@@ -3,7 +3,6 @@
 Раздрешенные функции:
 malloc, free, write, open, read, close, fork, wait, waitpid, wait3, wait4, signal, kill, exit, getcwd, chdir, stat, lstat, fstat, execve, dup, dup2, pipe, opendir, readdir, closedir, strerror, errno
 
-
 Команды:
 - echo - отображает строку теста (с опцией '-n' выводит без завершающего '\n')
 - cd - изменяет текущий рабочий каталог (в качестве аргумента принимает абсолютный или относительный адрес; путь является абсолютным, если он начинается с / . В противном случае это относительный путь)
@@ -19,3 +18,7 @@ malloc, free, write, open, read, close, fork, wait, waitpid, wait3, wait4, signa
 - Environment variables ($ followed by characters)
 - $?
 - ctrl-C, ctrl-D and ctrl-\
+
+Заметки:
+* Аргументов у main() не два, а три – последний указывает на блок переменных окружения (продублирован также в предопределенной переменной extern char **environ). Окружение состоит из строк вида "ИМЯПЕРЕМЕННОЙ=значение". Массив этих строк завершается NULL (как и argv).
+* 
