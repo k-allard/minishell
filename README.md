@@ -20,5 +20,4 @@ malloc, free, write, open, read, close, fork, wait, waitpid, wait3, wait4, signa
 - ctrl-C, ctrl-D and ctrl-\
 
 Заметки:
-* Аргументов у main() не два, а три – последний указывает на блок переменных окружения (продублирован также в предопределенной переменной extern char **environ). Окружение состоит из строк вида "ИМЯПЕРЕМЕННОЙ=значение". Массив этих строк завершается NULL (как и argv).
-* 
+* Про уровни оболочки и переменную $SHLVL https://solutics.ru/linux/kak-i-pochemu-vy-dolzhny-ispolzovat-peremennuyu-shlvl/

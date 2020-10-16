@@ -6,7 +6,7 @@
 #    By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 22:32:54 by kallard           #+#    #+#              #
-#    Updated: 2020/10/14 22:55:23 by kallard          ###   ########.fr        #
+#    Updated: 2020/10/15 14:58:43 by kallard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ NAME = libft.a
 SRC = ft_memset.c \
 		ft_bzero.c \
 		ft_memcpy.c \
+		ft_memalloc.c \
 		ft_memccpy.c \
 		ft_memmove.c \
 		ft_memchr.c \
@@ -28,6 +29,7 @@ SRC = ft_memset.c \
 		ft_strrchr.c \
 		ft_strnstr.c \
 		ft_strncmp.c \
+		ft_strfree.c \
 		ft_atoi.c \
 		ft_isalpha.c \
 		ft_isdigit.c \

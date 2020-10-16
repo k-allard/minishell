@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:29 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/15 00:13:27 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/16 14:23:56 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,14 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
-# include <stdio.h>
-
-typedef struct			s_var
-{
-	char				*name;
-	char				*value;
-	int					is_env;
-}						t_var;
-
-typedef struct			s_lexer
-{
-    //...
-	char				*input;
-	t_list				*env_list;
-}						t_lexer;
+# include <stdio.h>					//	этот инклюд нужен, но не забыть потом заменить все оригинальные принтэфы на ft_
 
 
 
-void        init_lexer(t_lexer *lex, char *input, t_list *env_list);
+/*
+** Глабальные переменные
+*/
+t_minishell			g_ms;				//основная структура: global minishell
+char				**g_env;			//массив переменных окружения
 
 #endif
