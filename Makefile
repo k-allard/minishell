@@ -1,6 +1,6 @@
 NAME = minishell
 
-SRCS = *.c
+SRCS = srcs/*.c
 
 HEADER = ./minishell.h
 
