@@ -1,6 +1,6 @@
 NAME = minishell
 
-SRCS = srcs/*.c
+SRCS = srcs/*.c srcs/commands/*.c
 
 HEADER = ./minishell.h
 
@@ -8,12 +8,9 @@ OBJS = $(SRCS:.c=.o)
 
 FLAGS =-g
 
-%.o: %.c
-	@$(CC) $(FLAGS) -c $< -o $@
-
 all: $(NAME)
 
-$(NAME): $(OBJS) $(HEADER)
+$(NAME):
 	@echo "\x1b[33m Preparing minishell...\x1b[0m"
 	@make -C libft
 	@gcc -o $(NAME) $(SRCS) libft/libft.a $(FLAGS)
@@ -32,5 +29,9 @@ fclean: clean
 	@make -C libft fclean
 
 re: fclean all
+
+
+%.o: %.c
+	@$(CC) $(FLAGS) -c $< -o $@
 
 .PHONY:	all clean fclean re

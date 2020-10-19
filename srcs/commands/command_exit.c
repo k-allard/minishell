@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_comand.c                                      :+:      :+:    :+:   */
+/*   command_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 22:24:09 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/18 22:26:58 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/19 16:20:58 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static int		if_str_number(char *str)
 {
@@ -23,7 +23,7 @@ static int		if_str_number(char *str)
 	return (1);
 }
 
-void			cmd_exit(char **argv)
+void			command_exit(char **argv)
 {
 	int	i;
 

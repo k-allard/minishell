@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   command_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/15 00:11:40 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/19 16:02:24 by kallard          ###   ########.fr       */
+/*   Created: 2020/10/18 22:43:39 by kallard           #+#    #+#             */
+/*   Updated: 2020/10/19 16:20:09 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "../minishell.h"
 
-void	handle_signal(int signo)
-{
-	int		status;
+/*
+** For each name, unset removes the corresponding variable (set to NULL?). 
+** The variables PATH, PS1, PS2, MAILCHECK, and IF cannot be unset.
+*/
 
-	if (signo == SIGINT)    //Ctrl-C
-	{
-		//ничего стереть не надо?
-		ft_putstr_fd("\n", 1);
-		write_prompt();
-		g_exit_value = 1;
-	}
-	// else if (signo == SIGQUIT)  //Ctrl-\
-	// {
 
-	// }
-	return ;
-}
+
