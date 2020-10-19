@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:51:25 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/19 19:30:57 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/19 22:09:57 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int				exec_builtins(char *line, t_list *envs)
 		command_pwd();
 	else if (!ft_strncmp(argv[0], "echo", ft_strlen(argv[0])))
 		command_echo(argv);
-	// else if (!ft_strncmp(argv[0], "cd", ft_strlen(argv[0])))
-	// 	command_cd(argv, envs);
+	else if (!ft_strncmp(argv[0], "cd", ft_strlen(argv[0])))
+		command_cd(argv, envs);
 	else if (!ft_strncmp(argv[0], "env", ft_strlen(argv[0])))
 		command_env(envs);
 	// else if (!ft_strncmp(argv[0], "export", ft_strlen(argv[0])))

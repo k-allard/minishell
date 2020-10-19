@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:29 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/19 19:30:19 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/19 22:11:02 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char			**get_comands(char *line);
 void			execute_comands(char *line, t_list *envs);
 
 int				exec_builtins(char *line, t_list *envs);
-//cd
+void			command_cd(int argc, char **argv);
 void			command_echo(char **argv);
 void			command_pwd(void);
 void			command_env(t_list *envs);

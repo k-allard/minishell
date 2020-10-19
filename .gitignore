@@ -1,0 +1,5 @@
+*.o
+minishell
+*.a
+minishell.dSYM
+minishell.dSYM/Contents/Resources/DWARF/minishell
