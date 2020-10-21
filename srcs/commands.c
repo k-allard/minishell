@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   comands.c                                          :+:      :+:    :+:   */
+/*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:31:37 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/19 15:19:23 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/20 22:08:50 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void			execute_comands(char *line, t_list *envs)
 {
-	// if (есть пайп(line)?)
-	// 	exec_pipe(line, envs);
-	// else if (есть перенаправление(line)?)
-	// 	exec_redirection(line, envs);
-	// else if с долларами ? с обычными командами (builtins)? другое ?
-	exec_builtins(line, envs);
+	if (pipe_found(line))
+		execute_pipes(line, envs);
+	// else if (redirect_found(line)?)
+	// 	exec_redirect(line, envs);
+	// else if dollar_found(line) ? с обычными командами (builtins)? другое ?
+	execute_builtins(line, envs);
 }
 
 int		syntax_error(char *line)

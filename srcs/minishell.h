@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:29 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/19 19:30:19 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/20 23:24:19 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,22 @@ typedef struct	s_env
 	char		*value;
 }				t_env;
 
+typedef struct	s_pipe
+{
+	char		*left_end;
+	char		**argv;
+}				t_pipe;
 
 t_list			*get_envs(int argc, char **argv, char **envp);
 void			write_prompt();
 
 int				deal_with_input(char **line);
 char			**get_comands(char *line);
+char	**get_argumentes(char *line, t_list *envs);
 void			execute_comands(char *line, t_list *envs);
 
-int				exec_builtins(char *line, t_list *envs);
+void			execute_pipes(char *line, t_list *envs);
+int				execute_builtins(char *line, t_list *envs);
 //cd
 void			command_echo(char **argv);
 void			command_pwd(void);
@@ -46,5 +53,11 @@ void			command_env(t_list *envs);
 //export
 //unset
 void			command_exit(char **argv);
+
+int		pipe_found(char *line);
+int		redirect_found(char *line);
+int		dollar_found(char *line);
+int		quote_found(char *line);
+
 
 #endif

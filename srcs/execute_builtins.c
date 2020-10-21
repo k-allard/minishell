@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_commands.c                                 :+:      :+:    :+:   */
+/*   execute_builtins.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:51:25 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/19 19:30:57 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/20 23:20:31 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
 
-char	**get_argv(char *line, t_list *envs)
-{
-	int		i;
-	char	**argv;
-
-	if (!(argv = ft_split(line, ' ')))
-		return (0);
-	//отдельно обработать случаи кавычек и переменных?
-	return (argv);
-}
-
-int				exec_builtins(char *line, t_list *envs)
+int				execute_builtins(char *line, t_list *envs)
 {
 	char **argv;
 
-	argv = get_argv(line, envs);
+	argv = get_argumentes(line, envs);
 	if (!ft_strncmp(argv[0], "pwd", ft_strlen(argv[0])))
 		command_pwd();
 	else if (!ft_strncmp(argv[0], "echo", ft_strlen(argv[0])))
