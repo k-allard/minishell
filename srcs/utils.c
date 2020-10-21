@@ -1,42 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/14 22:38:46 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/21 22:30:52 by kallard          ###   ########.fr       */
+/*   Created: 2020/10/21 19:42:19 by kallard           #+#    #+#             */
+/*   Updated: 2020/10/21 21:28:57 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
 
-int		main(int argc, char **argv, char **envp)
+void	free_double_array(char **array)
 {
 	int		i;
-	t_list	*envs;
-	char	*line;
-	char	**comands;
 
-	g_envp = envp;
-	envs = get_envs(argc, argv, envp);
-	// 
-	line = NULL;
-	while (1)
-	{
-		write_prompt();
-		if (!deal_with_input(&line))
-			continue ;
-		if (!(comands = get_comands(line)))
-			continue ;
-		i = -1;
-		while (comands[++i])
-		{
-			execute_commands(comands[i], envs);
-			free(comands[i]);
-		}
-		free(comands);
-	}
-	return (0);
+	if (!array)
+		return ;
+	i = -1;
+	while (array[++i])
+		free(array[i]);
+	free(array);
+}
+
+int		error_no_cmd(char *cmd)
+{
+	ft_putstr_fd(cmd, 2);
+	ft_putendl_fd(": command not found", 2);
+	return (127);
+}
+
+int		error_no_file_dir(char *cmd)
+{
+	ft_putstr_fd(cmd, 2);
+	ft_putendl_fd(": No such file or directory", 2);
+	return (127);
 }

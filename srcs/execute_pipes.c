@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 22:02:58 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/21 19:15:45 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/21 22:30:52 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	execute_left_pipe_end(int file_pipes[2], t_list *envs, char *left_end)
     dup2(file_pipes[1], STDOUT_FILENO); //int dup2(int oldfd, int newfd) Делает newfd копией oldfd; 
     close(file_pipes[0]);
     close(file_pipes[1]);
-    execute_comands(left_end, envs);
+    execute_commands(left_end, envs);
     exit(EXIT_SUCCESS);
 }
 
@@ -54,7 +54,7 @@ void	execute_right_pipe_end(int file_pipes[2], t_list *envs, char *line)
     dup2(file_pipes[0], STDIN_FILENO);
     close(file_pipes[0]);
     close(file_pipes[1]);
-    execute_comands(line, envs);
+    execute_commands(line, envs);
     exit(EXIT_SUCCESS);
 }
 

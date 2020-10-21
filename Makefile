@@ -14,6 +14,9 @@ $(NAME):
 	@echo "\x1b[33m Preparing minishell...\x1b[0m"
 	@make -C libft
 	@gcc -o $(NAME) $(SRCS) libft/libft.a $(FLAGS)
+	@touch test.txt           
+	@chmod a+rw test.txt
+	@echo "test\nabc" >> ./test.txt
 	@echo "\x1b[33m Minishell is ready!\x1b[0m"
 
 norm:

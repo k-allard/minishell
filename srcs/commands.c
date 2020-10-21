@@ -6,20 +6,22 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:31:37 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/20 22:08:50 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/21 23:51:19 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			execute_comands(char *line, t_list *envs)
+void			execute_commands(char *line, t_list *envs)
 {
+	ft_putendl_fd("[We are in execute_commands]", 1);
 	if (pipe_found(line))
 		execute_pipes(line, envs);
 	// else if (redirect_found(line)?)
 	// 	exec_redirect(line, envs);
 	// else if dollar_found(line) ? с обычными командами (builtins)? другое ?
-	execute_builtins(line, envs);
+	if (!(execute_builtins(line, envs)))
+		execute_others(line, envs);
 }
 
 int		syntax_error(char *line)
