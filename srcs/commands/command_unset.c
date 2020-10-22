@@ -18,4 +18,21 @@
 */
 
 
+/*void	command_unset(char **argv, t_list *envs, t_all all)
+{
+	int	i;
+
+	i = 1;
+ 
+    while (envs->next)
+    {
+        if (is_this_key_env(argv[i], envs))
+        {
+            
+
+            return ;
+        }
+        //envs = envs->next;
+    }
+}*/
 

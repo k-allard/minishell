@@ -19,6 +19,9 @@ int		main(int argc, char **argv, char **envp)
 	char	*line;
 	char	**comands;
 
+	t_all	all;
+	all.argc = argc;
+	printf("%d", all.argc);
 	g_envp = envp;
 	envs = get_envs(argc, argv, envp);
 	// 
@@ -33,7 +36,7 @@ int		main(int argc, char **argv, char **envp)
 		i = -1;
 		while (comands[++i])
 		{
-			execute_commands(comands[i], envs);
+			execute_commands(comands[i], envs, all);
 			free(comands[i]);
 		}
 		free(comands);

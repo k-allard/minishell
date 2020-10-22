@@ -10,17 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void ft_cd(int argc, char **argv)
+
+# include "../minishell.h"
+
+void command_cd(/*int argc, */char **argv)
 {
 	DIR		*dir; //Тип, представляющий поток каталога
 	char	*path;
     int		er; //можно положить в структуру с ошибками
 
 	er = 0;
-	if (argc > 1)
-		path = argv[1];
-	else
-        printf("%s", "Здесь будет какой-то код чтобы попасть в Home");
+	//if (argc > 1) //если после cd есть путь
+		path = argv[1]; 
+	//else //если путь не указан
+        //printf("%s", "Здесь будет какой-то код чтобы попасть в Home");
 	if (path == NULL)
 		return ;
 	dir = opendir(path);
@@ -33,6 +36,6 @@ void ft_cd(int argc, char **argv)
 	}
 	else
 		er = 1;
-	if (er)
-        printf("%s", "вывести ошибку с помощью strerror(errno)");
+	//if (er)
+     //   printf("%s", "вывести ошибку с помощью strerror(errno)");
 }

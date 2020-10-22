@@ -12,15 +12,15 @@
 
 #include "minishell.h"
 
-void			execute_commands(char *line, t_list *envs)
+void			execute_commands(char *line, t_list *envs, t_all all)
 {
 	ft_putendl_fd("[We are in execute_commands]", 1);
 	if (pipe_found(line))
-		execute_pipes(line, envs);
+		execute_pipes(line, envs, all);
 	// else if (redirect_found(line)?)
 	// 	exec_redirect(line, envs);
 	// else if dollar_found(line) ? с обычными командами (builtins)? другое ?
-	if (!(execute_builtins(line, envs)))
+	if (!(execute_builtins(line, envs, all)))
 		execute_others(line, envs);
 }
 

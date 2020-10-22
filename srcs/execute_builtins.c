@@ -12,7 +12,7 @@
 
 # include "minishell.h"
 
-int				execute_builtins(char *line, t_list *envs)
+int				execute_builtins(char *line, t_list *envs, t_all all)
 {
 	char **argv;
 
@@ -22,7 +22,7 @@ int				execute_builtins(char *line, t_list *envs)
 	else if (!ft_strncmp(argv[0], "echo", ft_strlen(argv[0])))
 		command_echo(argv);
 	else if (!ft_strncmp(argv[0], "cd", ft_strlen(argv[0])))
-		command_cd(argv, envs);
+		command_cd(argv);
 	else if (!ft_strncmp(argv[0], "env", ft_strlen(argv[0])))
 		command_env(envs);
 	// else if (!ft_strncmp(argv[0], "export", ft_strlen(argv[0])))
