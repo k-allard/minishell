@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:29 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/22 00:15:52 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/22 15:03:49 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void			write_prompt();
 int				deal_with_input(char **line);
 char			**get_comands(char *line);
 char	**get_argumentes(char *line, t_list *envs);
+char *insert_variable(char *argv, t_list *envs);
 void			execute_commands(char *line, t_list *envs);
 
 void			execute_pipes(char *line, t_list *envs);

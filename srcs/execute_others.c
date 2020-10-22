@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 19:35:15 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/21 23:51:11 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/22 22:24:46 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,9 @@ void			execute_others(char *line, t_list *envs)
 			exit(error_no_cmd(argv[0]));
 		exit(EXIT_SUCCESS);
 	}
-	wait(&status);
+	//wait(&status);
+	waitpid(pid, &status, 0);
+	close(pid);
     ft_putendl_fd("[Child process terminated]", 1);
 	free(filename);
 	free_double_array(argv);

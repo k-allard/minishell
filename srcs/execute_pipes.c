@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 22:02:58 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/21 22:30:52 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/22 22:41:53 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,11 @@ void parse_pipes(char **line, t_pipe *pipe, t_list *envs)
 
 void	execute_left_pipe_end(int file_pipes[2], t_list *envs, char *left_end)
 {
-    dup2(file_pipes[1], STDOUT_FILENO); //int dup2(int oldfd, int newfd) Делает newfd копией oldfd; 
+    if(dup2(file_pipes[1], STDOUT_FILENO) == -1) //int dup2(int oldfd, int newfd) Делает newfd копией oldfd;
+    {
+        printf("ERROR dup2\n");
+        fflush(stdout);
+    } 
     close(file_pipes[0]);
     close(file_pipes[1]);
     execute_commands(left_end, envs);
@@ -79,8 +83,11 @@ void execute_pipes(char *line, t_list *envs)
 	pid[1] = fork();
 	if (pid[1] == 0)
 	    execute_right_pipe_end(file_pipes, envs, line);
+    free(line);
+	waitpid(pid[0], NULL, 0); //  pid_t waitpid(pid_t pid, int *status, int options); 
     waitpid(pid[1], NULL, 0);
-	waitpid(pid[0], NULL, WNOHANG); //  pid_t waitpid(pid_t pid, int *status, int options); 
+	close(pid[0]);
+	close(pid[1]);
     // приостанавливает выполнение текущего процесса до тех пор, пока дочерний процесс, указанный в 
     // параметре pid, не завершит выполнение, или пока не появится сигнал, который либо завершает текущий процесс либо 
     // требует вызвать функцию-обработчик. Если указанный дочерний процесс к моменту вызова функции уже 

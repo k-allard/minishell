@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:17:10 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/20 23:20:31 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/22 14:19:31 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,15 @@ char	**get_argumentes(char *line, t_list *envs)
 
 	if (!(argv = ft_split(line, ' ')))
 		return (0);
-	//отдельно обработать случаи кавычек и переменных?
+	//случаи переменных:
+	i = -1;
+	while (argv[++i])
+	{
+		if (ft_strlen(argv[i]) > 1 && dollar_found(argv[i]))
+			argv[i] = insert_variable(argv[i], envs);
+	}
+	//случаи кавычек:
+
 	return (argv);
 }
 
