@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:29 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/22 15:03:49 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/23 23:51:34 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 /*
 ** Глабальные переменные
 */
-// t_msh			g_msh;				//основная структура: global minishell
 char			**g_envp;			//массив переменных окружения
 int				g_exit_value;
+
 typedef struct	s_env
 {
 	char		*key;
@@ -36,13 +36,29 @@ typedef struct	s_pipe
 	char		**argv;
 }				t_pipe;
 
+enum			e_quotes
+{
+	SING_Q = 0,
+	DUBL_Q,
+	ETC
+};
+
+typedef struct	s_quotes
+{
+	int			type;
+	int			start;
+	int			end;
+}				t_quotes;
+
 t_list			*get_envs(int argc, char **argv, char **envp);
 void			write_prompt();
 
 int				deal_with_input(char **line);
 char			**get_comands(char *line);
-char	**get_argumentes(char *line, t_list *envs);
-char *insert_variable(char *argv, t_list *envs);
+char			**get_argumentes(char *line, t_list *envs);
+char			*deal_with_quotes(char *argv, t_list *envs);
+char			 *insert_variable(char *argv, t_list *envs);
+int				print_exit_status(char *line);
 void			execute_commands(char *line, t_list *envs);
 
 void			execute_pipes(char *line, t_list *envs);
@@ -53,20 +69,19 @@ void			command_echo(char **argv);
 void			command_pwd(void);
 void			command_env(t_list *envs);
 //export
-//unset
+void			command_unset(char **argv, t_list *envs);
 void			command_exit(char **argv);
 
-int		pipe_found(char *line);
-int		redirect_found(char *line);
-int		dollar_found(char *line);
-int		quote_found(char *line);
+int				pipe_found(char *line);
+int				redirect_found(char *line);
+int				dollar_found(char *line);
+int				quote_found(char *line);
 
-char		*get_env_value(char *key, t_list *envs);
-int			is_this_key_env(char *key, t_list *envs);
+char			*get_env_value(char *key, t_list *envs);
+int				is_this_key_env(char *key, t_list *envs);
 
-void	free_double_array(char **array);
-int		error_no_cmd(char *cmd);
-int		error_no_file_dir(char *cmd);
-
+void			free_double_array(char **array);
+int				error_no_cmd(char *cmd);
+int				error_no_file_dir(char *cmd);
 
 #endif

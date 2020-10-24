@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 22:24:09 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/19 16:20:58 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/24 21:27:54 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void			command_exit(char **argv)
 		i++;
 	if (i == 1)
 	{
-		ft_putendl_fd("exit", 1);
+		ft_putendl_fd("exit", 2);
 		exit(EXIT_SUCCESS);
 	}
 	else if (i == 2 && if_str_number(argv[1]))
@@ -40,10 +40,10 @@ void			command_exit(char **argv)
 		exit(ft_atoi(argv[1]));
 	}
 	else if (i > 2 && if_str_number(argv[1]))
-		ft_putendl_fd("bash: exit: too many arguments", 1);
+		ft_putendl_fd("bash: exit: too many arguments", 2);
 	else
 	{
-		ft_putstr_fd("bash: exit: numeric argument required", 1);
+		ft_putstr_fd("bash: exit: numeric argument required", 2);
 		exit(2);
 	}
 }

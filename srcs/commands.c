@@ -6,26 +6,15 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:31:37 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/22 13:56:37 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/24 21:13:05 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		print_exit_status(char *line)
-{
-	if (line[0] == '$' && line[1] == '?')
-	{
-		ft_putstr_fd(ft_itoa(g_exit_value), 1);
-		ft_putendl_fd(": command not found", 1);
-		return (1);
-	}
-	return (0);
-}
-
 void			execute_commands(char *line, t_list *envs)
 {
-	ft_putendl_fd("[We are in execute_commands]", 1);
+	// ft_putendl_fd("[We are in execute_commands]", 1);
 	if (pipe_found(line))
 		execute_pipes(line, envs);
 	// else if (redirect_found(line))

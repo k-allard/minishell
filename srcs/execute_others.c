@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 19:35:15 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/22 22:24:46 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/24 21:13:37 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void			execute_others(char *line, t_list *envs)
 		error_no_cmd(argv[0]);
 		return ;
 	}
-    ft_putendl_fd("[We are in execute_others]", 1);
+    // ft_putendl_fd("[We are in execute_others]", 1);
 	pid = fork();
 	if (pid == 0)
 	{
-        ft_putendl_fd("[This message is from child process]", 1);
+        // ft_putendl_fd("[This message is from child process]", 1);
 		if (execve(filename, argv, g_envp) == -1)     // int execve(const char *filename, char *const argv[], char* const envp[]); 
         // , где filename - имя программы для исполнения
 			exit(error_no_cmd(argv[0]));
@@ -72,7 +72,7 @@ void			execute_others(char *line, t_list *envs)
 	//wait(&status);
 	waitpid(pid, &status, 0);
 	close(pid);
-    ft_putendl_fd("[Child process terminated]", 1);
+    // ft_putendl_fd("[Child process terminated]", 1);
 	free(filename);
 	free_double_array(argv);
     if (WIFEXITED(status))  // if the process terminated normally by a call to _exit(2) or exit(3)

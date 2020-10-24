@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 22:02:58 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/22 22:41:53 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/24 21:31:11 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	execute_left_pipe_end(int file_pipes[2], t_list *envs, char *left_end)
 {
     if(dup2(file_pipes[1], STDOUT_FILENO) == -1) //int dup2(int oldfd, int newfd) Делает newfd копией oldfd;
     {
-        printf("ERROR dup2\n");
+        printf("ERROR dup2\n");     //написать корректную ошибку в STDERR
         fflush(stdout);
     } 
     close(file_pipes[0]);

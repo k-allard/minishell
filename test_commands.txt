@@ -1,0 +1,15 @@
+1. Simple command
+/bin/ls 
+/bin/pwd
+
+2. Arguments
+/bin/ls ..
+/bin/cat test.txt
+
+3. echo
+echo
+echo -n hello
+
+4. exit
+exit
+exit 0
