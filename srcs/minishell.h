@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:29 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/23 23:51:34 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/24 22:38:29 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "../libft/libft.h"
 # include <stdio.h>					//	этот инклюд нужен, но не забыть потом заменить все оригинальные принтэфы на ft_ (если будут)
 
-
+ #include <dirent.h>
 
 /*
 ** Глабальные переменные
@@ -64,7 +64,7 @@ void			execute_commands(char *line, t_list *envs);
 void			execute_pipes(char *line, t_list *envs);
 void			execute_others(char *line, t_list *envs);
 int				execute_builtins(char *line, t_list *envs);
-//cd
+void command_cd(char **argv, t_list *envs);
 void			command_echo(char **argv);
 void			command_pwd(void);
 void			command_env(t_list *envs);

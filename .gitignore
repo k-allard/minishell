@@ -3,3 +3,6 @@ minishell
 *.a
 minishell.dSYM
 minishell.dSYM/Contents/Resources/DWARF/minishell
+minishell-tester
+.vscode/launch.json
+test.txt

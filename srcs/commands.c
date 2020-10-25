@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:31:37 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/24 21:13:05 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/24 23:46:58 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ char			**get_comands(char *line)
 	{
 		free(comands);
 		ft_putendl_fd("syntax error near unexpected token `;'", 2);
-		free(line);
+		//free(line);
 		return (NULL);
 	}
-	free(line);
+	//free(line);
 	return (comands);
 }
