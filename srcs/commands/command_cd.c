@@ -13,17 +13,28 @@
 
 # include "../minishell.h"
 
-void command_cd(/*int argc, */char **argv)
+int	count_argv(char **argv)
 {
-	DIR		*dir; //Тип, представляющий поток каталога
+	int i;
+	i = 0;
+
+	while (argv[i])
+	{
+		i++;
+	}
+	return (i);
+}
+
+void command_cd(char **argv, t_list *envs)
+{
+	DIR		*dir;
 	char	*path;
-    int		er; //можно положить в структуру с ошибками
+    int		er;
+	int		n;
 
 	er = 0;
-	//if (argc > 1) //если после cd есть путь
-		path = argv[1]; 
-	//else //если путь не указан
-        //printf("%s", "Здесь будет какой-то код чтобы попасть в Home");
+	n = count_argv(argv);
+	path = (n > 1) ? argv[1] : get_env_value("HOME", envs);
 	if (path == NULL)
 		return ;
 	dir = opendir(path);
@@ -36,6 +47,6 @@ void command_cd(/*int argc, */char **argv)
 	}
 	else
 		er = 1;
-	//if (er)
-     //   printf("%s", "вывести ошибку с помощью strerror(errno)");
+	if (er)
+        printf("cd: %s: No such file or directory\n", argv[1]);
 }

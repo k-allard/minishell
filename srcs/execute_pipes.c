@@ -40,25 +40,25 @@ void parse_pipes(char **line, t_pipe *pipe, t_list *envs)
 	}
 }
 
-void	execute_left_pipe_end(int file_pipes[2], t_list *envs, char *left_end, t_all all)
+void	execute_left_pipe_end(int file_pipes[2], t_list *envs, char *left_end)
 {
     dup2(file_pipes[1], STDOUT_FILENO); //int dup2(int oldfd, int newfd) Делает newfd копией oldfd; 
     close(file_pipes[0]);
     close(file_pipes[1]);
-    execute_commands(left_end, envs, all);
+    execute_commands(left_end, envs);
     exit(EXIT_SUCCESS);
 }
 
-void	execute_right_pipe_end(int file_pipes[2], t_list *envs, char *line, t_all all)
+void	execute_right_pipe_end(int file_pipes[2], t_list *envs, char *line)
 {
     dup2(file_pipes[0], STDIN_FILENO);
     close(file_pipes[0]);
     close(file_pipes[1]);
-    execute_commands(line, envs, all);
+    execute_commands(line, envs);
     exit(EXIT_SUCCESS);
 }
 
-void execute_pipes(char *line, t_list *envs, t_all all)
+void execute_pipes(char *line, t_list *envs)
 {
     int		    file_pipes[2];
 	pid_t		pid[2];
@@ -74,11 +74,11 @@ void execute_pipes(char *line, t_list *envs, t_all all)
     // Процесс-родитель получает идентификатор (PID) потомка. Если это значение будет отрицательным, следовательно при порождении процесса произошла ошибка. 
     // Процесс-потомок получает в качестве кода возврата значение 0, если вызов fork() оказался успешным.
     if (pid[0] == 0)
-		execute_left_pipe_end(file_pipes, envs, p.left_end, all);     // в структуре p - левая часть конвейра, в лайн - правая
+		execute_left_pipe_end(file_pipes, envs, p.left_end);     // в структуре p - левая часть конвейра, в лайн - правая
     // можно освободить структуру p
 	pid[1] = fork();
 	if (pid[1] == 0)
-	    execute_right_pipe_end(file_pipes, envs, line, all);
+	    execute_right_pipe_end(file_pipes, envs, line);
     waitpid(pid[1], NULL, 0);
 	waitpid(pid[0], NULL, WNOHANG); //  pid_t waitpid(pid_t pid, int *status, int options); 
     // приостанавливает выполнение текущего процесса до тех пор, пока дочерний процесс, указанный в 

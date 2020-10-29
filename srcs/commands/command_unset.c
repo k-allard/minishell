@@ -10,29 +10,41 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../minishell.h"
 
-/*
-** For each name, unset removes the corresponding variable (set to NULL?). 
-** The variables PATH, PS1, PS2, MAILCHECK, and IF cannot be unset.
-*/
-
-
-/*void	command_unset(char **argv, t_list *envs, t_all all)
+void    delete_elem(t_list *lst)
 {
-	int	i;
+    free(((t_env *)lst->content)->key);
+    free(((t_env *)lst->content)->value);
+    free(lst->content);
+    free(lst); 
+}
 
-	i = 1;
- 
-    while (envs->next)
+void    command_unset(char **argv, t_list *envs, int i)
+{
+    t_list  *tmp;
+    t_list  *del;
+
+    while (argv[++i])
     {
-        if (is_this_key_env(argv[i], envs))
+        tmp = envs;
+        while (tmp && (is_this_key_env(argv[i], tmp)))
         {
-            
-
-            return ;
+            del = tmp;
+            tmp = tmp->next;
+            delete_elem(del);
         }
-        //envs = envs->next;
+        while (tmp->next)
+        {
+            if (is_this_key_env(argv[i], tmp->next))
+            {
+                del = tmp->next;
+                tmp->next = tmp->next->next;
+                delete_elem(del);
+            }
+            else
+                tmp = tmp->next;
+        }
     }
-}*/
-
+}

@@ -30,12 +30,6 @@ typedef struct	s_env
 	char		*value;
 }				t_env;
 
-typedef struct	s_all
-{
-	int			argc;
-
-	t_list		*envs;
-}				t_all;
 
 typedef struct	s_pipe
 {
@@ -49,20 +43,23 @@ void			write_prompt();
 int				deal_with_input(char **line);
 char			**get_comands(char *line);
 char			**get_argumentes(char *line, t_list *envs);
-void			execute_commands(char *line, t_list *envs, t_all all);
+void			execute_commands(char *line, t_list *envs);
 
-void			execute_pipes(char *line, t_list *envs, t_all all);
+void			execute_pipes(char *line, t_list *envs);
 void			execute_others(char *line, t_list *envs);
-int				execute_builtins(char *line, t_list *envs, t_all all);
-//cd
-void 			command_cd(/*int argc, */char **argv);
+int				execute_builtins(char *line, t_list *envs);
+void 			command_cd(char **argv, t_list *envs);
 void			command_echo(char **argv);
 void			command_pwd(void);
 void			command_env(t_list *envs);
-//export
-//unset
-void			command_unset(char **argv, t_list *envs, t_all all);
+void			command_export(char **argv, t_list *envs);
+void			command_unset(char **argv, t_list *envs, int i);
 void			command_exit(char **argv);
+
+int				valid_name_first(int ch);
+int				valid_name(char *str);
+
+int				count_argv(char **argv);
 
 int				pipe_found(char *line);
 int				redirect_found(char *line);
