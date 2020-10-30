@@ -12,6 +12,12 @@
 
 # include "minishell.h"
 
+#include "t_lexema/t_lexema.h"
+#include "t_stream/t_stream.h"
+#include "t_command/t_command.h"
+#include "parser/parser.h"
+
+
 int		main(int argc, char **argv, char **envp)
 {
 	int		i;
@@ -19,20 +25,22 @@ int		main(int argc, char **argv, char **envp)
 	char	*line;
 	char	**comands;
 
+//    parser("echo 123");
+//    parser("echo 123; echo 345");
+
+
 	g_envp = envp;
 	envs = get_envs(argc, argv, envp);
+//    parser("  echo 'he \\$test \\llo' \"1\\\"\\$a $USER    \" 1\\ 2\\$t 3\\ $PWD ; echo 1 | cat  ; echo 2 | cat | cat | cat | cat | cat > test.txt",
+//           argc, argv, (t_list_env*)envs);
+//    parser("  echo 'he \\$test \\llo' \"1\\\"\\$a $USER  $0  \" A\\ $1\\ A 1\\ 2\\$t 3\\ $PWD ; echo 1 | cat ",
+           parser("echo tttttt ; pwd ; ping localhost -c 1 ; echo 2",
+           argc, argv, (t_list_env*)envs);
+    return 0;
+
 	if(argc == 3 && ft_strncmp(argv[1], "-c", 3) == 0)
 	{
-		if ((comands = get_comands(argv[2])))
-		{
-			i = -1;
-			while (comands[++i])
-			{
-				execute_commands(comands[i], envs);
-				free(comands[i]);
-			}
-			free(comands);		
-		}
+        parser(argv[2], argc, argv, (t_list_env*)envs);
 	}
 	else {
 	line = NULL;

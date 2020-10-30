@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:29 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/26 15:20:14 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/24 22:38:29 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,14 @@
 # include "../libft/libft.h"
 # include <stdio.h>					//	этот инклюд нужен, но не забыть потом заменить все оригинальные принтэфы на ft_ (если будут)
 
- #include <dirent.h>
+#include <dirent.h>
+
+#include <sys/types.h>
+#include <sys/wait.h>
+
+#include "t_lexema/t_lexema.h"
+
+
 
 /*
 ** Глабальные переменные
@@ -29,6 +36,18 @@ typedef struct	s_env
 	char		*key;
 	char		*value;
 }				t_env;
+
+typedef	struct		s_list_env
+{
+    t_env			*env;
+    struct s_list_env	*next;
+}					t_list_env;
+
+typedef	struct		s_list_lexema
+{
+    t_lexema			*lexema;
+    struct s_list_lexema	*next;
+}					t_list_lexema;
 
 typedef struct	s_pipe
 {
@@ -55,6 +74,7 @@ void			write_prompt();
 
 int				deal_with_input(char **line);
 char			**get_comands(char *line);
+char		    *find_path(char *argv, t_list *envs);
 char			**get_argumentes(char *line, t_list *envs);
 char			*deal_with_quotes(char *argv, t_list *envs);
 char			 *insert_variable(char *argv, t_list *envs);
@@ -68,7 +88,7 @@ void command_cd(char **argv, t_list *envs);
 void			command_echo(char **argv);
 void			command_pwd(void);
 void			command_env(t_list *envs);
-void command_export(char **argv, t_list *envs);
+//export
 void			command_unset(char **argv, t_list *envs);
 void			command_exit(char **argv);
 
