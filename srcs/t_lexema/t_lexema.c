@@ -2,10 +2,11 @@
 
 #include "t_lexema.h"
 
-/**
- * Выделение памяти и инициализация пустыми значениями нового элемента lexema
- * @return NULL, если память не была выделена, t_lexema, если память была выделена
- */
+/*
+** Memory allocation and initialization of the new lexema element
+** Returns NULL if the memory was not allocated, and t_lexema if it was
+*/
+
 t_lexema* t_lexema_init()
 {
     t_lexema *lexema;
@@ -38,5 +39,3 @@ void t_lexema_free_void(void *content)
     lexema = (t_lexema *)content;
     t_lexema_free(lexema);
 }
-
-

@@ -91,11 +91,11 @@ void			execute_commands(char *line, t_list *envs);
 void			execute_pipes(char *line, t_list *envs);
 void			execute_others(char *line, t_list *envs);
 int				execute_builtins(char *line, t_list *envs);
-//cd
+void			command_cd(/*int argc, */char **argv);
 void			command_echo(char **argv);
 void			command_pwd(void);
 void			command_env(t_list *envs);
-//export
+void            command_export(char **argv, t_list *envs);
 void			command_unset(char **argv, t_list *envs);
 void			command_exit(char **argv);
 

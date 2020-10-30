@@ -38,10 +38,9 @@ static void delete_elem(t_list *lst)
     //return(temp); //возвращаем указатель на следующий элемент
 }
 
-void	command_unset(char **argv, t_list *envs)
-{
-	int	i;
-	i = 0; //-1
+void	command_unset(char **argv, t_list *envs) {
+    int i;
+    i = 0; //-1
     t_list *tmp;
     t_list *head;
     t_list *del;
@@ -52,4 +51,5 @@ void	command_unset(char **argv, t_list *envs)
         tmp = envs;
         printf("%s\n", "go while");
 
-
+    }
+}

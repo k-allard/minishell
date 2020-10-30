@@ -12,7 +12,7 @@
 
 # include "minishell.h"
 
-int				execute_builtins(char *line, t_list *envs, t_all all)
+int				execute_builtins(char *line, t_list *envs)
 {
 	char **argv;
 

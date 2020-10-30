@@ -1,10 +1,6 @@
 # include "../minishell.h"
 #include "../t_lexema/t_lexema.h"
 
-static t_list *t_lexema_list_item_init(t_lexema *lexema)
-{
-
-}
 
 static void t_lexema_list_free(t_list **lexema_list)
 {
@@ -109,7 +105,7 @@ static void read_quote_param(char **commandline, t_lexema *lexema, char quoteCha
     else if(**commandline == '\0')
         error_end_of_line(quoteChar);
     else
-        *((*commandline)++);
+        (*commandline)++;
     lexema->lexemaType = (quoteChar == '"') ? lexema_type_double_q : lexema_type_single_q;
 }
 

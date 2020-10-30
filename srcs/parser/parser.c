@@ -60,10 +60,10 @@ static char** list_env_2_env(t_list_env *env_list)
     return env;
 }
 
-static t_list_env* env_2_list_env(char **env)
-{
-
-}
+//static t_list_env* env_2_list_env(char **env)
+//{
+//
+//}
 
 static int exec_lexema_chain_one_command(t_list_lexema *lexema_chain, t_list_env *envs)
 {
@@ -219,9 +219,6 @@ static int exec_one_command(t_list_lexema *one_command_lexemas, t_list_env *envs
 
 int eval_lexema_chain(t_list_lexema *lexema_chain, t_list_env *envs)
 {
-    ft_putstr_fd("«eval_lexema_chain.start.*****************************»\n", STDERR_FILENO);
-    parser_debug_print_lexema_list(lexema_chain);
-
     if(is_pipe_in_lexema_chain(lexema_chain))
     {
         return exec_lexema_chain_pipe(lexema_chain, envs);
@@ -230,8 +227,6 @@ int eval_lexema_chain(t_list_lexema *lexema_chain, t_list_env *envs)
     {
         return exec_one_command(lexema_chain, envs);
     }
-    ft_putstr_fd("«eval_lexema_chain.stop. =============================»\n", STDERR_FILENO);
-    ft_putstr_fd("\n", STDERR_FILENO);
 }
 
 int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
@@ -240,22 +235,19 @@ int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
     t_list_lexema *lexema_chain;
     int res;
 
-    t_lexema *lexema;
-    int i = 0;
-
     lexema_list = get_lexema_list(commandline);
 
-    ft_putstr_fd("«", STDERR_FILENO);
-    ft_putstr_fd(commandline, STDERR_FILENO);
-    ft_putstr_fd("»\n", STDERR_FILENO);
-    parser_debug_print_lexema_list(lexema_list);
+//    ft_putstr_fd("«", STDERR_FILENO);
+//    ft_putstr_fd(commandline, STDERR_FILENO);
+//    ft_putstr_fd("»\n", STDERR_FILENO);
+//    parser_debug_print_lexema_list(lexema_list);
 
     check_marker_syntaxis(lexema_list);
 
     while ((lexema_chain = get_next_lexema_chain(&lexema_list, lexema_type_semicolon)))
     {
         eval_vars_and_unescape_$_in_lexema_chain(lexema_chain, argc, argv, envs);
-        res = eval_lexema_chain((t_list_lexema *)lexema_chain, envs);
+        res = eval_lexema_chain(lexema_chain, envs);
     }
     return res;
 }
