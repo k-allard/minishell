@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:46 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/24 23:41:26 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/21 22:30:52 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ int		main(int argc, char **argv, char **envp)
 	t_list	*envs;
 	char	*line;
 	char	**comands;
-
-//    parser("echo 123");
-//    parser("echo 123; echo 345");
-
 
 	g_envp = envp;
 	envs = get_envs(argc, argv, envp);

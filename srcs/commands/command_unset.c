@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 22:43:39 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/23 15:46:54 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/19 16:20:09 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ t_list * delete_head(t_list *root) //пригодится для удалени�
 static void delete_elem(t_list *lst)
 {
     //t_list *temp;
-   
+
     //temp->next = lst->next; // переставляем указатель
     free(((t_env *)lst->content)->key);
     free(((t_env *)lst->content)->value);
     free(lst->content);
-    free(lst); 
+    free(lst);
     //return(temp); //возвращаем указатель на следующий элемент
 }
 
@@ -52,33 +52,4 @@ void	command_unset(char **argv, t_list *envs)
         tmp = envs;
         printf("%s\n", "go while");
 
-        
-        
-        while (tmp && (is_this_key_env(argv[i], tmp)))
-        {
-            n++;//2
-            printf("%d\n", n);
-
-            del = tmp;
-            tmp = tmp->next;
-            delete_elem(del);
-            printf("%s", "unset success");
-        }
-
-        while (tmp->next)//
-        {
-            n++;//2
-            printf("%d\n", n);
-            if (is_this_key_env(argv[i], tmp->next))
-            {
-                del = tmp->next;
-                tmp->next = tmp->next->next;
-                delete_elem(del);
-                printf("%s", "unset success");
-            }
-            else
-                tmp = tmp->next;
-        }
-    }
-}
 
