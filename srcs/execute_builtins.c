@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 12:51:25 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/24 22:37:45 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/30 04:59:21 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int				execute_builtins(char *line, t_list *envs)
 		command_cd(argv, envs);
 	else if (!ft_strncmp(argv[0], "env", ft_strlen(argv[0])))
 		command_env(envs);
-	// else if (!ft_strncmp(argv[0], "export", ft_strlen(argv[0])))
-	// 	command_export(argv, envs);
+	else if (!ft_strncmp(argv[0], "export", ft_strlen(argv[0])))
+		command_export(argv, envs);
 	else if (!ft_strncmp(argv[0], "unset", ft_strlen(argv[0])))
 		command_unset(argv, envs);
 	else if (!ft_strncmp(argv[0], "exit", ft_strlen(argv[0])))
