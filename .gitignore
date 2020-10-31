@@ -18,3 +18,4 @@ output
 /.idea/
 /test.txt~origin_cw
 auxiliary/
+/minishell-tester/minishell

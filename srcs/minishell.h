@@ -110,6 +110,9 @@ int			is_this_key_env(char *key, t_list *envs);
 void	free_double_array(char **array);
 int		error_no_cmd(char *cmd);
 int		error_no_file_dir(char *cmd);
+int	valid_name_first(int ch);
+int	valid_name(char *str);
+
 
 
 #endif

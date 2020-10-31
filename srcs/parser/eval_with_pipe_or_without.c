@@ -61,10 +61,6 @@ static int eval_with_pipe(t_list_lexema *lexema_chain, t_list_env *envs)
 	}
 	else
 	{
-		waitpid(pid[0], &(status[0]), 0);
-		if (WIFEXITED(status[0]))
-			res[0] = WEXITSTATUS(status[0]);
-		close(file_pipes[1]);
 		pid[1] = fork();
 		if (pid[1] < 0)
 		{
@@ -85,6 +81,10 @@ static int eval_with_pipe(t_list_lexema *lexema_chain, t_list_env *envs)
 		}
 		else
 		{
+			waitpid(pid[0], &(status[0]), WNOHANG);
+			if (WIFEXITED(status[0]))
+				res[0] = WEXITSTATUS(status[0]);
+			close(file_pipes[1]); //TODO: перенести ниже?
 			waitpid(pid[1], &(status[1]), 0);
 			if (WIFEXITED(status[1]))
 				res[1] = WEXITSTATUS(status[1]);
