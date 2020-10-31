@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:29 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/22 00:15:52 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/31 15:56:12 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,13 @@ void			execute_commands(char *line, t_list *envs);
 void			execute_pipes(char *line, t_list *envs);
 void			execute_others(char *line, t_list *envs);
 int				execute_builtins(char *line, t_list *envs);
-void			command_cd(/*int argc, */char **argv);
-void			command_echo(char **argv);
-void			command_pwd(void);
-void			command_env(t_list *envs);
-void            command_export(char **argv, t_list *envs);
-void			command_unset(char **argv, t_list *envs);
-void			command_exit(char **argv);
+int 			command_cd(char **argv, t_list *envs);
+int				command_echo(char **argv);
+int				command_pwd(t_list_env *envs);
+int				command_env(t_list *envs);
+int           	command_export(char **argv, t_list *envs);
+int				command_unset(char **argv, t_list *envs);
+int				command_exit(char **argv);
 
 int		pipe_found(char *line);
 int		redirect_found(char *line);

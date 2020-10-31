@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 03:05:00 by cwindom           #+#    #+#             */
-/*   Updated: 2020/10/26 16:00:24 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/31 15:39:12 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void check_env(char *argv, t_list *envs)
 	free(new_data);
 }
 
-void command_export(char **argv, t_list *envs) //что если переменная есть и по
+int command_export(char **argv, t_list *envs) //что если переменная есть и по
 {
     int i;
     int j;
@@ -101,7 +101,7 @@ void command_export(char **argv, t_list *envs) //что если перемен�
     if (n < 2) //если просто export то нужно вывести список переменных с приставкой "declare -x "
     {
          command_env_declare(envs); //готово
-         return ; // готово
+         return (0); // готово
     }
     while (argv[++i])
     {
@@ -122,4 +122,5 @@ void command_export(char **argv, t_list *envs) //что если перемен�
             	//}
 		}
     }
+	return (0); //TODO: код возврата 1 если некорректный идентификатор. Пример: export 123
 }

@@ -6,36 +6,63 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:07:16 by cwindom           #+#    #+#             */
-/*   Updated: 2020/10/22 00:16:18 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/31 15:31:46 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 # include "../minishell.h"
 
-void command_cd(/*int argc, */char **argv)
+int	count_argv(char **argv)
 {
-	DIR		*dir; //Тип, представляющий поток каталога
+	int i;
+	i = 0;
+
+	while (argv[i])
+	{
+		i++;
+	}
+	return (i);
+}
+
+int command_cd(char **argv, t_list *envs)
+{
+	DIR		*dir;
 	char	*path;
-    int		er; //можно положить в структуру с ошибками
+	char	*pwd;
+    int		er;
+	int		n;
 
 	er = 0;
 	//if (argc > 1) //если после cd есть путь
 		path = argv[1];
 	//else //если путь не указан
         //printf("%s", "Здесь будет какой-то код чтобы попасть в Home");
+
+	n = count_argv(argv);
+	path = (n > 1) ? argv[1] : get_env_value("HOME", envs);
+
 	if (path == NULL)
-		return ;
-	dir = opendir(path);
-	if (dir != NULL)
+		return 17;
+	if(path[0] == '.' && path[1] == '\0')
 	{
-		if (chdir(path) < 0)
-			er = 1;
-		if (closedir(dir) < 0)
-			er = 1;
+		pwd = getcwd(0, 1024);//TODO 1: получать PWD из переменных - getpwd(envs);
+		path = ft_strjoin(pwd, "/.");
+		chdir(path); //TODO: сделать вместо chdir функцию chpwd, чтобы она ставила PWD env + OWDPWD env и выполняла chdir
+		free(pwd);
+		free(path);
 	}
 	else
+	{
+		dir = opendir(path);
+		if (dir != NULL)
+		{
+			if ((chdir(path) < 0) || (closedir(dir) < 0))//TODO: сделать вместо chdir функцию chpwd, чтобы она ставила PWD env + OWDPWD env и выполняла chdir
+				er = 1;
+		}
+		else
+			er = 1;
+	}
 		er = 1;
-	//if (er)
-     //   printf("%s", "вывести ошибку с помощью strerror(errno)");
+	return 0;
 }

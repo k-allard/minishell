@@ -8,6 +8,7 @@ minishell-tester
 .vscode/launch.json
 output
 /output
+/.DS_Store
 /test.txt
 /output.*
 /.idea/.gitignore

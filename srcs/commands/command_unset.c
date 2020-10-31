@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 22:43:39 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/19 16:20:09 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/31 15:39:43 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void delete_elem(t_list *lst)
     //return(temp); //возвращаем указатель на следующий элемент
 }
 
-void	command_unset(char **argv, t_list *envs) {
+int	command_unset(char **argv, t_list *envs) {
     int i;
     i = 0; //-1
     t_list *tmp;
@@ -52,4 +52,5 @@ void	command_unset(char **argv, t_list *envs) {
         printf("%s\n", "go while");
 
     }
+    return (0);
 }
