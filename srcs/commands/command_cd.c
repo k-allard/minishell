@@ -30,12 +30,13 @@ int command_cd(char **argv, t_list *envs)
 	DIR		*dir;
 	char	*path;
 	char	*pwd;
+	char *is_cwd;
     int		er;
 	int		n;
 
 	er = 0;
 	//if (argc > 1) //если после cd есть путь
-		path = argv[1];
+//		path = argv[1];
 	//else //если путь не указан
         //printf("%s", "Здесь будет какой-то код чтобы попасть в Home");
 
@@ -44,24 +45,36 @@ int command_cd(char **argv, t_list *envs)
 
 	if (path == NULL)
 		return 17;
-	pwd = getcwd(0, 1024);//TODO 1: получать PWD из переменных - getpwd(envs);
-	if(path[0] == '.' && path[1] == '\0')
+	pwd = get_env_value("PWD", (t_list *)envs);
+	is_cwd = getcwd(0, 1024);//TODO 1: получать PWD из переменных - getpwd(envs);
+	if(!is_cwd && path[0] == '.' && path[1] == '\0')
 	{
-		path = ft_strjoin(pwd, "/.");
-		chdir(path); //TODO: сделать вместо chdir функцию chpwd, чтобы она ставила PWD env + OWDPWD env и выполняла chdir
+		update_env_data(envs, "OLDPWD", pwd); //обновляем OLDPWD в переменных
+		pwd = ft_strjoin(pwd, "/.");
+		update_env_data(envs, "PWD", pwd); //обновляем PWD в переменных
+//		chdir(pwd); //TODO: сделать вместо chdir функцию chpwd, чтобы она ставила PWD env + OWDPWD env и выполняла chdir
 		free(pwd);
-		free(path);
+//		free(path);
+	}
+	else if(path[0] == '.' && path[1] == '\0')
+	{
+		update_env_data(envs, "OLDPWD", pwd); //обновляем OLDPWD в переменных
+//		pwd = ft_strjoin(pwd, "/.");
+		update_env_data(envs, "PWD", pwd); //обновляем PWD в переменных
+		chdir(pwd); //TODO: сделать вместо chdir функцию chpwd, чтобы она ставила PWD env + OWDPWD env и выполняла chdir
+		free(pwd);
+//		free(path);
 	}
 	else
 	{
 		dir = opendir(path);
 		if (dir != NULL)
 		{
-			if ((chdir(path) < 0) || (closedir(dir) < 0))//TODO: сделать вместо chdir функцию chpwd, чтобы она ставила PWD env + OWDPWD env и выполняла chdir
+			if ((chdir(path) < 0) || (closedir(dir) < 0))
 				er = 1;
 			if (er == 0)
 			{
-				update_env_data(envs, "OLDPWD", pwd); //обновляем PWD в переменных
+				update_env_data(envs, "OLDPWD", pwd); //обновляем OLDPWD в переменных
 				pwd = getcwd(0, 1024);
 				update_env_data(envs, "PWD", pwd); //обновляем PWD в переменных
 			}

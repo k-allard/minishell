@@ -16,8 +16,9 @@ int	command_pwd(t_list_env *envs)
 {
 	char	*pwd;
 
-	pwd = getcwd(0, 1024);
+	//	pwd = getcwd(0, 1024);
+	pwd = get_env_value("PWD", (t_list *)envs);
 	ft_putendl_fd(pwd, 1);
-	free(pwd);
+//	free(pwd);
 	return (0);
 }
