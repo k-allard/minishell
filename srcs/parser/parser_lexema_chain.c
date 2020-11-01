@@ -119,9 +119,21 @@ static void simple_join_symbol(char **str_eval, char **str_original)
     (*str_original)++;
 }
 
+static void eval_last_exit_value(char **str_eval, char **str_original) //$? substitution
+{
+	char *exit_value;
+
+	exit_value = ft_itoa(g_exit_value);
+	str_join_str(str_eval, exit_value);
+	(*str_original)+=(ft_strlen(exit_value)+1);
+	free(exit_value);
+}
+
 static void eval_vars_and_params(char **str_eval, char **str_original, int argc, char **argv, t_list_env	*envs)
 {
-    if(is_var_name_symbol(*((*str_original)+1)))
+	if (*((*str_original) + 1) == '?')
+		eval_last_exit_value(str_eval, str_original); //$? substitution
+    else if(is_var_name_symbol(*((*str_original)+1)))
     {
         eval_var(str_eval, str_original, envs);
     } else if(is_var_name_symbol_with_num(*((*str_original)+1)))
