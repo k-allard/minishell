@@ -7,9 +7,7 @@ typedef enum e_lexema_type
     lexema_type_simple_word,
     lexema_type_double_q,
     lexema_type_single_q,
-    lexema_type_marker,
     lexema_type_semicolon,
-    lexema_type_redirect,
     lexema_type_redirect_to_append,
     lexema_type_redirect_to,
     lexema_type_redirect_from,
@@ -19,6 +17,7 @@ typedef enum e_lexema_type
 typedef struct s_lexema
 {
     char *string;
+    int has_space_before;
     t_lexema_type lexemaType;
 } t_lexema;
 

@@ -15,10 +15,17 @@ static int is_blank(char symbol)
         return 0;
 }
 
-static void skip_blank(char**commandline)
+static int skip_blank(char**commandline)
 {
+	int has_space_before;
+
+	has_space_before = 0;
     while (is_blank(**commandline))
-        (*commandline)++;
+    {
+    	has_space_before = 1;
+		(*commandline)++;
+	}
+	return has_space_before;
 }
 
 
@@ -178,8 +185,9 @@ static void read_simple_word(char **commandline, t_lexema *lexema)
 static t_lexema *get_next_lexema(char **commandline)
 {
     t_lexema *lexema;
+    int has_space_before;
 
-    skip_blank(commandline);
+	has_space_before = skip_blank(commandline);
     if(**commandline == '\0') return NULL;
     lexema = t_lexema_init();
     if(**commandline == '"') read_quote_param(commandline, lexema, '"'); else
@@ -189,7 +197,7 @@ static t_lexema *get_next_lexema(char **commandline)
     if(**commandline == '>') read_redirect_to(commandline, lexema); else
     if(**commandline == '<') read_redirect_from(commandline, lexema); else
     read_simple_word(commandline, lexema);
-
+	lexema->has_space_before = has_space_before;
     return lexema;
 }
 

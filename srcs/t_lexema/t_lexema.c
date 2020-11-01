@@ -14,6 +14,7 @@ t_lexema* t_lexema_init()
     if(lexema != NULL)
     {
         lexema->lexemaType = lexema_type_default;
+        lexema->has_space_before = 0;
         lexema->string = (char *)malloc(sizeof(char ));
         if(lexema->string != NULL)
             lexema->string[0] = '\0';
