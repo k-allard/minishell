@@ -30,6 +30,8 @@ int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
 
     while ((lexema_chain = get_next_lexema_chain(&lexema_list, lexema_type_semicolon)))
     {
+//		ft_putstr_fd("«Before:»\n", STDERR_FILENO);
+//		parser_debug_print_lexema_list(lexema_chain);
         eval_vars_and_unescape_$_in_lexema_chain(lexema_chain, argc, argv, envs);
 //		ft_putstr_fd("«After eval_vars_and_unescape_$_in_lexema_chain:»\n", STDERR_FILENO);
 //		parser_debug_print_lexema_list(lexema_chain);

@@ -143,7 +143,15 @@ static void eval_vars_and_params(char **str_eval, char **str_original, int argc,
         simple_join_symbol(str_eval, str_original);
 }
 
+static void eval_tilda(char **str_eval, char **str_original, t_list_env	*envs) //~ substitution
+{
+	char *home_dir;
 
+	home_dir = get_env_value("HOME", (t_list *)envs);
+	str_join_str(str_eval, home_dir);
+	(*str_original)+=2;
+//	free(home_dir);
+}
 
 static void eval_vars_and_unescape_$(t_lexema *lexema, int argc, char **argv, t_list_env	*envs)
 {
@@ -152,17 +160,20 @@ static void eval_vars_and_unescape_$(t_lexema *lexema, int argc, char **argv, t_
 
     str_eval = ft_strdup("");
     str_original = lexema->string;
-    while (*str_original)
-    {
-        if(*str_original == '\\' && *(str_original+1) == '$') {
-            unescape$(&str_eval, &str_original);
-        }
-        else if (*str_original == '$') {
-            eval_vars_and_params(&str_eval, &str_original, argc, argv, envs);
-        }
-        else
-            simple_join_symbol(&str_eval, &str_original);
-    }
+	if (*str_original == '~' && *(str_original+1) == '\0')
+	{
+		eval_tilda(&str_eval, &str_original, envs);
+	}
+	else
+		while (*str_original)
+		{
+			if(*str_original == '\\' && *(str_original+1) == '$')
+				unescape$(&str_eval, &str_original);
+			else if (*str_original == '$')
+				eval_vars_and_params(&str_eval, &str_original, argc, argv, envs);
+			else
+				simple_join_symbol(&str_eval, &str_original);
+		}
     free(lexema->string);
     lexema->string = str_eval;
 }
