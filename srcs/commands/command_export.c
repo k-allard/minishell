@@ -46,7 +46,7 @@ void add_new(t_list *envs, char *new_env, char *new_data)
 	ft_lstadd_back(&envs, ft_lstnew(new));
 }
 
-int update_data(t_list *envs, char *new_env, char *new_data)
+int update_env_data(t_list *envs, char *new_env, char *new_data)
 {
 	int flag;
 
@@ -92,7 +92,7 @@ void check_env(char *argv, t_list *envs)
 	new_data[i] = '\0';
 //	printf("новая переменная: %s\n", new_env);//
 //	printf("новая дата: %s\n", new_data);//
-	if (!update_data(envs, new_env, new_data))
+	if (!update_env_data(envs, new_env, new_data))
 		add_new(envs, new_env, new_data);
 	free(new_env);
 	free(new_data);

@@ -44,9 +44,9 @@ int command_cd(char **argv, t_list *envs)
 
 	if (path == NULL)
 		return 17;
+	pwd = getcwd(0, 1024);//TODO 1: получать PWD из переменных - getpwd(envs);
 	if(path[0] == '.' && path[1] == '\0')
 	{
-		pwd = getcwd(0, 1024);//TODO 1: получать PWD из переменных - getpwd(envs);
 		path = ft_strjoin(pwd, "/.");
 		chdir(path); //TODO: сделать вместо chdir функцию chpwd, чтобы она ставила PWD env + OWDPWD env и выполняла chdir
 		free(pwd);
@@ -59,6 +59,12 @@ int command_cd(char **argv, t_list *envs)
 		{
 			if ((chdir(path) < 0) || (closedir(dir) < 0))//TODO: сделать вместо chdir функцию chpwd, чтобы она ставила PWD env + OWDPWD env и выполняла chdir
 				er = 1;
+			if (er == 0)
+			{
+				update_env_data(envs, "OLDPWD", pwd); //обновляем PWD в переменных
+				pwd = getcwd(0, 1024);
+				update_env_data(envs, "PWD", pwd); //обновляем PWD в переменных
+			}
 		}
 		else
 			er = 1;
