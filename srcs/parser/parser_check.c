@@ -78,7 +78,7 @@ static int is_sequence_correct(t_lexema *lexema_prev, t_lexema *lexema)
     }
 }
 
-void check_marker_syntaxis(t_list_lexema *lexema_list)
+int check_marker_syntaxis(t_list_lexema *lexema_list)
 {
     t_lexema *lexema_prev;
     t_lexema *lexema;
@@ -97,9 +97,10 @@ void check_marker_syntaxis(t_list_lexema *lexema_list)
     is_correct = (is_correct && !is_marker(lexema));
     if(!is_correct)
     {
-        ft_putstr_fd("синтаксическая ошибка рядом с неожиданным маркером «", STDERR_FILENO);
+        ft_putstr_fd("syntax error near unexpected token `", STDERR_FILENO);
         ft_putstr_fd(lexema->string, STDERR_FILENO);
-        ft_putstr_fd("»\n", STDERR_FILENO);
-        exit(3);
+        ft_putendl_fd("\'", STDERR_FILENO);
+        return (2);
     }
+    return (0);
 }

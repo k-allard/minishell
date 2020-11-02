@@ -26,7 +26,9 @@ int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
 //    ft_putstr_fd("»\n", STDERR_FILENO);
 //    parser_debug_print_lexema_list(lexema_list);
 
-    check_marker_syntaxis(lexema_list);
+    res = check_marker_syntaxis(lexema_list);
+    if (res)
+    	return res;
 
     while ((lexema_chain = get_next_lexema_chain(&lexema_list, lexema_type_semicolon)))
     {
