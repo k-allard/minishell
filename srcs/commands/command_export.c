@@ -30,8 +30,9 @@ void		command_env_declare(t_list *envs)
 		return ;
 	ft_putstr_fd("declare -x ", 1);
 	ft_putstr_fd(((t_env *)envs->content)->key, 1);
-	ft_putchar_fd('=', 1);
-	ft_putendl_fd(((t_env *)envs->content)->value, 1);
+	ft_putstr_fd("=\"", 1);
+	ft_putstr_fd(((t_env *)envs->content)->value, 1);
+	ft_putendl_fd("\"", 1);
 	command_env_declare(envs->next);
 }
 
@@ -113,6 +114,7 @@ int command_export(char **argv, t_list *envs)
 				ft_putstr_fd("export: `", 2);
 				ft_putstr_fd(argv[i], 2);
 				ft_putendl_fd("': not a valid identifier", 2);
+				return (1);
 			}
 			if (ft_strchr(argv[i], '=') && valid_name_first(argv[i][0]))
 				check_env(argv[i], envs);
