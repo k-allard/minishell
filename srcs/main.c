@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:46 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/21 22:30:52 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/02 17:44:05 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		main(int argc, char **argv, char **envp)
 	t_list	*envs;
 	char	*line;
 	char	**comands;
+	int res;
 
 	g_envp = envp;
 	envs = get_envs(argc, argv, envp);
@@ -36,7 +37,7 @@ int		main(int argc, char **argv, char **envp)
 //
 		if(argc == 3 && ft_strncmp(argv[1], "-c", 3) == 0)
 		{
-			parser(argv[2], argc, argv, (t_list_env*)envs);
+			res = parser(argv[2], argc, argv, (t_list_env*)envs);
 		}
 		else {
 			line = NULL;
@@ -44,9 +45,9 @@ int		main(int argc, char **argv, char **envp)
 				write_prompt();
 				if (!deal_with_input(&line))
 					continue;
-				parser(line, argc, argv, (t_list_env *) envs);
+				res = parser(line, argc, argv, (t_list_env *) envs);
 				free(line);
 			}
 		}
-	return (0);
+	return (res);
 }

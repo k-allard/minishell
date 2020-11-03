@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:29 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/31 15:56:12 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/02 19:02:19 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <errno.h>
+#include <string.h>
 
 #include "t_lexema/t_lexema.h"
 

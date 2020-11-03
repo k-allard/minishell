@@ -67,9 +67,14 @@ static int exec_external_command(t_list_lexema *lexema_chain, t_list_env *envs)
 
 	if ((res = execve(command_name, args, env)) < 0)
 	{
-		ft_putstr_fd("error: cannot execute ", STDERR_FILENO);
-		ft_putstr_fd(command_name, STDERR_FILENO);
-		ft_putstr_fd("\n", STDERR_FILENO);
+		if (errno == ENOENT)
+		{
+			ft_putstr_fd(command_name, STDERR_FILENO);
+			ft_putendl_fd(": command not found", STDERR_FILENO);
+			res = 127;
+		}
+		else
+			res = errno;
 	}
 	free(command_name);
 	free(args);
