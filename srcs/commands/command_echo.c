@@ -6,13 +6,13 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 17:29:37 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/19 17:30:43 by kallard          ###   ########.fr       */
+/*   Updated: 2020/10/31 15:38:01 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void		command_echo(char **argv)
+int		command_echo(char **argv)
 {
 	size_t	i;
 	int		new_line;
@@ -33,4 +33,5 @@ void		command_echo(char **argv)
 	}
 	if (new_line)
 		ft_putstr_fd("\n", 1);
+	return (0);
 }

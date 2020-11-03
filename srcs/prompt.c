@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 14:47:11 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/16 14:50:21 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/02 18:35:31 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void			write_prompt()
 {
-	ft_putstr_fd("(fastest team's shell)  ", 1);
+	ft_putstr_fd(" \033[31mFA\033[0m\033[32mST\033[0m\033[33mES\033[0m\033[34mT\033[0m\033[35mSHELL\033[0m$ ", 2);
 }

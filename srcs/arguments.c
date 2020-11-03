@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   arguments.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/21 19:42:19 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/21 21:28:57 by kallard          ###   ########.fr       */
+/*   Created: 2020/10/23 14:48:17 by kallard           #+#    #+#             */
+/*   Updated: 2020/10/25 14:54:53 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-void	free_double_array(char **array)
+/*
+** 
+*/
+
+char	**get_argumentes(char *line, t_list *envs)
 {
 	int		i;
+	char	**argv;
 
-	if (!array)
-		return ;
+	if (!(argv = ft_split(line, ' ')))
+		return (0);
 	i = -1;
-	while (array[++i])
-		free(array[i]);
-	free(array);
-}
-
-int		error_no_cmd(char *cmd)
-{
-	ft_putstr_fd(cmd, 2);
-	ft_putendl_fd(": command not found", 2);
-	return (127);
-}
-
-int		error_no_file_dir(char *cmd)
-{
-	ft_putstr_fd(cmd, 2);
-	ft_putendl_fd(": No such file or directory", 2);
-	return (127);
+	while (argv[++i])
+	{
+		// if (ft_strlen(argv[i]) > 1 && quote_found(argv[i]))
+		// 	argv[i] = deal_with_quotes(argv[i], envs);
+        if (ft_strlen(argv[i]) > 1 && dollar_found(argv[i]))
+			argv[i] = insert_variable(argv[i], envs);
+	}
+	return (argv);
 }
