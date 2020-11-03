@@ -100,7 +100,7 @@ int check_marker_syntaxis(t_list_lexema *lexema_list)
         ft_putstr_fd("syntax error near unexpected token `", STDERR_FILENO);
         ft_putstr_fd(lexema->string, STDERR_FILENO);
         ft_putendl_fd("\'", STDERR_FILENO);
-        return (2);
+        return (258);
     }
     return (0);
 }

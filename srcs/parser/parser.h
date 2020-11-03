@@ -16,7 +16,7 @@ enum COMMANDS_INDEX
 	NONE_COMMAND
 } typedef E_COMMAND;
 
-t_list_lexema *get_lexema_list(char *commandline);
+t_list_lexema *get_lexema_list(char *commandline, int *res);
 void parser_debug_print_lexema_list(t_list_lexema *lexema_list);
 
 int check_marker_syntaxis(t_list_lexema *lexema_list);

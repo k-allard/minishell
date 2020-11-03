@@ -11,7 +11,11 @@
 
 
 
-
+static int exit_code(int code)
+{
+	g_exit_value = code;
+	return code;
+}
 
 int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
 {
@@ -19,7 +23,9 @@ int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
     t_list_lexema *lexema_chain;
     int res;
 
-    lexema_list = get_lexema_list(commandline);
+	lexema_list = get_lexema_list(commandline, &res);
+	if(res)
+		return exit_code(res);
 
 //    ft_putstr_fd("«", STDERR_FILENO);
 //    ft_putstr_fd(commandline, STDERR_FILENO);
@@ -28,7 +34,7 @@ int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
 
     res = check_marker_syntaxis(lexema_list);
     if (res)
-    	return res;
+    	return exit_code(res);
 
     while ((lexema_chain = get_next_lexema_chain(&lexema_list, lexema_type_semicolon)))
     {

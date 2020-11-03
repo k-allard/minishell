@@ -45,26 +45,18 @@ static void read_simple_symbol(char **commandline, t_lexema *lexema)
     free(symbol);
 }
 
-static void error_end_of_line_escape()
-{
-    ft_putstr_fd("неожиданный конец строки после «\\», во время поиска экранированного символа\n", STDERR_FILENO);
-    ft_putstr_fd("синтаксическая ошибка: неожиданный конец строки\n", STDERR_FILENO);
-    exit(6);
-}
-
-static void read_escape_symbol(char **commandline, t_lexema *lexema, int is_var_support)
+static int read_escape_symbol(char **commandline, t_lexema *lexema, int is_var_support)
 {
     char *symbol;
     char *tmpString;
     char tmpSymbol;
 
-    symbol = ft_strnew(2);
-    tmpString = lexema->string;
-
     (*commandline)++;
     tmpSymbol = *((*commandline)++);
     if(!tmpSymbol)
-        error_end_of_line_escape();
+        return (0);
+    symbol = ft_strnew(2);
+    tmpString = lexema->string;
     if(is_var_support && tmpSymbol == '$')
     {
         symbol[0] = '\\';
@@ -76,24 +68,23 @@ static void read_escape_symbol(char **commandline, t_lexema *lexema, int is_var_
     lexema->string = ft_strjoin(tmpString, symbol);
     free(tmpString);
     free(symbol);
+    return (0);
 }
 
-static void error_end_of_line(char quoteChar)
+static int error_end_of_line(char quoteChar)
 {
-    ft_putstr_fd("неожиданный конец строки во время поиска «", STDERR_FILENO);
+    ft_putstr_fd("unexpected EOF while looking for matching `", STDERR_FILENO);
     ft_putchar_fd(quoteChar, STDERR_FILENO);
-    ft_putstr_fd("»\n", STDERR_FILENO);
-    ft_putstr_fd("синтаксическая ошибка: неожиданный конец строки\n", STDERR_FILENO);
-    exit(4);
+    ft_putstr_fd("'\n", STDERR_FILENO);
+    ft_putstr_fd("syntax error: unexpected end of file\n", STDERR_FILENO);
+    return(2);
 }
-static void malloc_error(char *commandline)
+static int malloc_error(char *commandline)
 {
-    ft_putstr_fd("ошибка выделения памяти при обработке командной строки «", STDERR_FILENO);
-    ft_putstr_fd(commandline, STDERR_FILENO);
-    ft_putstr_fd("»\n", STDERR_FILENO);
-    exit(5);
+    ft_putendl_fd("memory allocation error during command line processing", STDERR_FILENO);
+    return(5);
 }
-static void read_quote_param(char **commandline, t_lexema *lexema, char quoteChar)
+static int read_quote_param(char **commandline, t_lexema *lexema, char quoteChar)
 {
     (*commandline)++;
     while (lexema->string && **commandline && **commandline != quoteChar)
@@ -108,29 +99,32 @@ static void read_quote_param(char **commandline, t_lexema *lexema, char quoteCha
             read_simple_symbol(commandline, lexema);
     }
     if(lexema->string == NULL)
-        malloc_error(*commandline);
+        return (malloc_error(*commandline));
     else if(**commandline == '\0')
-        error_end_of_line(quoteChar);
+        return (error_end_of_line(quoteChar));
     else
         (*commandline)++;
     lexema->lexemaType = (quoteChar == '"') ? lexema_type_double_q : lexema_type_single_q;
+    return (0);
 }
 
-static void read_pipe(char **commandline, t_lexema *lexema)
+static int read_pipe(char **commandline, t_lexema *lexema)
 {
     read_simple_symbol(commandline, lexema);
     if(lexema->string == NULL)
-        malloc_error(*commandline);
+        return (malloc_error(*commandline));
     lexema->lexemaType = lexema_type_pipe;
+    return (0);
 }
-static void read_semicolon(char **commandline, t_lexema *lexema)
+static int read_semicolon(char **commandline, t_lexema *lexema)
 {
     read_simple_symbol(commandline, lexema);
     if(lexema->string == NULL)
-        malloc_error(*commandline);
+        return (malloc_error(*commandline));
     lexema->lexemaType = lexema_type_semicolon;
+    return (0);
 }
-static void read_redirect_to(char **commandline, t_lexema *lexema)
+static int read_redirect_to(char **commandline, t_lexema *lexema)
 {
     int i;
 
@@ -140,10 +134,11 @@ static void read_redirect_to(char **commandline, t_lexema *lexema)
         read_simple_symbol(commandline, lexema);
     }
     if(lexema->string == NULL)
-        malloc_error(*commandline);
+        return (malloc_error(*commandline));
     lexema->lexemaType = (i == 1) ? lexema_type_redirect_to : lexema_type_redirect_to_append;
+    return (0);
 }
-static void read_redirect_from(char **commandline, t_lexema *lexema)
+static int read_redirect_from(char **commandline, t_lexema *lexema)
 {
     int i;
 
@@ -153,8 +148,9 @@ static void read_redirect_from(char **commandline, t_lexema *lexema)
         read_simple_symbol(commandline, lexema);
     }
     if(lexema->string == NULL)
-        malloc_error(*commandline);
+        return (malloc_error(*commandline));
     lexema->lexemaType = lexema_type_redirect_from;
+    return (0);
 }
 
 static int is_simple_symbol(char symbol)
@@ -168,7 +164,7 @@ static int is_simple_symbol(char symbol)
         return 1;
 }
 
-static void read_simple_word(char **commandline, t_lexema *lexema)
+static int read_simple_word(char **commandline, t_lexema *lexema)
 {
     while (lexema->string && **commandline && is_simple_symbol(**commandline))
     {
@@ -178,36 +174,38 @@ static void read_simple_word(char **commandline, t_lexema *lexema)
             read_simple_symbol(commandline, lexema);
     }
     if(lexema->string == NULL)
-        malloc_error(*commandline);
+        return (malloc_error(*commandline));
     lexema->lexemaType = lexema_type_simple_word;
+    return (0);
 }
 
-static t_lexema *get_next_lexema(char **commandline)
+static t_lexema *get_next_lexema(char **commandline, int *res)
 {
     t_lexema *lexema;
     int has_space_before;
 
+    *res = 0;
 	has_space_before = skip_blank(commandline);
     if(**commandline == '\0') return NULL;
     lexema = t_lexema_init();
-    if(**commandline == '"') read_quote_param(commandline, lexema, '"'); else
-    if(**commandline == '\'') read_quote_param(commandline, lexema, '\''); else
-    if(**commandline == '|') read_pipe(commandline, lexema); else
-    if(**commandline == ';') read_semicolon(commandline, lexema); else
-    if(**commandline == '>') read_redirect_to(commandline, lexema); else
-    if(**commandline == '<') read_redirect_from(commandline, lexema); else
-    read_simple_word(commandline, lexema);
+    if(**commandline == '"') *res = read_quote_param(commandline, lexema, '"'); else
+    if(**commandline == '\'') *res = read_quote_param(commandline, lexema, '\''); else
+    if(**commandline == '|') *res = read_pipe(commandline, lexema); else
+    if(**commandline == ';') *res = read_semicolon(commandline, lexema); else
+    if(**commandline == '>') *res = read_redirect_to(commandline, lexema); else
+    if(**commandline == '<') *res = read_redirect_from(commandline, lexema); else
+        *res = read_simple_word(commandline, lexema);
 	lexema->has_space_before = has_space_before;
     return lexema;
 }
 
-t_list_lexema *get_lexema_list(char *commandline)
+t_list_lexema *get_lexema_list(char *commandline, int *res)
 {
     t_lexema *lexema;
     t_list *lexema_list;
 
     lexema_list = NULL;
-    while ((lexema = get_next_lexema(&commandline)))
+    while ((lexema = get_next_lexema(&commandline, res)) && (*res == 0))
     {
         ft_lstadd_back(&lexema_list, ft_lstnew(lexema));
     }

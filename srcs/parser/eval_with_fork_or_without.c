@@ -29,15 +29,10 @@ int eval_without_fork(t_list_lexema *one_command_lexemas, t_list_env *envs)
 
 int eval_with_fork(t_list_lexema *one_command_lexemas, t_list_env *envs)
 {
-	int		    file_pipes[2];
 	pid_t		pid;
 	int res;
 	int status;
 
-	if (pipe(file_pipes) < 0) {
-		ft_putstr_fd("Pipe could not be initialized\n", STDERR_FILENO);
-		exit(9);
-	}
 	pid = fork();
 	if (pid < 0) {
 		ft_putstr_fd("Could not fork\n", STDERR_FILENO);
