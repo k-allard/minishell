@@ -31,10 +31,10 @@ int command_cd(char **argv, t_list *envs)
 	char	*path;
 	char	*pwd;
 	char *is_cwd;
-    int		er;
+    int		res;
 	int		n;
 
-	er = 0;
+	res = 0;
 	//if (argc > 1) //если после cd есть путь
 //		path = argv[1];
 	//else //если путь не указан
@@ -71,8 +71,8 @@ int command_cd(char **argv, t_list *envs)
 		if (dir != NULL)
 		{
 			if ((chdir(path) < 0) || (closedir(dir) < 0))
-				er = 1;
-			if (er == 0)
+				res = 1;
+			if (res == 0)
 			{
 				update_env_data(envs, "OLDPWD", pwd); //обновляем OLDPWD в переменных
 				pwd = getcwd(0, 1024);
@@ -80,8 +80,13 @@ int command_cd(char **argv, t_list *envs)
 			}
 		}
 		else
-			er = 1;
+			res = 1;
 	}
-		er = 1;
-	return 0;
+	if (res == 1)
+	{
+		ft_putstr_fd("cd: ", STDERR_FILENO);
+		ft_putstr_fd(path, STDERR_FILENO);
+		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+	}
+	return (res);
 }
