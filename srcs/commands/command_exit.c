@@ -17,6 +17,8 @@ static int		if_str_number(char *str)
 	int	i;
 
 	i = 0;
+	if (str[i] == '-')
+		i++;
 	while (str[i])
 		if (!ft_isdigit(str[i++]))
 			return (0);
@@ -34,14 +36,22 @@ int			command_exit(char **argv)
 	if (i == 1)
 		exit(EXIT_SUCCESS);
 	else if (i == 2 && if_str_number(argv[1]))
-		exit(ft_atoi(argv[1]));
-	else if (i > 2 && if_str_number(argv[1])) {
-		ft_putendl_fd("bash: exit: too many arguments", 2);
+	{
+		if (ft_atoi(argv[1]) >= 0)
+			exit(ft_atoi(argv[1]));
+		else
+			exit (252);
+	}
+	else if (i > 2 && if_str_number(argv[1]))
+	{
+		ft_putendl_fd("exit: too many arguments", 2);
 		return (1);
 	}
 	else
 	{
-		ft_putstr_fd("bash: exit: numeric argument required", 2);
-		return (255);
+		ft_putstr_fd("exit: ", 2);
+		ft_putstr_fd(argv[1], 2);
+		ft_putendl_fd(": numeric argument required", 2);
+		exit (255);
 	}
 }

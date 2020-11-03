@@ -22,14 +22,14 @@ char	*ft_strtrim(char const *s1, char const *set)
 	unsigned int	i;
 	unsigned int	end;
 	size_t			setlen;
-	unsigned char	trim_hashmap[256];
+	unsigned char	trim_hashmap[5000];
 
 	if (!s1 || !set)
 		return (NULL);
 	setlen = ft_strlen(set);
 	if (!setlen || !ft_strlen(s1))
 		return (ft_strdup(s1));
-	ft_bzero(trim_hashmap, 256);
+	ft_bzero(trim_hashmap, 5000);
 	i = 0;
 	while (i < setlen)
 		trim_hashmap[(unsigned int)set[i++]] = 1;
