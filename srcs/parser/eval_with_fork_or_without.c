@@ -11,16 +11,16 @@
 
 
 
-static int is_exit_command(t_lexema *lexema)
-{
-	char *exit_str;
-
-	exit_str = "exit";
-	if(ft_strncmp(lexema->string, exit_str, 5) == 0)
-		return (1);
-	else
-		return (0);
-}
+//static int is_exit_command(t_lexema *lexema)
+//{
+//	char *exit_str;
+//
+//	exit_str = "exit";
+//	if(ft_strncmp(lexema->string, exit_str, 5) == 0)
+//		return (1);
+//	else
+//		return (0);
+//}
 
 int eval_without_fork(t_list_lexema *one_command_lexemas, t_list_env *envs)
 {

@@ -2,10 +2,10 @@
 #include "../t_lexema/t_lexema.h"
 
 
-static void t_lexema_list_free(t_list **lexema_list)
-{
-    ft_lstclear(lexema_list, t_lexema_free_void);
-}
+//static void t_lexema_list_free(t_list **lexema_list)
+//{
+//    ft_lstclear(lexema_list, t_lexema_free_void);
+//}
 
 static int is_blank(char symbol)
 {
@@ -27,7 +27,6 @@ static int skip_blank(char**commandline)
 	}
 	return has_space_before;
 }
-
 
 static void read_simple_symbol(char **commandline, t_lexema *lexema)
 {
