@@ -15,7 +15,7 @@ static int is_marker(t_lexema *lexema)
         return 0;
 }
 
-static int is_block(t_lexema *lexema)
+int is_block(t_lexema *lexema)
 {
     if(lexema == NULL)
         return 0;

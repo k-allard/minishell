@@ -6,7 +6,7 @@
 #include <sys/wait.h>
 #include "../t_lexema/t_lexema.h"
 #include "../t_stream/t_stream.h"
-#include "../t_command/t_command.h"
+#include "../t_command/t_redirects_close.h"
 #include "parser.h"
 
 static int is_pipe_in_lexema_chain(t_list_lexema *lexema_chain)

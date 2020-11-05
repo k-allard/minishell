@@ -31,9 +31,9 @@ int		error_no_cmd(char *cmd)
 	return (127);
 }
 
-int		error_no_file_dir(char *cmd)
-{
-	ft_putstr_fd(cmd, 2);
-	ft_putendl_fd(": No such file or directory", 2);
-	return (127);
-}
+//int		error_no_file_dir(char *cmd)
+//{
+//	ft_putstr_fd(cmd, 2);
+//	ft_putendl_fd(": No such file or directory", 2);
+//	return (127);
+//}

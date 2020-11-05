@@ -35,11 +35,6 @@ int command_cd(char **argv, t_list *envs)
 	int		n;
 
 	res = 0;
-	//if (argc > 1) //если после cd есть путь
-//		path = argv[1];
-	//else //если путь не указан
-        //printf("%s", "Здесь будет какой-то код чтобы попасть в Home");
-
 	n = count_argv(argv);
 	path = (n > 1) ? argv[1] : get_env_value("HOME", envs);
 
@@ -52,18 +47,14 @@ int command_cd(char **argv, t_list *envs)
 		update_env_data(envs, "OLDPWD", pwd); //обновляем OLDPWD в переменных
 		pwd = ft_strjoin(pwd, "/.");
 		update_env_data(envs, "PWD", pwd); //обновляем PWD в переменных
-//		chdir(pwd); //TODO: сделать вместо chdir функцию chpwd, чтобы она ставила PWD env + OWDPWD env и выполняла chdir
 		free(pwd);
-//		free(path);
 	}
 	else if(path[0] == '.' && path[1] == '\0')
 	{
 		update_env_data(envs, "OLDPWD", pwd); //обновляем OLDPWD в переменных
-//		pwd = ft_strjoin(pwd, "/.");
 		update_env_data(envs, "PWD", pwd); //обновляем PWD в переменных
 		chdir(pwd); //TODO: сделать вместо chdir функцию chpwd, чтобы она ставила PWD env + OWDPWD env и выполняла chdir
 		free(pwd);
-//		free(path);
 	}
 	else
 	{

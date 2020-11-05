@@ -19,25 +19,25 @@ int	valid_name_first(int ch)
 	if (ch == '_')
 		return (1);
 	return (0);
-	
+
 }
 
-int valid_name(char *str)
-{
-	int i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (ft_isalpha(str[i]) || ft_isdigit(str[i] || str[i] == '_'))
-		{
-			i++;
-		}
-		else
-		{
-			return (0);
-		}
-		
-	}
-	return (1);
-}
+//int valid_name(char *str)
+//{
+//	int i;
+//
+//	i = 0;
+//	while (str[i] != '\0')
+//	{
+//		if (ft_isalpha(str[i]) || ft_isdigit(str[i] || str[i] == '_'))
+//		{
+//			i++;
+//		}
+//		else
+//		{
+//			return (0);
+//		}
+//
+//	}
+//	return (1);
+//}

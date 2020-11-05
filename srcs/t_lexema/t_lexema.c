@@ -22,21 +22,21 @@ t_lexema* t_lexema_init()
     return lexema;
 }
 
-static void t_lexema_free(t_lexema *lexema)
-{
-    if(lexema != NULL)
-    {
-        if(lexema->string != NULL)
-            free(lexema->string);
-        lexema->string = NULL;
-        free(lexema);
-    }
-}
+//static void t_lexema_free(t_lexema *lexema)
+//{
+//    if(lexema != NULL)
+//    {
+//        if(lexema->string != NULL)
+//            free(lexema->string);
+//        lexema->string = NULL;
+//        free(lexema);
+//    }
+//}
 
-void t_lexema_free_void(void *content)
-{
-    t_lexema *lexema;
-
-    lexema = (t_lexema *)content;
-    t_lexema_free(lexema);
-}
+//void t_lexema_free_void(void *content)
+//{
+//    t_lexema *lexema;
+//
+//    lexema = (t_lexema *)content;
+//    t_lexema_free(lexema);
+//}
