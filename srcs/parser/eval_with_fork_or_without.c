@@ -44,7 +44,7 @@ int eval_with_fork(t_list_lexema *one_command_lexemas, t_list_env *envs)
 		if ((res = eval_without_fork(one_command_lexemas, envs)) < 0)
 		{
 			ft_putstr_fd("Error: ошибка выполнения команды\n", STDERR_FILENO);
-			parser_debug_print_lexema_list(one_command_lexemas);
+			// parser_debug_print_lexema_list(one_command_lexemas);
 		}
 		exit(res);
 	} else {

@@ -45,7 +45,7 @@ int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
         eval_vars_and_unescape_$_in_lexema_chain(lexema_chain, argc, argv, envs);
         join_lexemas_without_spaces(lexema_chain);
 //		ft_putstr_fd("«After eval_vars_and_unescape_$_in_lexema_chain:»\n", STDERR_FILENO);
-		parser_debug_print_lexema_list(lexema_chain);
+		// parser_debug_print_lexema_list(lexema_chain);
 		remove_empty_elements(&lexema_chain);
 //		ft_putstr_fd("«After remove_empty_elements:»\n", STDERR_FILENO);
 //		parser_debug_print_lexema_list(lexema_chain);

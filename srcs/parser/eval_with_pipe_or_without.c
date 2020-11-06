@@ -55,7 +55,7 @@ static int eval_with_pipe(t_list_lexema *lexema_chain, t_list_env *envs)
 		if((res[0] = eval_without_pipe(one_command_lexemas, envs)) < 0)
 		{
 			ft_putstr_fd("Error: ошибка выполнения команды\n", STDERR_FILENO);
-			parser_debug_print_lexema_list(one_command_lexemas);
+			// parser_debug_print_lexema_list(one_command_lexemas);
 		}
 		exit(res[0]);
 	}
@@ -75,7 +75,7 @@ static int eval_with_pipe(t_list_lexema *lexema_chain, t_list_env *envs)
 			if((res[1] = eval_with_pipe_or_without(lexema_chain, envs)) < 0)
 			{
 				ft_putstr_fd("Error: ошибка выполнения команды\n", STDERR_FILENO);
-				parser_debug_print_lexema_list(lexema_chain);
+				// parser_debug_print_lexema_list(lexema_chain);
 			}
 			exit(res[1]);
 		}
