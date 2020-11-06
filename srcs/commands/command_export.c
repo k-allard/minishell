@@ -60,7 +60,6 @@ int update_env_data(t_list *envs, char *new_env, char *new_data)
 			((t_env *)envs->content)->value =
 					(char *)malloc(ft_strlen(new_data));
 			ft_strcpy(((t_env *)envs->content)->value, new_data);
-//			printf("Нашлась!\n");//
 			flag = 1;
 			break ;
 		}
@@ -91,8 +90,6 @@ void check_env(char *argv, t_list *envs)
 	while (argv[len_ravno] != '\0')
 		new_data[++i] = argv[++len_ravno];
 	new_data[i] = '\0';
-//	printf("новая переменная: %s\n", new_env);//
-//	printf("новая дата: %s\n", new_data);//
 	if (!update_env_data(envs, new_env, new_data))
 		add_new(envs, new_env, new_data);
 	free(new_env);
@@ -119,5 +116,5 @@ int command_export(char **argv, t_list *envs)
 			if (ft_strchr(argv[i], '=') && valid_name_first(argv[i][0]))
 				check_env(argv[i], envs);
 		}
-	return (0); //TODO: код возврата 1 если некорректный идентификатор. Пример: export 123
+	return (0);
 }

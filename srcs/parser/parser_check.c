@@ -15,7 +15,7 @@ static int is_marker(t_lexema *lexema)
         return 0;
 }
 
-static int is_block(t_lexema *lexema)
+int is_block(t_lexema *lexema)
 {
     if(lexema == NULL)
         return 0;
@@ -100,7 +100,7 @@ int check_marker_syntaxis(t_list_lexema *lexema_list)
         ft_putstr_fd("syntax error near unexpected token `", STDERR_FILENO);
         ft_putstr_fd(lexema->string, STDERR_FILENO);
         ft_putendl_fd("\'", STDERR_FILENO);
-        return (2);
+        return (258);
     }
     return (0);
 }

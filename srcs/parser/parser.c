@@ -6,12 +6,16 @@
 #include <sys/wait.h>
 #include "../t_lexema/t_lexema.h"
 #include "../t_stream/t_stream.h"
-#include "../t_command/t_command.h"
+#include "../t_command/t_redirects_close.h"
 #include "parser.h"
 
 
 
-
+static int exit_code(int code)
+{
+	g_exit_value = code;
+	return code;
+}
 
 int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
 {
@@ -19,7 +23,11 @@ int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
     t_list_lexema *lexema_chain;
     int res;
 
-    lexema_list = get_lexema_list(commandline);
+	lexema_list = get_lexema_list(commandline, &res);
+	if(res)
+		return exit_code(res);
+	if(lexema_list == NULL)
+        return (0);
 
 //    ft_putstr_fd("«", STDERR_FILENO);
 //    ft_putstr_fd(commandline, STDERR_FILENO);
@@ -28,15 +36,16 @@ int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
 
     res = check_marker_syntaxis(lexema_list);
     if (res)
-    	return res;
+    	return exit_code(res);
 
     while ((lexema_chain = get_next_lexema_chain(&lexema_list, lexema_type_semicolon)))
     {
 //		ft_putstr_fd("«Before:»\n", STDERR_FILENO);
 //		parser_debug_print_lexema_list(lexema_chain);
         eval_vars_and_unescape_$_in_lexema_chain(lexema_chain, argc, argv, envs);
+        join_lexemas_without_spaces(lexema_chain);
 //		ft_putstr_fd("«After eval_vars_and_unescape_$_in_lexema_chain:»\n", STDERR_FILENO);
-//		parser_debug_print_lexema_list(lexema_chain);
+		// parser_debug_print_lexema_list(lexema_chain);
 		remove_empty_elements(&lexema_chain);
 //		ft_putstr_fd("«After remove_empty_elements:»\n", STDERR_FILENO);
 //		parser_debug_print_lexema_list(lexema_chain);

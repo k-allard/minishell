@@ -14,7 +14,7 @@
 
 #include "t_lexema/t_lexema.h"
 #include "t_stream/t_stream.h"
-#include "t_command/t_command.h"
+#include "t_command/t_redirects_close.h"
 #include "parser/parser.h"
 
 

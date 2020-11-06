@@ -6,21 +6,21 @@
 #include <sys/wait.h>
 #include "../t_lexema/t_lexema.h"
 #include "../t_stream/t_stream.h"
-#include "../t_command/t_command.h"
+#include "../t_command/t_redirects_close.h"
 #include "parser.h"
 
 
 
-static int is_exit_command(t_lexema *lexema)
-{
-	char *exit_str;
-
-	exit_str = "exit";
-	if(ft_strncmp(lexema->string, exit_str, 5) == 0)
-		return (1);
-	else
-		return (0);
-}
+//static int is_exit_command(t_lexema *lexema)
+//{
+//	char *exit_str;
+//
+//	exit_str = "exit";
+//	if(ft_strncmp(lexema->string, exit_str, 5) == 0)
+//		return (1);
+//	else
+//		return (0);
+//}
 
 int eval_without_fork(t_list_lexema *one_command_lexemas, t_list_env *envs)
 {
@@ -29,15 +29,10 @@ int eval_without_fork(t_list_lexema *one_command_lexemas, t_list_env *envs)
 
 int eval_with_fork(t_list_lexema *one_command_lexemas, t_list_env *envs)
 {
-	int		    file_pipes[2];
 	pid_t		pid;
 	int res;
 	int status;
 
-	if (pipe(file_pipes) < 0) {
-		ft_putstr_fd("Pipe could not be initialized\n", STDERR_FILENO);
-		exit(9);
-	}
 	pid = fork();
 	if (pid < 0) {
 		ft_putstr_fd("Could not fork\n", STDERR_FILENO);
@@ -49,7 +44,7 @@ int eval_with_fork(t_list_lexema *one_command_lexemas, t_list_env *envs)
 		if ((res = eval_without_fork(one_command_lexemas, envs)) < 0)
 		{
 			ft_putstr_fd("Error: ошибка выполнения команды\n", STDERR_FILENO);
-			parser_debug_print_lexema_list(one_command_lexemas);
+			// parser_debug_print_lexema_list(one_command_lexemas);
 		}
 		exit(res);
 	} else {
