@@ -34,7 +34,7 @@ int			command_exit(char **argv)
 		i++;
 	ft_putendl_fd("exit", 2);
 	if (i == 1)
-		exit(EXIT_SUCCESS);
+		exit(g_exit_value);
 	else if (i == 2 && if_str_number(argv[1]))
 	{
 		if (ft_atoi(argv[1]) >= 0)
