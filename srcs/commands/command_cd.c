@@ -41,8 +41,6 @@ int command_cd(char **argv, t_list *envs)
 	{
 		update_env_data(envs, "OLDPWD", pwd); //обновляем OLDPWD в переменных
 		update_env_data(envs, "PWD", pwd); //обновляем PWD в переменных
-		chdir(pwd); //TODO: сделать вместо chdir функцию chpwd, чтобы она ставила PWD env + OWDPWD env и выполняла chdir
-		free(pwd);
 	}
 	else
 	{
