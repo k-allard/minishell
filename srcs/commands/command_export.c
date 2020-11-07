@@ -12,19 +12,7 @@
 
 #include "../minishell.h"
 
-static int	count_argv(char **argv)
-{
-	int i;
-	i = 0;
-
-	while (argv[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
-void		command_env_declare(t_list *envs)
+void	command_env_declare(t_list *envs)
 {
 	if (!envs)
 		return ;
@@ -36,9 +24,10 @@ void		command_env_declare(t_list *envs)
 	command_env_declare(envs->next);
 }
 
-void add_new(t_list *envs, char *new_env, char *new_data)
+void	add_new(t_list *envs, char *new_env, char *new_data)
 {
-	t_env *new;
+	t_env	*new;
+
 	new = (t_env *)malloc(sizeof(t_env));
 	new->key = (char *)malloc(sizeof(char) * ft_strlen(new_env));
 	new->key = ft_strcpy(new->key, new_env);
@@ -47,9 +36,9 @@ void add_new(t_list *envs, char *new_env, char *new_data)
 	ft_lstadd_back(&envs, ft_lstnew(new));
 }
 
-int update_env_data(t_list *envs, char *new_env, char *new_data)
+int		update_env_data(t_list *envs, char *new_env, char *new_data)
 {
-	int flag;
+	int	flag;
 
 	flag = 0;
 	while (envs->next)
@@ -68,13 +57,13 @@ int update_env_data(t_list *envs, char *new_env, char *new_data)
 	return (flag);
 }
 
-void check_env(char *argv, t_list *envs)
+void	check_env(char *argv, t_list *envs)
 {
-	char *new_env;
-	char *new_data;
-	int len_ravno;
-	int len_data;
-	int i;
+	char	*new_env;
+	char	*new_data;
+	int		len_ravno;
+	int		len_data;
+	int		i;
 
 	len_ravno = 0;
 	i = -1;
@@ -96,9 +85,9 @@ void check_env(char *argv, t_list *envs)
 	free(new_data);
 }
 
-int command_export(char **argv, t_list *envs)
+int		command_export(char **argv, t_list *envs)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (count_argv(argv) < 2)
@@ -113,7 +102,8 @@ int command_export(char **argv, t_list *envs)
 				ft_putendl_fd("': not a valid identifier", 2);
 				return (1);
 			}
-			if (ft_strchr(argv[i], '=') && valid_name_first(argv[i][0]) && valid_name(argv[i]))
+			if (ft_strchr(argv[i], '=') && valid_name_first(argv[i][0]) &&
+				valid_name(argv[i]))
 				check_env(argv[i], envs);
 		}
 	return (0);

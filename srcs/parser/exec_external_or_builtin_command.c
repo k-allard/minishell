@@ -120,7 +120,7 @@ static int exec_builtin_command(E_COMMAND commandIndex, t_list_lexema *lexema_ch
 	else if(commandIndex == COMMAND_EXPORT)
 		res = command_export(args, (t_list *)envs);
 	else if(commandIndex == COMMAND_EXIT)
-		res = command_exit(args);
+		res = command_exit(args, 0);
 	else if(commandIndex == COMMAND_ENV)
 		res = command_env((t_list *)envs);
 	else if(commandIndex == COMMAND_PWD)

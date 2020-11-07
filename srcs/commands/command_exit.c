@@ -25,10 +25,8 @@ static int		if_str_number(char *str)
 	return (1);
 }
 
-int			command_exit(char **argv)
+int				command_exit(char **argv, int i)
 {
-	int	i;
-
 	i = 0;
 	while (argv[i])
 		i++;
@@ -40,7 +38,7 @@ int			command_exit(char **argv)
 		if (ft_atoi(argv[1]) >= 0)
 			exit(ft_atoi(argv[1]));
 		else
-			exit (252);
+			exit(252);
 	}
 	else if (i > 2 && if_str_number(argv[1]))
 	{
@@ -52,6 +50,6 @@ int			command_exit(char **argv)
 		ft_putstr_fd("exit: ", 2);
 		ft_putstr_fd(argv[1], 2);
 		ft_putendl_fd(": numeric argument required", 2);
-		exit (255);
+		exit(255);
 	}
 }

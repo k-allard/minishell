@@ -99,7 +99,7 @@ int				command_pwd(t_list_env *envs);
 int				command_env(t_list *envs);
 int           	command_export(char **argv, t_list *envs);
 int				command_unset(char **argv, t_list *envs);
-int				command_exit(char **argv);
+int				command_exit(char **argv, int i);
 
 int		pipe_found(char *line);
 int		redirect_found(char *line);
@@ -119,6 +119,7 @@ int		error_no_file_dir(char *cmd);
 int	valid_name_first(int ch);
 int	valid_name(char *str);
 void signals();
+int	count_argv(char **argv);
 
 
 #endif
