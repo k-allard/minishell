@@ -14,14 +14,14 @@ $(NAME):
 	@echo "\x1b[33m Preparing minishell...\x1b[0m"
 	@make -C libft
 	@gcc -o $(NAME) $(SRCS) libft/libft.a $(FLAGS)
-	@touch test.txt           
+	@touch test.txt
 	@chmod a+rw test.txt
 	@echo "test\nabc" >> ./test.txt
 	@echo "\x1b[33m Minishell is ready!\x1b[0m"
 
 norm:
 	@echo "\x1b[33m Sources, headers, libft NORM CHECK...\x1b[0m"
-	@norminette *.c minishell.h libft/*.c libft/*.h 
+	@norminette *.c minishell.h libft/*.c libft/*.h
 
 clean:
 	@rm -rf $(OBJS)
@@ -33,6 +33,11 @@ fclean: clean
 
 re: fclean all
 
+test: re
+	@echo "Copy minishell into test Folder"
+	@cp ./minishell ./minishell-tester/minishell
+	@echo "GoTo test Folder && Start tests"
+	@cd ./minishell-tester ; bash test.sh
 
 %.o: %.c
 	@$(CC) $(FLAGS) -c $< -o $@

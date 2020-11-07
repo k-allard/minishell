@@ -32,6 +32,10 @@ function exec_test()
 	TEST2=$(echo $@ "; exit" | bash 2>/dev/null)
 	ES_2=$?
 	all=$((all + 1))
+  if [ "$all" -lt 10 ]; then
+    printf " "
+  fi
+  printf "$all."
 	if [ "$TEST1" == "$TEST2" ] && [ "$ES_1" == "$ES_2" ]; then
 		printf " $BOLDGREEN%s$RESET" "✓ "
 		ok=$((ok + 1))
