@@ -20,3 +20,4 @@ output
 auxiliary/
 /minishell-tester/minishell
 /minishell-tester/
+/minishell.dSYM/
