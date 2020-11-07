@@ -15,13 +15,35 @@
 static int		if_str_number(char *str)
 {
 	int	i;
+	int sign;
+	int len;
+	int len_max;
 
 	i = 0;
+	sign = 1;
 	if (str[i] == '-')
+	{
 		i++;
-	while (str[i])
-		if (!ft_isdigit(str[i++]))
-			return (0);
+		sign = -1;
+	} else
+	if (str[i] == '+')
+	{
+		i++;
+		sign = 1;
+	}
+	res = 0;
+	while (str[i] && (len == 0))
+		len = !(ft_isdigit(str[i++]));
+	if(len != 0)
+		return (0);
+
+	len = ft_strlen(str);
+	len_max = ft_strlen("9223372036854775807");
+	if((sign == 1 && len > len_max) || (sign == -1 && len > len_max+1))
+		return (0);
+	if((sign == 1 && len == len_max && ft_strncmp("9223372036854775807", str, len_max) < 0) ||
+			(sign == -1 && len == len_max+1 && ft_strncmp("-9223372036854775808", str, len_max) < 0))
+		return (0);
 	return (1);
 }
 
@@ -37,10 +59,7 @@ int			command_exit(char **argv)
 		exit(g_exit_value);
 	else if (i == 2 && if_str_number(argv[1]))
 	{
-		if (ft_atoi(argv[1]) >= 0)
-			exit(ft_atoi(argv[1]));
-		else
-			exit (252);
+		exit((unsigned char)ft_atoi(argv[1]));
 	}
 	else if (i > 2 && if_str_number(argv[1]))
 	{
