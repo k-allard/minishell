@@ -28,6 +28,7 @@ int		main(int argc, char **argv, char **envp)
 
 	g_envp = envp;
 	envs = get_envs(argc, argv, envp);
+
 	signals();
 ////    parser("  echo 'he \\$test \\llo' \"1\\\"\\$a $USER    \" 1\\ 2\\$t 3\\ $PWD ; echo 1 | cat  ; echo 2 | cat | cat | cat | cat | cat > test.txt",
 ////           argc, argv, (t_list_env*)envs);

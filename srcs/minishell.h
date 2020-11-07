@@ -110,6 +110,7 @@ char		*get_env_value(char *key, t_list *envs);
 int			is_this_key_env(char *key, t_list *envs);
 int is_redirect(t_lexema *lexema);
 
+
 int update_env_data(t_list *envs, char *new_env, char *new_data);
 
 
@@ -118,6 +119,7 @@ int		error_no_cmd(char *cmd);
 int		error_no_file_dir(char *cmd);
 int	valid_name_first(int ch);
 int	valid_name(char *str);
+
 
 void signals();
 
