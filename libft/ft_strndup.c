@@ -17,7 +17,7 @@ char	*ft_strndup(const char *src, size_t len)
 	char	*new;
 	size_t	i;
 
-	if(!(new = malloc((len + 1) * sizeof(char))))
+	if (!(new = malloc((len + 1) * sizeof(char))))
 		return (0);
 	i = 0;
 	while (src[i] && i < len)
