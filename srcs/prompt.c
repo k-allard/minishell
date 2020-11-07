@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "./minishell.h"
 
-void			write_prompt()
+void	write_prompt(void)
 {
-	ft_putstr_fd(" \033[31mFA\033[0m\033[32mST\033[0m\033[33mES\033[0m\033[34mT\033[0m\033[35mSHELL\033[0m$ ", 2);
+	ft_putstr_fd(" \033[31mFA\033[0m\033[32mST\033[0m\033[33mES", 2);
+	ft_putstr_fd("\033[0m\033[34mT\033[0m\033[35mSHELL\033[0m$ ", 2);
 }

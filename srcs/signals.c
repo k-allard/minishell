@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "./minishell.h"
 
 void	handle_signal(int signo)
 {
@@ -35,7 +35,7 @@ void	handle_signal(int signo)
 	return ;
 }
 
-void	signals()
+void	signals(void)
 {
 	signal(SIGINT, (void *)handle_signal);
 	signal(SIGQUIT, (void *)handle_signal);
