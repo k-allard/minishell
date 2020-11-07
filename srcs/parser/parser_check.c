@@ -30,6 +30,7 @@ int is_block(t_lexema *lexema)
 /**
  * Корректно:
  *  1. NULL + block
+ *  1*. NULL + redirection
  *  2. block + block
  *  3. block + marker(any)
  *  4. marker(any) + block
@@ -62,7 +63,7 @@ int is_block(t_lexema *lexema)
 static int is_sequence_correct(t_lexema *lexema_prev, t_lexema *lexema)
 {
     if(lexema_prev == NULL)
-        return(is_block(lexema));
+        return(is_block(lexema) || is_redirect(lexema));
     else
     {
         if(is_marker(lexema_prev) && is_marker(lexema))

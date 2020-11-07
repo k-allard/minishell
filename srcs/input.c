@@ -14,7 +14,12 @@
 
 static void		catch_input(char **line)
 {
-	get_next_line(0, line); //???
+	if (!get_next_line(0, line)) 
+	{
+		write(1, "\nexit\n", 7); //на случай ctrl^D в пустой строке
+		exit(0);
+	}
+	//get_next_line(0, line); //???
 }
 
 int				deal_with_input(char **line)

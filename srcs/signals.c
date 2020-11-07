@@ -16,16 +16,27 @@ void	handle_signal(int signo)
 {
 	int		status;
 
-	if (signo == SIGINT)    //Ctrl-C
+	if (signo == SIGINT)
 	{
-		//ничего стереть не надо?
+		ft_putstr_fd("\b\b  \b\b", 1);
 		ft_putstr_fd("\n", 1);
 		write_prompt();
-		g_exit_value = 1;
+		//g_exit_value = 1;
 	}
-	// else if (signo == SIGQUIT)  //Ctrl-\
-	// {
-
-	// }
+	else if (signo == SIGQUIT)
+	{
+		signo = wait(&status);
+		//g_exit_value = status / 256;
+		ft_putstr_fd("\b\b  \b\b", 1);
+		//g_exit_value = 127;
+		if (signo != -1)
+			ft_putstr_fd("^\\Quit: 3\n", 1);
+	}
 	return ;
+}
+
+void	signals()
+{
+	signal(SIGINT, (void *)handle_signal);
+	signal(SIGQUIT, (void *)handle_signal);
 }

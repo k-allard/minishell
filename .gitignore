@@ -19,3 +19,5 @@ output
 /test.txt~origin_cw
 auxiliary/
 /minishell-tester/minishell
+/minishell-tester/
+/minishell.dSYM/

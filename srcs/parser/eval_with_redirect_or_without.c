@@ -19,7 +19,7 @@ static t_list_lexema* error_unexpected_redirect(t_lexema *lexema, int *res)
     return NULL;
 }
 
-static int is_redirect(t_lexema *lexema)
+int is_redirect(t_lexema *lexema)
 {
     int is_rdr;
     t_lexema_type t;
