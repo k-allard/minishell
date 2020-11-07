@@ -19,10 +19,9 @@ int	valid_name_first(int ch)
 	if (ch == '_')
 		return (1);
 	return (0);
-
 }
 
-int valid_name(char *str)
+int	valid_name(char *str)
 {
 	int i;
 
@@ -37,7 +36,6 @@ int valid_name(char *str)
 		{
 			return (0);
 		}
-
 	}
 	return (1);
 }
