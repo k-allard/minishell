@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   t_lexema.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cwindom <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/08 01:29:36 by cwindom           #+#    #+#             */
+/*   Updated: 2020/11/08 01:29:50 by cwindom          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 # include "../minishell.h"
 
 #include "t_lexema.h"
@@ -7,11 +19,12 @@
 ** Returns NULL if the memory was not allocated, and t_lexema if it was
 */
 
-t_lexema* t_lexema_init()
+t_lexema* t_lexema_init(void)
 {
     t_lexema *lexema;
+
     lexema = (t_lexema *)malloc(sizeof(t_lexema));
-    if(lexema != NULL)
+    if (lexema != NULL)
     {
         lexema->lexemaType = lexema_type_default;
         lexema->has_space_before = 0;
