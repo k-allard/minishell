@@ -13,18 +13,6 @@
 
 # include "../minishell.h"
 
-int	count_argv(char **argv)
-{
-	int i;
-	i = 0;
-
-	while (argv[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
 int command_cd(char **argv, t_list *envs)
 {
 	DIR		*dir;

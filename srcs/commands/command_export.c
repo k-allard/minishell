@@ -12,18 +12,6 @@
 
 #include "../minishell.h"
 
-static int	count_argv(char **argv)
-{
-	int i;
-	i = 0;
-
-	while (argv[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
 void		command_env_declare(t_list *envs)
 {
 	if (!envs)
