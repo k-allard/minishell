@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-void    delete_elem(t_list *lst)
+void	delete_elem(t_list *lst)
 {
 	free(((t_env *)lst->content)->key);
 	free(((t_env *)lst->content)->value);
@@ -20,11 +20,11 @@ void    delete_elem(t_list *lst)
 	free(lst);
 }
 
-int    command_unset(char **argv, t_list *envs)
+int		command_unset(char **argv, t_list *envs, int i)
 {
-	t_list  *tmp;
-	t_list  *del;
-	int i = 0;
+	t_list	*tmp;
+	t_list	*del;
+
 	while (argv[++i])
 	{
 		tmp = envs;
@@ -46,5 +46,5 @@ int    command_unset(char **argv, t_list *envs)
 				tmp = tmp->next;
 		}
 	}
-	return 0;
+	return (0);
 }

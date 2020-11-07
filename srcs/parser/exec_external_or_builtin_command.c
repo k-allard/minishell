@@ -126,7 +126,7 @@ static int exec_builtin_command(E_COMMAND commandIndex, t_list_lexema *lexema_ch
 	else if(commandIndex == COMMAND_PWD)
 		res = command_pwd(envs);
 	else if(commandIndex == COMMAND_UNSET)
-		res = command_unset(args, (t_list *)envs);
+		res = command_unset(args, (t_list *)envs, 0);
 	return (res);
 }
 
