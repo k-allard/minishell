@@ -15,7 +15,7 @@
 int		command_env(t_list *envs)
 {
 	if (!envs)
-		return 17;
+		return (17);
 	ft_putstr_fd(((t_env *)envs->content)->key, 1);
 	ft_putchar_fd('=', 1);
 	ft_putendl_fd(((t_env *)envs->content)->value, 1);
