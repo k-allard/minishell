@@ -98,7 +98,7 @@ int				command_echo(char **argv);
 int				command_pwd(t_list_env *envs);
 int				command_env(t_list *envs);
 int           	command_export(char **argv, t_list *envs);
-int				command_unset(char **argv, t_list *envs);
+int				command_unset(char **argv, t_list *envs, int i);
 int				command_exit(char **argv);
 
 int		pipe_found(char *line);
