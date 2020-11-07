@@ -31,7 +31,7 @@ static int		if_str_number(char *str)
 		i++;
 		sign = 1;
 	}
-	res = 0;
+	len = 0;
 	while (str[i] && (len == 0))
 		len = !(ft_isdigit(str[i++]));
 	if(len != 0)
