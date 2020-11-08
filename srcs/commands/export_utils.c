@@ -33,14 +33,14 @@ int	valid_name_first(int ch)
 	return (0);
 }
 
-int	valid_name(char *str)
+int	valid_name(char *str, char stopSymbol)
 {
 	int i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i] != stopSymbol)
 	{
-		if (ft_isalpha(str[i]) || ft_isdigit(str[i] || str[i] == '_'))
+		if (ft_isalpha(str[i]) || ft_isdigit(str[i]) || str[i] == '_')
 		{
 			i++;
 		}

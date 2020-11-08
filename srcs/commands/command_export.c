@@ -95,15 +95,14 @@ int			command_export(char **argv, t_list *envs)
 	else
 		while (argv[++i])
 		{
-			if (!valid_name_first(argv[i][0]) || !valid_name(argv[i]))
+			if (!valid_name_first(argv[i][0]) || !valid_name(argv[i], '='))
 			{
 				ft_putstr_fd("export: `", 2);
 				ft_putstr_fd(argv[i], 2);
 				ft_putendl_fd("': not a valid identifier", 2);
 				return (1);
 			}
-			if (ft_strchr(argv[i], '=') && valid_name_first(argv[i][0]) &&
-			valid_name(argv[i]))
+			if (ft_strchr(argv[i], '='))
 				check_env(argv[i], envs);
 		}
 	return (0);
