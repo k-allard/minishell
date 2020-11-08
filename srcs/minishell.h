@@ -96,7 +96,7 @@ typedef	struct				s_quotes
 t_lexema					*t_lexema_init();
 void						lexema_chain_free(t_list_lexema *lexema_chain);
 
-t_list						*get_envs(int argc, char **argv, char **envp);
+t_list						*get_envs(char **envp);
 void						write_prompt();
 
 int							deal_with_input(char **line);

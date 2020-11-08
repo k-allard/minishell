@@ -16,14 +16,12 @@
 
 int		main(int argc, char **argv, char **envp)
 {
-	int			i;
 	t_list_env	*envs;
 	char		*line;
-	char		**comands;
 	int			res;
 
 	g_envp = envp;
-	envs = (t_list_env *)get_envs(argc, argv, envp);
+	envs = (t_list_env *)get_envs(envp);
 	signals();
 	if (argc == 3 && ft_strncmp(argv[1], "-c", 3) == 0)
 		res = parser(argv[2], argc, argv, envs);
