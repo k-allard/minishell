@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:29 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/08 16:45:36 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/09 01:11:08 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <errno.h>
 # include <string.h>
 # include <sys/stat.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 char						**g_envp;
 int							g_exit_value;

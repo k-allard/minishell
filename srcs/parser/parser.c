@@ -1,44 +1,32 @@
 # include "../minishell.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-//#include "../t_stream/t_stream.h"
-//#include "../t_command/t_redirects_close.h"
-#include "parser.h"
+# include "parser.h"
 
-
-
-static int exit_code(int code, t_list_lexema *lexema_list)
+static int	exit_code(int code, t_list_lexema *lexema_list)
 {
-    if(lexema_list != NULL)
+    if (lexema_list != NULL)
         lexema_chain_free(lexema_list);
 	g_exit_value = code;
-	return code;
+	return (code);
 }
 
-int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
+int			parser(char *commandline, int argc, char **argv, t_list_env	*envs)
 {
-    t_list_lexema *lexema_list;
-    t_list_lexema *lexema_chain;
-    int res;
+    t_list_lexema	*lexema_list;
+    t_list_lexema	*lexema_chain;
+    int				res;
 
 	lexema_list = get_lexema_list(commandline, &res);
-	if(res)
-		return exit_code(res, lexema_list);
-	if(lexema_list == NULL)
+	if (res)
+		return (exit_code(res, lexema_list));
+	if (lexema_list == NULL)
         return (0);
-
 //    ft_putstr_fd("«", STDERR_FILENO);
 //    ft_putstr_fd(commandline, STDERR_FILENO);
 //    ft_putstr_fd("»\n", STDERR_FILENO);
 //    parser_debug_print_lexema_list(lexema_list);
-
     res = check_marker_syntaxis(lexema_list);
     if (res)
-    	return exit_code(res, lexema_list);
-
+    	return (exit_code(res, lexema_list));
     while ((lexema_chain = get_next_lexema_chain(&lexema_list, lexema_type_semicolon)))
     {
 //		ft_putstr_fd("«Before:»\n", STDERR_FILENO);
@@ -50,11 +38,11 @@ int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
 		remove_empty_elements(&lexema_chain);
 //		ft_putstr_fd("«After remove_empty_elements:»\n", STDERR_FILENO);
 //		parser_debug_print_lexema_list(lexema_chain);
-		if(lexema_chain != NULL)
+		if (lexema_chain != NULL)
 		{
 			res = eval_with_pipe_or_without(lexema_chain, envs);
-			lexema_chain_free(lexema_chain); // TODO:очистить lexema_chain полностью
+			lexema_chain_free(lexema_chain);
 		}
     }
-    return res;
+    return (res);
 }
