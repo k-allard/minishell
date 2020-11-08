@@ -16,10 +16,8 @@
 
 int		main(int argc, char **argv, char **envp)
 {
-	int			i;
 	t_list_env	*envs;
 	char		*line;
-	char		**comands;
 	int			res;
 
 	g_envp = envp;
