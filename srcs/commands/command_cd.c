@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 # include "../minishell.h"
 
 int command_cd(char **argv, t_list *envs)
@@ -18,29 +17,26 @@ int command_cd(char **argv, t_list *envs)
 	DIR		*dir;
 	char	*path;
 	char	*pwd;
-	char *is_cwd;
+	char	*is_cwd;
     int		res;
-	int		n;
 
 	res = 0;
-	n = count_argv(argv);
-	path = (n > 1) ? argv[1] : get_env_value("HOME", envs);
-
+	path = (count_argv(argv) > 1) ? argv[1] : get_env_value("HOME", envs);
 	if (path == NULL)
-		return 17;
+		return (17);
 	pwd = get_env_value("PWD", (t_list *)envs);
-	is_cwd = getcwd(0, 1024);//TODO 1: получать PWD из переменных - getpwd(envs);
-	if(!is_cwd && path[0] == '.' && path[1] == '\0')
+	is_cwd = getcwd(0, 1024);
+	if (!is_cwd && path[0] == '.' && path[1] == '\0')
 	{
-		update_env_data(envs, "OLDPWD", pwd); //обновляем OLDPWD в переменных
+		update_env_data(envs, "OLDPWD", pwd);
 		pwd = ft_strjoin(pwd, "/.");
-		update_env_data(envs, "PWD", pwd); //обновляем PWD в переменных
+		update_env_data(envs, "PWD", pwd);
 		free(pwd);
 	}
 	else if(path[0] == '.' && path[1] == '\0')
 	{
-		update_env_data(envs, "OLDPWD", pwd); //обновляем OLDPWD в переменных
-		update_env_data(envs, "PWD", pwd); //обновляем PWD в переменных
+		update_env_data(envs, "OLDPWD", pwd);
+		update_env_data(envs, "PWD", pwd);
 	}
 	else
 	{
@@ -51,9 +47,9 @@ int command_cd(char **argv, t_list *envs)
 				res = 1;
 			if (res == 0)
 			{
-				update_env_data(envs, "OLDPWD", pwd); //обновляем OLDPWD в переменных
+				update_env_data(envs, "OLDPWD", pwd);
 				pwd = getcwd(0, 1024);
-				update_env_data(envs, "PWD", pwd); //обновляем PWD в переменных
+				update_env_data(envs, "PWD", pwd);
 			}
 		}
 		else
