@@ -6,13 +6,13 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:46 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/02 17:44:05 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/08 16:45:26 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "minishell.h"
 
-#include "t_lexema/t_lexema.h"
+#include "minishell.h"
 #include "t_stream/t_stream.h"
 #include "t_command/t_redirects_close.h"
 #include "parser/parser.h"

@@ -1,5 +1,4 @@
 # include "../minishell.h"
-#include "../t_lexema/t_lexema.h"
 #include "parser.h"
 
 void remove_empty_elements(t_list_lexema **lexema_chain)

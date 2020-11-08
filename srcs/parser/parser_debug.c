@@ -1,5 +1,5 @@
 # include "../minishell.h"
-#include "../t_lexema/t_lexema.h"
+
 void parser_debug_print_lexema_list(t_list_lexema *lexema_list)
 {
     t_lexema *lexema;

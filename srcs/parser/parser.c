@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include "../t_lexema/t_lexema.h"
 #include "../t_stream/t_stream.h"
 #include "../t_command/t_redirects_close.h"
 #include "parser.h"
@@ -52,7 +51,7 @@ int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
 		if(lexema_chain != NULL)
 		{
 			res = eval_with_pipe_or_without(lexema_chain, envs);
-			// TODO:очистить lexema_chain полностью
+			lexema_chain_free(lexema_chain); // TODO:очистить lexema_chain полностью
 		}
     }
     return res;

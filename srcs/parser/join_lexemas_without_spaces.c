@@ -1,5 +1,4 @@
 #include "../minishell.h"
-#include "../t_lexema/t_lexema.h"
 #include "parser.h"
 
 void join_lexemas_without_spaces(t_list_lexema *lexema_chain)

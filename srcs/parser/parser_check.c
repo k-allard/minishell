@@ -6,12 +6,11 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 13:45:18 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/08 13:49:16 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/08 16:46:06 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include "../t_lexema/t_lexema.h"
 
 static int	is_marker(t_lexema *lexema)
 {

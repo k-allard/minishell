@@ -1,4 +1,4 @@
-# include "../t_lexema/t_lexema.h"
+# include "../minishell.h"
 
 #ifndef FT_MINISHELL_T_STREAM_H
 #define FT_MINISHELL_T_STREAM_H

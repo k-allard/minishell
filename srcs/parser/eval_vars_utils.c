@@ -6,12 +6,11 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 15:26:49 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/08 15:26:57 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/08 16:45:44 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include "../t_lexema/t_lexema.h"
 #include "parser.h"
 
 void	eval_var(char **str_eval, char **str_original, t_list_env *envs)

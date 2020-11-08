@@ -1,5 +1,4 @@
 #include "../minishell.h"
-#include "../t_lexema/t_lexema.h"
 #include "parser.h"
 
 static void unescape$(char **str_eval, char **str_original)

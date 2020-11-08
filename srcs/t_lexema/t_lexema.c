@@ -6,12 +6,11 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:29:36 by cwindom           #+#    #+#             */
-/*   Updated: 2020/11/08 13:42:29 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/08 16:46:27 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include "t_lexema.h"
 
 /*
 ** Memory allocation and initialization of the new lexema element

@@ -1,5 +1,5 @@
 # include "../minishell.h"
-#include "../t_lexema/t_lexema.h"
+
 t_list_lexema *get_next_lexema_chain(t_list_lexema **lexema_list, t_lexema_type delimeter)
 {
     t_lexema *lexema;

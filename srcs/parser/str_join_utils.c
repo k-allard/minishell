@@ -1,5 +1,4 @@
 # include "../minishell.h"
-#include "../t_lexema/t_lexema.h"
 
 void str_join_str(char **str1, char *str2)
 {

@@ -1,8 +1,5 @@
 #include "../minishell.h"
-
-#include "../t_lexema/t_lexema.h"
 #include "t_stream.h"
-
 
 t_stream** t_stream_init_streams()
 {
