@@ -60,7 +60,7 @@ void eval_vars_and_unescape_$_in_lexema_chain(t_list_lexema *lexema_chain, int a
     while (lexema_chain)
     {
         lexema = lexema_chain->lexema;
-        if(lexema->lexemaType == lexema_type_simple_word || lexema->lexemaType == lexema_type_double_q)
+        if(lexema->lexema_type == lexema_type_simple_word || lexema->lexema_type == lexema_type_double_q)
         {
             eval_vars_and_unescape_$(lexema, argc, argv, envs);
         }

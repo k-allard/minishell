@@ -8,7 +8,7 @@ void parser_debug_print_lexema_list(t_list_lexema *lexema_list)
     while (lexema_list)
     {
         lexema = lexema_list->lexema;
-        i_string = ft_itoa(lexema->lexemaType);
+        i_string = ft_itoa(lexema->lexema_type);
         ft_putstr_fd(i_string, STDERR_FILENO);
         free(i_string);
 		ft_putstr_fd("\t-\t«", STDERR_FILENO);

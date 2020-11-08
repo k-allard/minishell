@@ -50,6 +50,7 @@ int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
 //		ft_putstr_fd("«After remove_empty_elements:»\n", STDERR_FILENO);
 //		parser_debug_print_lexema_list(lexema_chain);
         res = eval_with_pipe_or_without(lexema_chain, envs);
+        // TODO:очистить lexema_chain полностью
     }
     return res;
 }

@@ -16,7 +16,7 @@ void remove_empty_elements(t_list_lexema **lexema_chain)
     {
         if(current->lexema->string[0] == '\0')
         {
-            if(current->lexema->lexemaType==lexema_type_simple_word)
+            if(current->lexema->lexema_type==lexema_type_simple_word)
             {
                 if(prev == NULL)
                 {

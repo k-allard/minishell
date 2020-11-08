@@ -14,7 +14,7 @@ static int is_pipe_in_lexema_chain(t_list_lexema *lexema_chain)
 	int is_pipe = 0;
 	while (lexema_chain && !is_pipe)
 	{
-		if(lexema_chain->lexema->lexemaType == lexema_type_pipe)
+		if(lexema_chain->lexema->lexema_type == lexema_type_pipe)
 			is_pipe = 1;
 		lexema_chain = lexema_chain->next;
 	}

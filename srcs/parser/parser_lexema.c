@@ -1,12 +1,6 @@
 # include "../minishell.h"
 #include "../t_lexema/t_lexema.h"
 
-
-//static void t_lexema_list_free(t_list **lexema_list)
-//{
-//    ft_lstclear(lexema_list, t_lexema_free_void);
-//}
-
 static int is_blank(char symbol)
 {
     if(symbol == ' ' || symbol == '\t')
@@ -103,7 +97,7 @@ static int read_quote_param(char **commandline, t_lexema *lexema, char quoteChar
         return (error_end_of_line(quoteChar));
     else
         (*commandline)++;
-    lexema->lexemaType = (quoteChar == '"') ? lexema_type_double_q : lexema_type_single_q;
+    lexema->lexema_type = (quoteChar == '"') ? lexema_type_double_q : lexema_type_single_q;
     return (0);
 }
 
@@ -112,7 +106,7 @@ static int read_pipe(char **commandline, t_lexema *lexema)
     read_simple_symbol(commandline, lexema);
     if(lexema->string == NULL)
         return (malloc_error(*commandline));
-    lexema->lexemaType = lexema_type_pipe;
+    lexema->lexema_type = lexema_type_pipe;
     return (0);
 }
 static int read_semicolon(char **commandline, t_lexema *lexema)
@@ -120,7 +114,7 @@ static int read_semicolon(char **commandline, t_lexema *lexema)
     read_simple_symbol(commandline, lexema);
     if(lexema->string == NULL)
         return (malloc_error(*commandline));
-    lexema->lexemaType = lexema_type_semicolon;
+    lexema->lexema_type = lexema_type_semicolon;
     return (0);
 }
 static int read_redirect_to(char **commandline, t_lexema *lexema)
@@ -134,7 +128,7 @@ static int read_redirect_to(char **commandline, t_lexema *lexema)
     }
     if(lexema->string == NULL)
         return (malloc_error(*commandline));
-    lexema->lexemaType = (i == 1) ? lexema_type_redirect_to : lexema_type_redirect_to_append;
+    lexema->lexema_type = (i == 1) ? lexema_type_redirect_to : lexema_type_redirect_to_append;
     return (0);
 }
 static int read_redirect_from(char **commandline, t_lexema *lexema)
@@ -148,7 +142,7 @@ static int read_redirect_from(char **commandline, t_lexema *lexema)
     }
     if(lexema->string == NULL)
         return (malloc_error(*commandline));
-    lexema->lexemaType = lexema_type_redirect_from;
+    lexema->lexema_type = lexema_type_redirect_from;
     return (0);
 }
 
@@ -174,7 +168,7 @@ static int read_simple_word(char **commandline, t_lexema *lexema)
     }
     if(lexema->string == NULL)
         return (malloc_error(*commandline));
-    lexema->lexemaType = lexema_type_simple_word;
+    lexema->lexema_type = lexema_type_simple_word;
     return (0);
 }
 

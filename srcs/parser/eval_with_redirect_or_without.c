@@ -24,7 +24,7 @@ int is_redirect(t_lexema *lexema)
     int is_rdr;
     t_lexema_type t;
 
-    t = lexema->lexemaType;
+    t = lexema->lexema_type;
     is_rdr = (t == lexema_type_redirect_from);
     is_rdr = (t == lexema_type_redirect_to) || is_rdr;
     is_rdr = (t == lexema_type_redirect_to_append) || is_rdr;
@@ -131,17 +131,17 @@ static int apply_redirects(t_list_lexema *redirect, t_redirects *redirects_fd)
 
     while ((one_redirect = get_next_redirect(&redirect, &res)) && res == 0)
     {
-        if(one_redirect->lexema->lexemaType == lexema_type_redirect_to)
+        if(one_redirect->lexema->lexema_type == lexema_type_redirect_to)
         {
             res = set_redirect_stdout(redirects_fd, one_redirect->next->lexema->string, \
             O_WRONLY | O_CREAT | O_TRUNC);
         }
-        else if (one_redirect->lexema->lexemaType == lexema_type_redirect_to_append)
+        else if (one_redirect->lexema->lexema_type == lexema_type_redirect_to_append)
         {
             res = set_redirect_stdout(redirects_fd, one_redirect->next->lexema->string, \
             O_WRONLY | O_CREAT | O_APPEND);
         }
-        else if (one_redirect->lexema->lexemaType == lexema_type_redirect_from)
+        else if (one_redirect->lexema->lexema_type == lexema_type_redirect_from)
         {
             res = set_redirect_stdin(redirects_fd, one_redirect->next->lexema->string, \
             O_RDONLY);

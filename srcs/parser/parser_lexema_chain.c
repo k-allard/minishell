@@ -14,7 +14,7 @@ t_list_lexema *get_next_lexema_chain(t_list_lexema **lexema_list, t_lexema_type 
     while (*lexema_list && is_not_delimeter_prev)
     {
         lexema = (*lexema_list)->lexema;
-        if(lexema->lexemaType != delimeter)
+        if(lexema->lexema_type != delimeter)
         {
             prev_node = *lexema_list;
             *lexema_list = (*lexema_list)->next;
