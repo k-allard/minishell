@@ -51,6 +51,7 @@ static void	cd_point(char *pwd, t_list *envs)
 	{
 		update_env_data(envs, "OLDPWD", pwd);
 		update_env_data(envs, "PWD", pwd);
+		free(is_cwd);
 	}
 }
 
