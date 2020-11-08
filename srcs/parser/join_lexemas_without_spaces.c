@@ -16,6 +16,7 @@ void join_lexemas_without_spaces(t_list_lexema *lexema_chain)
             free(tmp->lexema->string);
             free(tmp->lexema);
             free(tmp);
+            tmp = NULL;
         }
         else
             lexema_chain = lexema_chain->next;
