@@ -28,6 +28,7 @@ static int	cd_path(char *path, char *pwd, t_list *envs)
 			update_env_data(envs, "OLDPWD", pwd);
 			pwd = getcwd(0, 1024);
 			update_env_data(envs, "PWD", pwd);
+			free(pwd);
 		}
 	}
 	else
@@ -51,6 +52,7 @@ static void	cd_point(char *pwd, t_list *envs)
 	{
 		update_env_data(envs, "OLDPWD", pwd);
 		update_env_data(envs, "PWD", pwd);
+		free(is_cwd);
 	}
 }
 
