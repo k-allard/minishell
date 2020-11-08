@@ -56,4 +56,20 @@ int exec_external_or_builtin_command(t_list_lexema *lexema_chain, t_list_env *en
 
 E_COMMAND get_command_type(char *command_name);
 
+/*
+** PARSER_LEXEMA (2 and 3)
+*/
+
+int malloc_error(char *commandline);
+int read_quote_param(char **commandline, t_lexema *lexema, char quoteChar);
+int read_pipe(char **commandline, t_lexema *lexema);
+int read_semicolon(char **commandline, t_lexema *lexema);
+int read_redirect_to(char **commandline, t_lexema *lexema);
+
+int is_blank(char symbol);
+int skip_blank(char**commandline);
+void read_simple_symbol(char **commandline, t_lexema *lexema);
+int read_escape(char **commandline, t_lexema *lexema, int is_var_support);
+int error_end_of_line(char quoteChar);
+
 #endif //FT_MINISHELL_PARSER_H
