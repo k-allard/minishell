@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_list		*get_envs(int argc, char **argv, char **envp)
+t_list		*get_envs(char **envp)
 {
 	int		name_end;
 	t_env	*env;

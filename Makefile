@@ -6,7 +6,7 @@ HEADER = ./minishell.h
 
 OBJS = $(SRCS:.c=.o)
 
-FLAGS =-g
+FLAGS =-g -Wall -Wextra -Werror
 
 all: $(NAME)
 
@@ -34,8 +34,6 @@ fclean: clean
 re: fclean all
 
 test: re
-	@echo "Remove old minishell from test Folder"
-	@cd ./minishell-tester ; rm -f ./minishell ; cd ..
 	@echo "Copy minishell into test Folder"
 	@cp ./minishell ./minishell-tester/minishell
 	@echo "GoTo test Folder && Start tests"
