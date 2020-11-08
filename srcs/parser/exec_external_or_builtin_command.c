@@ -113,6 +113,7 @@ static int exec_builtin_command(E_COMMAND commandIndex, t_list_lexema *lexema_ch
 	char **args;
 	int res;
 
+	res = 0;
 	args = lexema_chain_2_argv(lexema_chain);
 	if (commandIndex == COMMAND_CD)
 		res = command_cd(args, (t_list *)envs);

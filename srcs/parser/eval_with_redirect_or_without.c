@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 22:47:22 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/08 22:52:38 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/09 01:37:56 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,23 @@ static t_list_lexema* get_next_redirect(t_list_lexema **redirect, int *res)
 	return (NULL);
 }
 
-static int close_current_fd(int *current_fd)
-{
-	int res;
+// static int close_current_fd(int *current_fd)
+// {
+// 	int res;
 
-	if (*current_fd != -1)
-	{
-		res = close(*current_fd);
-		if(res == -1)
-			ft_putendl_fd(strerror(errno), STDERR_FILENO);
-		return res;
-	}
-	else
-	{
-		*current_fd = -1;
-		return (0);
-	}
-}
+// 	if (*current_fd != -1)
+// 	{
+// 		res = close(*current_fd);
+// 		if(res == -1)
+// 			ft_putendl_fd(strerror(errno), STDERR_FILENO);
+// 		return res;
+// 	}
+// 	else
+// 	{
+// 		*current_fd = -1;
+// 		return (0);
+// 	}
+// }
 
 static int open_redirect_fd(int* current_fd, int std_fd, char *filename, int flags)
 {

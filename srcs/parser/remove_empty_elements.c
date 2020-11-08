@@ -6,7 +6,7 @@ void remove_empty_elements(t_list_lexema **lexema_chain)
     t_list_lexema *prev;
     t_list_lexema *current;
     t_list_lexema *tmp;
-    t_list_lexema *tmp2;
+    // t_list_lexema *tmp2;
     char *tmp_string;
 
     prev = NULL;

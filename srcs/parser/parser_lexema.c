@@ -73,7 +73,8 @@ static int error_end_of_line(char quoteChar)
 }
 static int malloc_error(char *commandline)
 {
-    ft_putendl_fd("memory allocation error during command line processing", STDERR_FILENO);
+    ft_putstr_fd("memory allocation error during command line processing: ", STDERR_FILENO);
+    ft_putendl_fd(commandline, STDERR_FILENO);
     return(5);
 }
 static int read_quote_param(char **commandline, t_lexema *lexema, char quoteChar)
