@@ -47,7 +47,7 @@ int			update_env_data(t_list *envs, char *new_env, char *new_data)
 		{
 			free(((t_env *)envs->content)->value);
 			((t_env *)envs->content)->value =
-					(char *)malloc(ft_strlen(new_data));
+					(char *)malloc(ft_strlen(new_data) + 1);
 			ft_strcpy(((t_env *)envs->content)->value, new_data);
 			flag = 1;
 			break ;
