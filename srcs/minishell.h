@@ -22,7 +22,7 @@
 # include <sys/wait.h>
 # include <errno.h>
 # include <string.h>
-#include <sys/stat.h>
+# include <sys/stat.h>
 
 char						**g_envp;
 int							g_exit_value;
