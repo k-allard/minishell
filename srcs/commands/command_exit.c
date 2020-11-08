@@ -12,42 +12,35 @@
 
 #include "../minishell.h"
 
-static int		if_str_number(char *str)
+static int		if_str_number(char *str, int i, int s, int l)
 {
-	int	i;
-	int sign;
-	int len;
-	int len_max;
+	int m;
 
-	i = 0;
-	sign = 1;
 	if (str[i] == '-')
 	{
 		i++;
-		sign = -1;
-	} else
-	if (str[i] == '+')
+		s = -1;
+	}
+	else if (str[i] == '+')
 	{
 		i++;
-		sign = 1;
+		s = 1;
 	}
-	len = 0;
-	while (str[i] && (len == 0))
-		len = !(ft_isdigit(str[i++]));
-	if(len != 0)
+	while (str[i] && (l == 0))
+		l = !(ft_isdigit(str[i++]));
+	if (l != 0)
 		return (0);
-
-	len = ft_strlen(str);
-	len_max = ft_strlen("9223372036854775807");
-	if((sign == 1 && len > len_max) || (sign == -1 && len > len_max+1))
+	l = ft_strlen(str);
+	m = ft_strlen("9223372036854775807");
+	if ((s == 1 && l > m) || (s == -1 && l > m + 1))
 		return (0);
-	if((sign == 1 && len == len_max && ft_strncmp("9223372036854775807", str, len_max) < 0) ||
-			(sign == -1 && len == len_max+1 && ft_strncmp("-9223372036854775808", str, len_max) < 0))
+	if ((s == 1 && l == m && ft_strncmp("9223372036854775807", str, m) < 0) ||
+	(s == -1 && l == m + 1 && ft_strncmp("-9223372036854775808", str, m) < 0))
 		return (0);
 	return (1);
 }
 
-int			command_exit(char **argv)
+int				command_exit(char **argv)
 {
 	int	i;
 
@@ -57,11 +50,11 @@ int			command_exit(char **argv)
 	ft_putendl_fd("exit", 2);
 	if (i == 1)
 		exit(g_exit_value);
-	else if (i == 2 && if_str_number(argv[1]))
+	else if (i == 2 && if_str_number(argv[1], 0, 1, 0))
 	{
 		exit((unsigned char)ft_atoi(argv[1]));
 	}
-	else if (i > 2 && if_str_number(argv[1]))
+	else if (i > 2 && if_str_number(argv[1], 0, 1, 0))
 	{
 		ft_putendl_fd("exit: too many arguments", 2);
 		return (1);
@@ -71,6 +64,6 @@ int			command_exit(char **argv)
 		ft_putstr_fd("exit: ", 2);
 		ft_putstr_fd(argv[1], 2);
 		ft_putendl_fd(": numeric argument required", 2);
-		exit (255);
+		exit(255);
 	}
 }
