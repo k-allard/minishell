@@ -38,7 +38,7 @@ int	valid_name(char *str, char stopSymbol)
 	int i;
 
 	i = 0;
-	while (str[i] != stopSymbol)
+	while (str[i] != stopSymbol || str[i] != '\0')
 	{
 		if (ft_isalpha(str[i]) || ft_isdigit(str[i]) || str[i] == '_')
 		{
