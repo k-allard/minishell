@@ -24,7 +24,8 @@ t_list		*get_envs(int argc, char **argv, char **envp)
 		env = (t_env *)malloc(sizeof(t_env));
 		name_end = ft_strchr(*envp, '=') - *envp;
 		env->key = ft_substr(*envp, 0, name_end);
-		env->value = ft_substr(*envp, name_end + 1, ft_strlen(*envp) - name_end - 1);
+		env->value = ft_substr(*envp, name_end + 1,
+		ft_strlen(*envp) - name_end - 1);
 		ft_lstadd_back(&envs, ft_lstnew(env));
 		envp++;
 	}
