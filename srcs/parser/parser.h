@@ -53,6 +53,9 @@ int eval_with_pipe_or_without(t_list_lexema *lexema_chain, t_list_env *envs);
 int eval_with_redirect_or_without(t_list_lexema *one_command_lexemas, t_list_env *envs);
 int eval_with_fork_or_without(t_list_lexema *one_command_lexemas, t_list_env *envs);
 int exec_external_or_builtin_command(t_list_lexema *lexema_chain, t_list_env *envs);
+int	external_command_exist(char	*command_name, t_list_lexema *lexema_chain, t_list_env *envs);
+char	**lexema_chain_2_argv(t_list_lexema *lexema_chain);
+char	**list_env_2_env(t_list_env *env_list);
 
 E_COMMAND get_command_type(char *command_name);
 

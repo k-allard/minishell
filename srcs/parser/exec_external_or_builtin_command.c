@@ -18,7 +18,7 @@
 #include <sys/wait.h>
 #include "parser.h"
 
-static char	**lexema_chain_2_argv(t_list_lexema *lexema_chain)
+char		**lexema_chain_2_argv(t_list_lexema *lexema_chain)
 {
 	char	**args;
 	int		i;
@@ -36,7 +36,7 @@ static char	**lexema_chain_2_argv(t_list_lexema *lexema_chain)
 	return (args);
 }
 
-static char	**list_env_2_env(t_list_env *env_list)
+char		**list_env_2_env(t_list_env *env_list)
 {
 	char	**env;
 	int		i;
@@ -60,8 +60,6 @@ static char	**list_env_2_env(t_list_env *env_list)
 static int	exec_external_command(t_list_lexema *lexema_chain, t_list_env *envs)
 {
 	char	*command_name;
-	char	**args;
-	char	**env;
 	int		res;
 
 	command_name = find_path(lexema_chain->lexema->string, (t_list *)envs);
@@ -72,23 +70,7 @@ static int	exec_external_command(t_list_lexema *lexema_chain, t_list_env *envs)
 		res = 127;
 	}
 	else
-	{
-		args = lexema_chain_2_argv(lexema_chain);
-		env = list_env_2_env(envs);
-		if ((res = execve(command_name, args, env)) < 0)
-		{
-			if (errno == ENOENT)
-			{
-				ft_putstr_fd(command_name, STDERR_FILENO);
-				ft_putendl_fd(": command not found", STDERR_FILENO);
-				res = 127;
-			}
-			else
-				res = errno;
-		}
-		free_double_array(args);
-		free_double_array(env);
-	}
+		res = external_command_exist(command_name, lexema_chain, envs);
 	free(command_name);
 	return (res);
 }
