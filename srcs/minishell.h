@@ -135,6 +135,7 @@ int							error_no_file_dir(char *cmd);
 int							valid_name_first(int ch);
 int							valid_name(char *str);
 int							count_argv(char **argv);
+void						free_envs_list(t_list_env *envs);
 
 void						signals();
 

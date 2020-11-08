@@ -30,3 +30,20 @@ int		error_no_cmd(char *cmd)
 	ft_putendl_fd(": command not found", 2);
 	return (127);
 }
+
+void	free_envs_list(t_list_env *envs)
+{
+	t_list_env *arch_elem;
+
+	if (!envs)
+		return ;
+	while (envs)
+	{
+		free(envs->env->key);
+		free(envs->env->value);
+		free(envs->env);
+		arch_elem = envs;
+		envs = arch_elem->next;
+		free((void *)arch_elem);
+	}
+}
