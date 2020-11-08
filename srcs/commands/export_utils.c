@@ -33,12 +33,12 @@ int	valid_name_first(int ch)
 	return (0);
 }
 
-int	valid_name(char *str, char stopSymbol)
+int	valid_name(char *str)
 {
 	int i;
 
 	i = 0;
-	while (str[i] != stopSymbol || str[i] != '\0')
+	while (str[i] != '=' && str[i] != '\0')
 	{
 		if (ft_isalpha(str[i]) || ft_isdigit(str[i]) || str[i] == '_')
 		{

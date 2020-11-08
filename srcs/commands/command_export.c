@@ -95,7 +95,7 @@ int			command_export(char **argv, t_list *envs)
 	else
 		while (argv[++i])
 		{
-			if (!valid_name_first(argv[i][0]) || !valid_name(argv[i], '='))
+			if (!valid_name_first(argv[i][0]) || !valid_name(argv[i]))
 			{
 				ft_putstr_fd("export: `", 2);
 				ft_putstr_fd(argv[i], 2);
