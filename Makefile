@@ -1,6 +1,6 @@
 NAME = minishell
 
-SRCS = srcs/t_lexema/*.c srcs/t_stream/*.c srcs/t_command/*.c srcs/parser/*.c srcs/commands/*.c srcs/*.c
+SRCS = srcs/t_lexema/*.c srcs/parser/*.c srcs/commands/*.c srcs/*.c
 
 HEADER = ./minishell.h
 

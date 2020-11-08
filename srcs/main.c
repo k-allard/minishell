@@ -13,8 +13,8 @@
 # include "minishell.h"
 
 #include "minishell.h"
-#include "t_stream/t_stream.h"
-#include "t_command/t_redirects_close.h"
+//#include "t_stream/t_stream.h"
+//#include "t_command/t_redirects_close.h"
 #include "parser/parser.h"
 
 

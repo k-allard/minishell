@@ -4,8 +4,8 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include "../t_stream/t_stream.h"
-#include "../t_command/t_redirects_close.h"
+//#include "../t_stream/t_stream.h"
+//#include "../t_command/t_redirects_close.h"
 #include "parser.h"
 
 int eval_without_fork(t_list_lexema *one_command_lexemas, t_list_env *envs)
