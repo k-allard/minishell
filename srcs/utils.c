@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 void	free_double_array(char **array)
 {
@@ -30,10 +30,3 @@ int		error_no_cmd(char *cmd)
 	ft_putendl_fd(": command not found", 2);
 	return (127);
 }
-
-//int		error_no_file_dir(char *cmd)
-//{
-//	ft_putstr_fd(cmd, 2);
-//	ft_putendl_fd(": No such file or directory", 2);
-//	return (127);
-//}

@@ -20,7 +20,6 @@ void	lexema_chain_free(t_list_lexema *lexema_chain)
 		return ;
 	while (lexema_chain)
 	{
-		//free(lexema_chain->lexema->string);
 		free(lexema_chain->lexema);
 		arch_elem = lexema_chain;
 		lexema_chain = arch_elem->next;

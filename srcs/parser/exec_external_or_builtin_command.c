@@ -59,7 +59,7 @@ static int exec_external_command(t_list_lexema *lexema_chain, t_list_env *envs)
 	if (!command_name)
 	{
 		ft_putstr_fd(lexema_chain->lexema->string, STDERR_FILENO);
-		ft_putendl_fd(": command not found 1", STDERR_FILENO);
+		ft_putendl_fd(": command not found", STDERR_FILENO);
 		res = 127;
 	}
 	else
@@ -70,7 +70,7 @@ static int exec_external_command(t_list_lexema *lexema_chain, t_list_env *envs)
 		if ((res = execve(command_name, args, env)) < 0) {
 			if (errno == ENOENT) {
 				ft_putstr_fd(command_name, STDERR_FILENO);
-				ft_putendl_fd(": command not found 2", STDERR_FILENO);
+				ft_putendl_fd(": command not found", STDERR_FILENO);
 				res = 127;
 			} else
 				res = errno;
