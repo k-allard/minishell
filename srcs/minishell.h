@@ -118,7 +118,7 @@ void	free_double_array(char **array);
 int		error_no_cmd(char *cmd);
 int		error_no_file_dir(char *cmd);
 int	valid_name_first(int ch);
-int	valid_name(char *str, char stopSymbol);
+int	valid_name(char *str);
 int	count_argv(char **argv);
 
 void signals();
