@@ -10,8 +10,10 @@
 
 
 
-static int exit_code(int code)
+static int exit_code(int code, t_list_lexema *lexema_list)
 {
+    if(lexema_list != NULL)
+        lexema_chain_free(lexema_list);
 	g_exit_value = code;
 	return code;
 }
@@ -24,7 +26,7 @@ int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
 
 	lexema_list = get_lexema_list(commandline, &res);
 	if(res)
-		return exit_code(res);
+		return exit_code(res, lexema_list);
 	if(lexema_list == NULL)
         return (0);
 
@@ -35,7 +37,7 @@ int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
 
     res = check_marker_syntaxis(lexema_list);
     if (res)
-    	return exit_code(res);
+    	return exit_code(res, lexema_list);
 
     while ((lexema_chain = get_next_lexema_chain(&lexema_list, lexema_type_semicolon)))
     {

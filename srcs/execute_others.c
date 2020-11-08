@@ -39,7 +39,7 @@ char		*find_path(char *argv, t_list *envs)
 		free(new_path);
 	}
 	free_double_array(paths);
-	return (ft_strdup(argv));
+	return (NULL);
 }
 
 //void			execute_others(char *line, t_list *envs)

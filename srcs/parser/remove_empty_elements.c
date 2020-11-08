@@ -58,6 +58,7 @@ void remove_empty_elements(t_list_lexema **lexema_chain)
             free(tmp->lexema->string);
             free(tmp->lexema);
             free(tmp);
+            tmp = NULL;
             continue;
         }
         prev = current;

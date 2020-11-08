@@ -23,6 +23,9 @@ t_list_lexema *get_next_lexema_chain(t_list_lexema **lexema_list, t_lexema_type 
         {
             lexema_list_tmp = (*lexema_list)->next;
             prev_node->next = NULL;
+            free((*lexema_list)->lexema->string);
+            free((*lexema_list)->lexema);
+            free((*lexema_list));
             *lexema_list = lexema_list_tmp;
             is_not_delimeter_prev = 0;
         }
