@@ -16,8 +16,8 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include "../t_stream/t_stream.h"
-#include "../t_command/t_redirects_close.h"
+//#include "../t_stream/t_stream.h"
+//#include "../t_command/t_redirects_close.h"
 #include "parser.h"
 
 static t_list_lexema* error_unexpected_redirect(t_lexema *lexema, int *res)
