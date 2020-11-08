@@ -21,3 +21,8 @@ auxiliary/
 /minishell-tester/minishell
 /minishell-tester/
 /minishell.dSYM/
+1.txt
+2.txt
+cmake-build-debug/
+ls
+
