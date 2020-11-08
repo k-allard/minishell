@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   t_lexema.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwindom <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 01:29:36 by cwindom           #+#    #+#             */
-/*   Updated: 2020/11/08 01:29:50 by cwindom          ###   ########.fr       */
+/*   Updated: 2020/11/08 13:42:29 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../minishell.h"
-
+#include "../minishell.h"
 #include "t_lexema.h"
 
 /*
@@ -19,37 +18,18 @@
 ** Returns NULL if the memory was not allocated, and t_lexema if it was
 */
 
-t_lexema* t_lexema_init(void)
+t_lexema	*t_lexema_init(void)
 {
-    t_lexema *lexema;
+	t_lexema *lexema;
 
-    lexema = (t_lexema *)malloc(sizeof(t_lexema));
-    if (lexema != NULL)
-    {
-        lexema->lexemaType = lexema_type_default;
-        lexema->has_space_before = 0;
-        lexema->string = (char *)malloc(sizeof(char ));
-        if(lexema->string != NULL)
-            lexema->string[0] = '\0';
-    }
-    return lexema;
+	lexema = (t_lexema *)malloc(sizeof(t_lexema));
+	if (lexema != NULL)
+	{
+		lexema->lexema_type = lexema_type_default;
+		lexema->has_space_before = 0;
+		lexema->string = (char *)malloc(sizeof(char ));
+		if (lexema->string != NULL)
+			lexema->string[0] = '\0';
+	}
+	return (lexema);
 }
-
-//static void t_lexema_free(t_lexema *lexema)
-//{
-//    if(lexema != NULL)
-//    {
-//        if(lexema->string != NULL)
-//            free(lexema->string);
-//        lexema->string = NULL;
-//        free(lexema);
-//    }
-//}
-
-//void t_lexema_free_void(void *content)
-//{
-//    t_lexema *lexema;
-//
-//    lexema = (t_lexema *)content;
-//    t_lexema_free(lexema);
-//}
