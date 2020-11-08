@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../minishell.h"
+#include "../minishell.h"
 
-void lexema_chain_free(t_list_lexema *lexema_chain)
+void	lexema_chain_free(t_list_lexema *lexema_chain)
 {
 	t_list_lexema *arch_elem;
 
