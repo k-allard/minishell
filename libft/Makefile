@@ -64,10 +64,10 @@ SRC = ft_memset.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
 		ft_gnl.c
-		
+
 OBJS = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror
 
 CC = gcc
 
