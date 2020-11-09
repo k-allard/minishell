@@ -13,7 +13,7 @@
 #include "../minishell.h"
 #include "parser.h"
 
-static int	read_redirect_from(char **commandline, t_lexema *lexema)
+static int		read_redirect_from(char **commandline, t_lexema *lexema)
 {
 	int i;
 
@@ -28,7 +28,7 @@ static int	read_redirect_from(char **commandline, t_lexema *lexema)
 	return (0);
 }
 
-static int	is_simple_symbol(char symbol)
+static int		is_simple_symbol(char symbol)
 {
 	char *non_simple_symbols;
 
@@ -39,7 +39,7 @@ static int	is_simple_symbol(char symbol)
 		return (1);
 }
 
-static int	read_simple_word(char **commandline, t_lexema *lexema)
+static int		read_simple_word(char **commandline, t_lexema *lexema)
 {
 	while (lexema->string && **commandline && is_simple_symbol(**commandline))
 	{
