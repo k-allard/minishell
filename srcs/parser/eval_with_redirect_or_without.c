@@ -18,24 +18,6 @@
 #include <sys/wait.h>
 #include "parser.h"
 
-// static int close_current_fd(int *current_fd)
-// {
-// 	int res;
-
-// 	if (*current_fd != -1)
-// 	{
-// 		res = close(*current_fd);
-// 		if(res == -1)
-// 			ft_putendl_fd(strerror(errno), STDERR_FILENO);
-// 		return res;
-// 	}
-// 	else
-// 	{
-// 		*current_fd = -1;
-// 		return (0);
-// 	}
-// }
-
 static int	apply_redirects(t_list_lexema *redirect, t_redirects *redirects_fd)
 {
 	t_list_lexema	*one_redirect;

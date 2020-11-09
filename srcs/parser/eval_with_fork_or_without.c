@@ -41,7 +41,6 @@ int	eval_with_fork(t_list_lexema *one_command_lexemas, t_list_env *envs)
 		{
 			ft_putstr_fd("Error: unexpected error executing the command\n",\
 			STDERR_FILENO);
-			// parser_debug_print_lexema_list(one_command_lexemas);
 		}
 		exit(res);
 	}
