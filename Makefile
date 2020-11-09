@@ -14,9 +14,6 @@ $(NAME):
 	@echo "\x1b[33m Preparing minishell...\x1b[0m"
 	@make -C libft
 	@gcc -o $(NAME) $(SRCS) libft/libft.a $(FLAGS)
-	@touch test.txt
-	@chmod a+rw test.txt
-	@echo "test\nabc" >> ./test.txt
 	@echo "\x1b[33m Minishell is ready!\x1b[0m"
 
 norm:
@@ -34,12 +31,15 @@ fclean: clean
 re: fclean all
 
 test: re
-	@echo "Remove old minishell from test Folder"
+	@touch test.txt
+	@chmod a+rw test.txt
+	@echo "test\nabc" >> ./test.txt
+	@echo "Remove old minishell from test folder"
 	@cd ./minishell-tester ; rm -f ./minishell ; cd ..
 	@echo "Copy minishell into test Folder"
 	@cp ./minishell ./minishell-tester/minishell
-	@echo "GoTo test Folder && Start tests"
-	@cd ./minishell-tester ; bash test.sh
+	@echo "Go to test folder && Start tests"
+	@cd ./minishell-tester ; bash test.sh ; cd ..
 
 %.o: %.c
 	@$(CC) $(FLAGS) -c $< -o $@

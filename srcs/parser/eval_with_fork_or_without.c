@@ -42,7 +42,7 @@ int	eval_with_fork(t_list_lexema *one_command_lexemas, t_list_env *envs)
 	else
 	{
 		waitpid(pid, &(status), 0);
-		res = WIFEXITED(status) ? WEXITSTATUS(status) : -1;
+		res = WIFEXITED(status) ? WEXITSTATUS(status) : 1;
 		return (res);
 	}
 }

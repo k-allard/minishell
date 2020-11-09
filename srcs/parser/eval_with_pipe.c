@@ -25,7 +25,7 @@ static int	parent_waiting(pid_t *pid, int *res, int *file_pipes)
 	if (WIFEXITED(status[1]))
 		res[1] = WEXITSTATUS(status[1]);
 	else
-		res[1] = -1;
+		res[1] = 1;
 	return (res[1]);
 }
 

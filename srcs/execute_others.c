@@ -6,11 +6,21 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 19:35:15 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/30 18:16:44 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/10 00:03:42 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	is_absolute_path(char *path)
+{
+	struct stat	s;
+
+	if (stat(path, &s) == 0)
+		return (1);
+	else
+		return (0);
+}
 
 char		*find_path(char *argv, t_list *envs)
 {
@@ -20,11 +30,12 @@ char		*find_path(char *argv, t_list *envs)
 	char		**paths;
 	struct stat	s;
 
-	if (!(tmp = get_env_value("PATH", envs)))
-		return (NULL);
+	if (is_absolute_path(argv))
+		return (argv);
+	tmp = get_env_value("PATH", envs);
 	paths = ft_split(tmp, ':');
 	i = -1;
-	while (paths[++i])
+	while (paths && paths[++i])
 	{
 		tmp = ft_strjoin("/", argv);
 		new_path = ft_strjoin(paths[i], tmp);

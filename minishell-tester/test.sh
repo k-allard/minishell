@@ -67,6 +67,16 @@ printf "| |  | |_| |_| |\  |_| |_ ____) | |  | | |____| |____| |____ \n"
 printf "|_|  |_|_____|_| \_|_____|_____/|_|  |_|______|______|______|\n$RESET"
 echo
 
+# 1. Simple command
+
+exec_test '/bin/ls'
+exec_test '/bin/pwd'
+
+# 1. Arguments
+
+exec_test '/bin/ls ..'
+exec_test '/bin/cat test.txt'
+
 # ECHO TESTS
 exec_test 'echo test tout'
 exec_test 'echo test      tout'

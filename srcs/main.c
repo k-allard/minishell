@@ -27,7 +27,7 @@ int		main(int argc, char **argv, char **envp)
 		res = parser(argv[2], &args_struct);
 	else
 	{
-		line = NULL;
+		line = ft_strdup("");
 		while (1)
 		{
 			write_prompt();
