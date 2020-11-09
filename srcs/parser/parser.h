@@ -75,4 +75,16 @@ void read_simple_symbol(char **commandline, t_lexema *lexema);
 int read_escape(char **commandline, t_lexema *lexema, int is_var_support);
 int error_end_of_line(char quoteChar);
 
+/*
+**EVAL_WITH_REDIRECT_OR_WITHOUT (2 and 3)
+*/
+
+int	is_redirect(t_lexema *lexema);
+int	is_redirect_exist(t_list_lexema *lexemas);
+t_list_lexema	*get_next_redirect(t_list_lexema **redirect, int *res);
+int	open_redirect_fd(int *current_fd, int std_fd, \
+char *filename, int flags);
+int	redir_stdin(t_redirects *redirects_fd, char *filename, int flags);
+int	redir_stdout(t_redirects *redirects_fd, char *filename, int flags);
+
 #endif //FT_MINISHELL_PARSER_H
