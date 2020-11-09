@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cwindom <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/09 14:45:02 by cwindom           #+#    #+#             */
+/*   Updated: 2020/11/09 14:45:04 by cwindom          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_MINISHELL_PARSER_H
-#define FT_MINISHELL_PARSER_H
+# define FT_MINISHELL_PARSER_H
 
-# include "../minishell.h"
+#include "../minishell.h"
 
-enum COMMANDS_INDEX
+typedef enum COMMANDS_INDEX
 {
 	COMMAND_EXTERNAL = 0,
 	COMMAND_CD,
@@ -14,7 +26,7 @@ enum COMMANDS_INDEX
 	COMMAND_PWD,
 	COMMAND_UNSET,
 	NONE_COMMAND
-} typedef E_COMMAND;
+} E_COMMAND;
 
 typedef struct s_redirects
 {
