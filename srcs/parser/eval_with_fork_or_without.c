@@ -11,11 +11,6 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include "parser.h"
 
 int	eval_without_fork(t_list_lexema *one_command_lexemas, t_list_env *envs)

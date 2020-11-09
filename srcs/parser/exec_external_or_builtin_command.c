@@ -11,11 +11,6 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include "parser.h"
 
 char		**lexema_chain_2_argv(t_list_lexema *lexema_chain)
@@ -102,7 +97,7 @@ t_list_lexema *lexema_chain, t_list_env *envs)
 }
 
 int			exec_external_or_builtin_command(t_list_lexema *lexema_chain,\
-t_list_env *envs)
+			t_list_env *envs)
 {
 	t_command command_index;
 

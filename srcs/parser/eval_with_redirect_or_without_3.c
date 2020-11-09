@@ -11,11 +11,6 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include "parser.h"
 
 int	redir_stdout(t_redirects *redirects_fd, char *filename, int flags)
@@ -24,7 +19,6 @@ int	redir_stdout(t_redirects *redirects_fd, char *filename, int flags)
 
 	if (redirects_fd->stdout_fd == -1)
 		redirects_fd->stdout_original = dup(STDOUT_FILENO);
-	res = -1;
 	if ((res = open_redirect_fd(&(redirects_fd->stdout_fd), STDOUT_FILENO, \
 	filename, flags)) == 0)
 		if ((res = dup2(redirects_fd->stdout_fd, STDOUT_FILENO)) != -1)

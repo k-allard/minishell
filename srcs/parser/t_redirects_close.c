@@ -12,8 +12,6 @@
 
 #include "../minishell.h"
 #include "parser.h"
-#include <unistd.h>
-#include <errno.h>
 
 static int	error_close_fd(char *str)
 {

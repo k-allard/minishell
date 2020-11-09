@@ -11,11 +11,6 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include "parser.h"
 
 static t_list_lexema	*error_unexpected_redirect(t_lexema *lexema, int *res)

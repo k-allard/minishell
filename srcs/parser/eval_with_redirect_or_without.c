@@ -11,11 +11,6 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include "parser.h"
 
 static int	apply_redirects(t_list_lexema *redirect, t_redirects *redirects_fd)
@@ -92,7 +87,6 @@ t_list_env *envs)
 	t_list_lexema	*command_only;
 	t_redirects		redirects_fd;
 
-	res = 0;
 	redirects_fd.stdout_original = -1;
 	redirects_fd.stdin_original = -1;
 	redirects_fd.stdin_fd = -1;
@@ -112,7 +106,6 @@ t_list_env *envs)
 {
 	int res;
 
-	res = 0;
 	if (is_redirect_exist(one_command_lexemas))
 		res = eval_with_redirect(one_command_lexemas, envs);
 	else
