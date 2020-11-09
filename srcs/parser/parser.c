@@ -13,7 +13,8 @@
 #include "../minishell.h"
 #include "parser.h"
 
-int			external_command_exist(char *command_name, t_list_lexema *lexema_chain, t_list_env *envs)
+int			external_command_exist(char *command_name, \
+			t_list_lexema *lexema_chain, t_list_env *envs)
 {
 	int		res;
 	char	**env;
@@ -45,7 +46,7 @@ static int	exit_code(int code, t_list_lexema *lexema_list)
 	return (code);
 }
 
-int			parser(char *commandline, int argc, char **argv, t_list_env *envs)
+int			parser(char *commandline, t_args_struct *args_struct)
 {
 	t_list_lexema	*lexema_list;
 	t_list_lexema	*lexema_chain;
@@ -68,7 +69,7 @@ int			parser(char *commandline, int argc, char **argv, t_list_env *envs)
 	{
 //		ft_putstr_fd("«Before:»\n", STDERR_FILENO);
 //		parser_debug_print_lexema_list(lexema_chain);
-		eval_vars_and_unescape_in_lexema_chain(lexema_chain, argc, argv, envs);
+		eval_vars_unesc_dol_in_lex_chain(lexema_chain, args_struct);
 		join_lexemas_without_spaces(lexema_chain);
 //		ft_putstr_fd("«After eval_vars_and_unescape_$_in_lexema_chain:»\n", STDERR_FILENO);
 		// parser_debug_print_lexema_list(lexema_chain);
@@ -77,7 +78,7 @@ int			parser(char *commandline, int argc, char **argv, t_list_env *envs)
 //		parser_debug_print_lexema_list(lexema_chain);
 		if (lexema_chain != NULL)
 		{
-			res = eval_with_pipe_or_without(lexema_chain, envs);
+			res = eval_with_pipe_or_without(lexema_chain, args_struct->envs);
 			lexema_chain_free(lexema_chain);
 		}
 	}

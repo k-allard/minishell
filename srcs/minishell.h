@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:29 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/09 01:11:08 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/09 17:09:00 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,25 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-char						**g_envp;
+typedef struct				s_env
+{
+	char					*key;
+	char					*value;
+}							t_env;
+
+typedef	struct				s_list_env
+{
+	t_env					*env;
+	struct s_list_env		*next;
+}							t_list_env;
+
+typedef struct				s_args_struct
+{
+	int						argc;
+	char					**argv;
+	t_list_env				*envs;
+}							t_args_struct;
+
 int							g_exit_value;
 
 typedef enum				e_lexema_type
@@ -49,23 +67,11 @@ typedef struct				s_lexema
 	t_lexema_type			lexema_type;
 }							t_lexema;
 
-typedef struct				s_env
-{
-	char					*key;
-	char					*value;
-}							t_env;
-
 typedef struct				s_all
 {
 	int						argc;
 	t_list					*envs;
 }							t_all;
-
-typedef	struct				s_list_env
-{
-	t_env					*env;
-	struct s_list_env		*next;
-}							t_list_env;
 
 typedef	struct				s_list_lexema
 {

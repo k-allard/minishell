@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/09 17:42:50 by kallard           #+#    #+#             */
+/*   Updated: 2020/11/09 17:42:52 by kallard          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef FT_MINISHELL_PARSER_H
 # define FT_MINISHELL_PARSER_H
@@ -43,15 +54,15 @@ void eval_tilda(char **str_eval, char **str_original, t_list_env	*envs);
 int check_marker_syntaxis(t_list_lexema *lexema_list);
 t_list_lexema *get_next_lexema_chain(t_list_lexema **lexema_list,\
 t_lexema_type delimeter);
-void eval_vars_and_unescape_in_lexema_chain(t_list_lexema *lexema_chain,\
-int argc, char **argv, t_list_env *envs);
+void		eval_vars_unesc_dol_in_lex_chain(t_list_lexema *lexema_chain, \
+			t_args_struct *args_struct);
 void join_lexemas_without_spaces(t_list_lexema *lexema_chain);
 void remove_empty_elements(t_list_lexema **lexema_chain);
 
 int is_var_name_symbol(char symbol);
 int is_var_name_symbol_with_num(char symbol);
 
-int parser(char *commandline, int argc, char **argv, t_list_env *envs);
+int			parser(char *commandline, t_args_struct	*args_struct);
 int eval_with_pipe_or_without(t_list_lexema *lexema_chain, t_list_env *envs);
 int eval_with_redirect_or_without(t_list_lexema *one_command_lexemas,\
 t_list_env *envs);

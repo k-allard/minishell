@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:46 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/08 16:45:26 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/09 17:09:04 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@
 
 int		main(int argc, char **argv, char **envp)
 {
-	t_list_env	*envs;
-	char		*line;
-	int			res;
+	t_args_struct	args_struct;
+	char			*line;
+	int				res;
 
-	g_envp = envp;
-	envs = (t_list_env *)get_envs(envp);
+	args_struct.argc = argc;
+	args_struct.argv = argv;
+	args_struct.envs = (t_list_env *)get_envs(envp);
 	signals();
 	if (argc == 3 && ft_strncmp(argv[1], "-c", 3) == 0)
-		res = parser(argv[2], argc, argv, envs);
+		res = parser(argv[2], &args_struct);
 	else
 	{
 		line = NULL;
@@ -33,10 +34,10 @@ int		main(int argc, char **argv, char **envp)
 			write_prompt();
 			if (!deal_with_input(&line))
 				continue;
-			res = parser(line, argc, argv, envs);
+			res = parser(line, &args_struct);
 			free(line);
 		}
 	}
-	free_envs_list(envs);
+	free_envs_list(args_struct.envs);
 	return (res);
 }
