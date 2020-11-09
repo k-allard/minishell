@@ -13,12 +13,12 @@
 #include "../minishell.h"
 #include "parser.h"
 
-E_COMMAND	get_command_type(char *command_name)
+t_command	get_command_type(char *command_name)
 {
-	E_COMMAND	i;
+	t_command	i;
 	int			len;
 	char		*commands[8];
-	E_COMMAND	res;
+	t_command	res;
 
 	commands[COMMAND_CD] = "cd";
 	commands[COMMAND_ECHO] = "echo";

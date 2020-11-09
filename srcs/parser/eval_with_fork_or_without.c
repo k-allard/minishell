@@ -55,7 +55,7 @@ int	eval_with_fork(t_list_lexema *one_command_lexemas, t_list_env *envs)
 
 int	eval_with_fork_or_without(t_list_lexema *cmd, t_list_env *envs)
 {
-	E_COMMAND command_index;
+	t_command command_index;
 
 	command_index = get_command_type(cmd->lexema->string);
 	if (command_index == COMMAND_EXTERNAL)

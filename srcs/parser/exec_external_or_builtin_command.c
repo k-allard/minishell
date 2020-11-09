@@ -75,7 +75,7 @@ static int	exec_external_command(t_list_lexema *lexema_chain, t_list_env *envs)
 	return (res);
 }
 
-static int	exec_builtin_command(E_COMMAND command_index,\
+static int	exec_builtin_command(t_command command_index,\
 t_list_lexema *lexema_chain, t_list_env *envs)
 {
 	char	**args;
@@ -104,7 +104,7 @@ t_list_lexema *lexema_chain, t_list_env *envs)
 int			exec_external_or_builtin_command(t_list_lexema *lexema_chain,\
 t_list_env *envs)
 {
-	E_COMMAND command_index;
+	t_command command_index;
 
 	command_index = get_command_type(lexema_chain->lexema->string);
 	if (command_index == COMMAND_EXTERNAL)
