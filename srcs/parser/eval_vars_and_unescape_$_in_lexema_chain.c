@@ -1,7 +1,7 @@
 #include "../minishell.h"
 #include "parser.h"
 
-static void unescape$(char **str_eval, char **str_original)
+static void unescape(char **str_eval, char **str_original)
 {
     str_join_str(str_eval, "$");
     (*str_original)+=2;
@@ -27,7 +27,7 @@ static void eval_vars_and_params(char **str_eval, char **str_original, int argc,
         simple_join_symbol(str_eval, str_original);
 }
 
-static void eval_vars_and_unescape_$(t_lexema *lexema, int argc, char **argv, t_list_env	*envs)
+static void eval_vars_and_unescape(t_lexema *lexema, int argc, char **argv, t_list_env	*envs)
 {
     char *str_original;
     char *str_eval;
@@ -42,7 +42,7 @@ static void eval_vars_and_unescape_$(t_lexema *lexema, int argc, char **argv, t_
         while (*str_original)
         {
             if(*str_original == '\\' && *(str_original+1) == '$')
-                unescape$(&str_eval, &str_original);
+                unescape(&str_eval, &str_original);
             else if (*str_original == '$')
                 eval_vars_and_params(&str_eval, &str_original, argc, argv, envs);
             else
@@ -52,7 +52,7 @@ static void eval_vars_and_unescape_$(t_lexema *lexema, int argc, char **argv, t_
     lexema->string = str_eval;
 }
 
-void eval_vars_and_unescape_$_in_lexema_chain(t_list_lexema *lexema_chain, int argc, char **argv, t_list_env *envs)
+void eval_vars_and_unescape_in_lexema_chain(t_list_lexema *lexema_chain, int argc, char **argv, t_list_env *envs)
 {
     t_lexema *lexema;
 
@@ -61,7 +61,7 @@ void eval_vars_and_unescape_$_in_lexema_chain(t_list_lexema *lexema_chain, int a
         lexema = lexema_chain->lexema;
         if(lexema->lexema_type == lexema_type_simple_word || lexema->lexema_type == lexema_type_double_q)
         {
-            eval_vars_and_unescape_$(lexema, argc, argv, envs);
+            eval_vars_and_unescape(lexema, argc, argv, envs);
         }
         lexema_chain = lexema_chain->next;
     }

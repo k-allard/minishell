@@ -41,7 +41,7 @@ void eval_tilda(char **str_eval, char **str_original, t_list_env	*envs);
 
 int check_marker_syntaxis(t_list_lexema *lexema_list);
 t_list_lexema *get_next_lexema_chain(t_list_lexema **lexema_list, t_lexema_type delimeter);
-void eval_vars_and_unescape_$_in_lexema_chain(t_list_lexema *lexema_chain, int argc, char **argv, t_list_env *envs);
+void eval_vars_and_unescape_in_lexema_chain(t_list_lexema *lexema_chain, int argc, char **argv, t_list_env *envs);
 void join_lexemas_without_spaces(t_list_lexema *lexema_chain);
 void remove_empty_elements(t_list_lexema **lexema_chain);
 

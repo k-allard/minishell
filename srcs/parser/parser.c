@@ -55,7 +55,7 @@ int			parser(char *commandline, int argc, char **argv, t_list_env	*envs)
     {
 //		ft_putstr_fd("«Before:»\n", STDERR_FILENO);
 //		parser_debug_print_lexema_list(lexema_chain);
-        eval_vars_and_unescape_$_in_lexema_chain(lexema_chain, argc, argv, envs);
+        eval_vars_and_unescape_in_lexema_chain(lexema_chain, argc, argv, envs);
         join_lexemas_without_spaces(lexema_chain);
 //		ft_putstr_fd("«After eval_vars_and_unescape_$_in_lexema_chain:»\n", STDERR_FILENO);
 		// parser_debug_print_lexema_list(lexema_chain);
