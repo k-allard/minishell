@@ -64,6 +64,10 @@ int is_var_name_symbol_with_num(char symbol);
 
 int			parser(char *commandline, t_args_struct	*args_struct);
 int eval_with_pipe_or_without(t_list_lexema *lexema_chain, t_list_env *envs);
+int	eval_with_pipe(t_list_lexema *lexema_chain, t_list_env *envs);
+int	eval_without_pipe(t_list_lexema *lexema_chain, t_list_env *envs);
+void unexpected_error_exit(int exit_flag);
+int	is_pipe_in_lexema_chain(t_list_lexema *lexema_chain);
 int eval_with_redirect_or_without(t_list_lexema *one_command_lexemas,\
 t_list_env *envs);
 int eval_with_fork_or_without(t_list_lexema *one_command_lexemas,\
