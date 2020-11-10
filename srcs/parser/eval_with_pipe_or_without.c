@@ -40,12 +40,12 @@ void	unexpected_error_exit(int exit_flag)
 }
 
 int		eval_with_pipe_or_without(t_list_lexema *lexema_chain, \
-t_list_env *envs)
+		t_list_env *envs)
 {
 	int res;
 
 	if (is_pipe_in_lexema_chain(lexema_chain))
-		res = eval_with_pipe(lexema_chain, envs);
+		res = eval_with_pipe(lexema_chain_copy(lexema_chain), envs);
 	else
 		res = eval_without_pipe(lexema_chain, envs);
 	g_exit_value = res;

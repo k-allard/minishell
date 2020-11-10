@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:46 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/10 21:53:26 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/10 21:57:27 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			main(int argc, char **argv, char **envp)
 		res = parser(argv[2], &args_struct);
 	else
 	{
-		line = ft_strdup("");
+		line = NULL;
 		while (1)
 		{
 			write_prompt();

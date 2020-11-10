@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 01:55:57 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/09 02:14:01 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/10 23:06:27 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,14 @@ t_list_lexema	*get_lexema_list(char *commandline, int *res)
 	t_list		*lexema_list;
 
 	lexema_list = NULL;
-	while ((lexema = get_next_lexema(&commandline, res)) && (*res == 0))
+	*res = 0;
+	while ((*res == 0) && (lexema = get_next_lexema(&commandline, res)))
 		ft_lstadd_back(&lexema_list, ft_lstnew(lexema));
-	return ((t_list_lexema *)lexema_list);
+	if (*res != 0)
+	{
+		lexema_chain_free((t_list_lexema *)lexema_list);
+		return (NULL);
+	}
+	else
+		return ((t_list_lexema *)lexema_list);
 }

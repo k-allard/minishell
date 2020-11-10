@@ -51,31 +51,29 @@ static void	eval_right_pipe_end(int *res, int *file_pipes, \
 	exit(res[1]);
 }
 
-int			eval_with_pipe(t_list_lexema *lexema_chain, t_list_env *envs)
+int			eval_with_pipe(t_list_lexema *all, t_list_env *envs)
 {
-	t_list_lexema	*one_command_lexemas;
+	t_list_lexema	*cmd;
 	int				file_pipes[2];
 	pid_t			pid[2];
 	int				res[2];
 
-	one_command_lexemas = get_next_lexema_chain(&lexema_chain, \
-	lexema_type_pipe);
+	cmd = get_next_lexema_chain(&all, lexema_type_pipe);
 	if (pipe(file_pipes) < 0)
 		unexpected_error_exit(1);
 	pid[0] = fork();
 	if (pid[0] < 0)
 		unexpected_error_exit(1);
 	if (pid[0] == 0)
-		eval_left_pipe_end(res, file_pipes, one_command_lexemas, envs);
+		eval_left_pipe_end(res, file_pipes, cmd, envs);
 	else
 	{
 		pid[1] = fork();
 		if (pid[1] < 0)
 			unexpected_error_exit(1);
 		if (pid[1] == 0)
-			eval_right_pipe_end(res, file_pipes, lexema_chain, envs);
-		else
-			return (parent_waiting(pid, res, file_pipes));
+			eval_right_pipe_end(res, file_pipes, all, envs);
 	}
-	return (-1);
+	return (lexema_chain_free(cmd) + lexema_chain_free(all) + \
+		(parent_waiting(pid, res, file_pipes)));
 }

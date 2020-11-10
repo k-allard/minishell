@@ -29,10 +29,8 @@ void		add_new(t_list *envs, char *new_env, char *new_data)
 	t_env *new;
 
 	new = (t_env *)malloc(sizeof(t_env));
-	new->key = (char *)malloc(sizeof(char) * ft_strlen(new_env));
-	new->key = ft_strcpy(new->key, new_env);
-	new->value = (char *)malloc(sizeof(char) * ft_strlen(new_data));
-	new->value = ft_strcpy(new->value, new_data);
+	new->key = ft_strdup(new_env);
+	new->value = ft_strdup(new_data);
 	ft_lstadd_back(&envs, ft_lstnew(new));
 }
 
