@@ -67,24 +67,39 @@ printf "| |  | |_| |_| |\  |_| |_ ____) | |  | | |____| |____| |____ \n"
 printf "|_|  |_|_____|_| \_|_____|_____/|_|  |_|______|______|______|\n$RESET"
 echo
 
-# 1. Simple command
+# Simple command
 
 exec_test '/bin/ls'
 exec_test '/bin/pwd'
 
-# 1. Arguments
+# Arguments
 
 exec_test '/bin/ls ..'
 exec_test '/bin/cat test.txt'
 
-# ECHO TESTS
+# ECHO command
 exec_test 'echo test tout'
 exec_test 'echo test      tout'
 exec_test 'echo -n test tout'
 exec_test 'echo -n -n -n test tout'
 
+# EXIT command
+exec_test "exit 42"
+exec_test "exit 42 53 68"
+exec_test "exit 259"
+exec_test "exit 9223372036854775807"
+exec_test "exit -9223372036854775808"
+exec_test "exit 9223372036854775808"
+exec_test "exit -9223372036854775810"
+exec_test "exit -4"
+exec_test "exit wrong"
+exec_test "exit wrong_command"
+exec_test "gdagadgag"
+exec_test "ls -Z"
+exec_test "cd gdhahahad"
+exec_test "ls -la | wtf"
 
-# CD TESTS
+# CD command
 exec_test 'cd .. ; pwd'
 exec_test 'cd /Users ; pwd'
 exec_test 'cd ; pwd'
@@ -123,6 +138,7 @@ ENV_SHOW="env | sort | grep -v SHLVL | grep -v _="
 EXPORT_SHOW="export | sort | grep -v SHLVL | grep -v _= | grep -v OLDPWD"
 exec_test 'export ='
 exec_test 'export 1TEST= ;' $ENV_SHOW
+exec_test 'unset HOME ;' $ENV_SHOW
 exec_test 'export ""="" ; ' $ENV_SHOW
 exec_test 'export TES=T="" ;' $ENV_SHOW
 exec_test 'export TE+S=T="" ;' $ENV_SHOW
@@ -147,22 +163,6 @@ exec_test '| test'
 exec_test 'echo > <'
 exec_test 'echo | |'
 exec_test '<'
-
-# EXIT
-exec_test "exit 42"
-exec_test "exit 42 53 68"
-exec_test "exit 259"
-exec_test "exit 9223372036854775807"
-exec_test "exit -9223372036854775808"
-exec_test "exit 9223372036854775808"
-exec_test "exit -9223372036854775810"
-exec_test "exit -4"
-exec_test "exit wrong"
-exec_test "exit wrong_command"
-exec_test "gdagadgag"
-exec_test "ls -Z"
-exec_test "cd gdhahahad"
-exec_test "ls -la | wtf"
 
 rm ls
 # rm lol test
