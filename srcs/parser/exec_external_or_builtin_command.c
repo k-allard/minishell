@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_external_or_builtin_command.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwindom <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 03:15:14 by cwindom           #+#    #+#             */
-/*   Updated: 2020/11/09 03:15:17 by cwindom          ###   ########.fr       */
+/*   Updated: 2020/11/10 19:55:28 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ t_list_lexema *lexema_chain, t_list_env *envs)
 		res = command_pwd(envs);
 	else if (command_index == COMMAND_UNSET)
 		res = command_unset(args, (t_list *)envs, 0);
-	free_double_array(args);
+	free(args);
 	return (res);
 }
 
