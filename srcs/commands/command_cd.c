@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:07:16 by cwindom           #+#    #+#             */
-/*   Updated: 2020/10/31 15:31:46 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/10 19:42:21 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	cd_point(char *pwd, t_list *envs)
 	else
 	{
 		update_env_data(envs, "OLDPWD", pwd);
-		update_env_data(envs, "PWD", pwd);
 		free(is_cwd);
 	}
 }
