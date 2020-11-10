@@ -6,7 +6,7 @@ HEADER = ./minishell.h
 
 OBJS = $(SRCS:.c=.o)
 
-FLAGS =-g -Wall -Wextra -Werror
+FLAGS =-Wall -Wextra -Werror
 
 all: $(NAME)
 

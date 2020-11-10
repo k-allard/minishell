@@ -153,6 +153,8 @@ exec_test 'echo test > ls ; cat ls'
 exec_test 'echo test > ls >> ls >> ls ; echo test >> ls; cat ls'
 exec_test 'cat < ls'
 exec_test 'cat < ls > ls'
+exec_test '> lol echo test lol; cat lol'
+exec_test '>lol echo > test>lol>test>>lol>test mdr >lol test >test; cat test'
 
 # MULTI TESTS
 exec_test 'echo testing multi ; echo "test 1 ; | and 2" ; cat tests/lorem.txt | grep Lorem'

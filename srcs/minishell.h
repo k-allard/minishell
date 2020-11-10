@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:29 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/09 17:09:00 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/10 20:24:59 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef	struct				s_quotes
 }							t_quotes;
 
 t_lexema					*t_lexema_init();
+t_lexema					*t_lexema_copy(t_lexema *original);
 void						lexema_chain_free(t_list_lexema *lexema_chain);
 
 t_list						*get_envs(char **envp);
