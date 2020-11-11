@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 19:35:15 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/10 00:03:42 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/11 11:14:32 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char		*find_path(char *argv, t_list *envs)
 
 	if (is_absolute_path(argv))
 		return (argv);
-	tmp = get_env_value("PATH", envs);
+	tmp = get_env_value("PATH", (t_list_env *)envs);
 	paths = ft_split(tmp, ':');
 	i = -1;
 	while (paths && paths[++i])

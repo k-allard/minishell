@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:07:16 by cwindom           #+#    #+#             */
-/*   Updated: 2020/11/10 19:42:21 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/11 11:15:52 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static int	cd_path(char *path, char *pwd, t_list *envs)
 			res = 1;
 		if (res == 0)
 		{
-			update_env_data(envs, "OLDPWD", pwd);
+			update_env_data((t_list_env *)envs, "OLDPWD", pwd);
 			pwd = getcwd(0, 1024);
-			update_env_data(envs, "PWD", pwd);
+			update_env_data((t_list_env *)envs, "PWD", pwd);
 			free(pwd);
 		}
 	}
@@ -43,14 +43,14 @@ static void	cd_point(char *pwd, t_list *envs)
 	is_cwd = getcwd(0, 1024);
 	if (!is_cwd)
 	{
-		update_env_data(envs, "OLDPWD", pwd);
+		update_env_data((t_list_env *)envs, "OLDPWD", pwd);
 		pwd = ft_strjoin(pwd, "/.");
-		update_env_data(envs, "PWD", pwd);
+		update_env_data((t_list_env *)envs, "PWD", pwd);
 		free(pwd);
 	}
 	else
 	{
-		update_env_data(envs, "OLDPWD", pwd);
+		update_env_data((t_list_env *)envs, "OLDPWD", pwd);
 		free(is_cwd);
 	}
 }
@@ -62,10 +62,11 @@ int			command_cd(char **argv, t_list *envs)
 	int		res;
 
 	res = 0;
-	path = (count_argv(argv) > 1) ? argv[1] : get_env_value("HOME", envs);
+	path = (count_argv(argv) > 1) ? argv[1] : \
+		get_env_value("HOME", (t_list_env *)envs);
 	if (path == NULL)
 		return (17);
-	pwd = get_env_value("PWD", (t_list *)envs);
+	pwd = get_env_value("PWD", (t_list_env *)envs);
 	if (path[0] == '.' && path[1] == '\0')
 		cd_point(pwd, envs);
 	else

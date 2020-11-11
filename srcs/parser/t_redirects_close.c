@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_redirects_close.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwindom <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 02:58:24 by cwindom           #+#    #+#             */
-/*   Updated: 2020/11/09 02:58:28 by cwindom          ###   ########.fr       */
+/*   Updated: 2020/11/11 13:34:24 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,14 @@ int			t_redirects_close(t_redirects *redirects)
 	if ((redirects->stdout_original != -1) && (dup2(redirects->stdout_original,\
 	STDOUT_FILENO) == -1))
 		res = error_close_fd("Error restore STDOUT after redirection");
+	if ((redirects->stdout_original != -1) && \
+		(close(redirects->stdout_original) != 0))
+		res = error_close_fd("Error close Original STDOUT after redirection");
 	if ((redirects->stdin_original != -1) && (dup2(redirects->stdin_original,\
 	STDIN_FILENO) == -1))
 		res = error_close_fd("Error restore STDIN after redirection");
+	if ((redirects->stdin_original != -1) && \
+		(close(redirects->stdin_original) != 0))
+		res = error_close_fd("Error close Original STDIN after redirection");
 	return (res);
 }

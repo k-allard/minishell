@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_debug.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwindom <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 02:53:08 by cwindom           #+#    #+#             */
-/*   Updated: 2020/11/09 02:53:11 by cwindom          ###   ########.fr       */
+/*   Updated: 2020/11/11 10:46:25 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,17 @@ void	parser_debug_print_lexema_list(t_list_lexema *lexema_list)
 		ft_putstr_fd(lexema->string, STDERR_FILENO);
 		ft_putstr_fd("»\n", STDERR_FILENO);
 		lexema_list = lexema_list->next;
+	}
+}
+
+void	parser_debug_print_envs_list(t_list_env *envs_list)
+{
+	while (envs_list)
+	{
+		ft_putstr_fd(envs_list->env->key, STDERR_FILENO);
+		ft_putstr_fd("\t-\t«", STDERR_FILENO);
+		ft_putstr_fd(envs_list->env->value, STDERR_FILENO);
+		ft_putstr_fd("»\n", STDERR_FILENO);
+		envs_list = envs_list->next;
 	}
 }

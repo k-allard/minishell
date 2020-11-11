@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:29 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/10 22:02:43 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/11 11:12:00 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int							command_cd(char **argv, t_list *envs);
 int							command_echo(char **argv);
 int							command_pwd(t_list_env *envs);
 int							command_env(t_list *envs);
-int							command_export(char **argv, t_list *envs);
+int							command_export(char **argv, t_list_env *envs);
 int							command_unset(char **argv, t_list *envs, int i);
 int							command_exit(char **argv);
 
@@ -132,11 +132,11 @@ int							redirect_found(char *line);
 int							dollar_found(char *line);
 int							quote_found(char *line);
 
-char						*get_env_value(char *key, t_list *envs);
-int							is_this_key_env(char *key, t_list *envs);
+char						*get_env_value(char *key, t_list_env *envs);
+int							is_this_key_env(char *key, t_list_env *envs);
 int							is_redirect(t_lexema *lexema);
 
-int							update_env_data(t_list *envs, char *new_env,\
+int							update_env_data(t_list_env *envs, char *new_env,\
 							char *new_data);
 
 void						free_double_array(char **array);

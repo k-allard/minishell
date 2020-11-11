@@ -3,50 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   command_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwindom <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 03:05:00 by cwindom           #+#    #+#             */
-/*   Updated: 2020/10/23 03:05:02 by cwindom          ###   ########.fr       */
+/*   Updated: 2020/11/11 11:32:02 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void		command_env_declare(t_list *envs)
+void		command_env_declare(t_list_env *envs)
 {
 	if (!envs)
 		return ;
 	ft_putstr_fd("declare -x ", 1);
-	ft_putstr_fd(((t_env *)envs->content)->key, 1);
+	ft_putstr_fd(envs->env->key, 1);
 	ft_putstr_fd("=\"", 1);
-	ft_putstr_fd(((t_env *)envs->content)->value, 1);
+	ft_putstr_fd(envs->env->value, 1);
 	ft_putendl_fd("\"", 1);
 	command_env_declare(envs->next);
 }
 
-void		add_new(t_list *envs, char *new_env, char *new_data)
+void		add_new(t_list_env *envs, char *new_env, char *new_data)
 {
 	t_env *new;
 
 	new = (t_env *)malloc(sizeof(t_env));
 	new->key = ft_strdup(new_env);
 	new->value = ft_strdup(new_data);
-	ft_lstadd_back(&envs, ft_lstnew(new));
+	ft_lstadd_back((t_list**)(&envs), ft_lstnew(new));
 }
 
-int			update_env_data(t_list *envs, char *new_env, char *new_data)
+int			update_env_data(t_list_env *envs, char *new_env, char *new_data)
 {
 	int flag;
 
 	flag = 0;
-	while (envs->next)
+	while (envs)
 	{
 		if (is_this_key_env(new_env, envs))
 		{
-			free(((t_env *)envs->content)->value);
-			((t_env *)envs->content)->value =
-					(char *)malloc((ft_strlen(new_data) + 1) * sizeof(char));
-			ft_strcpy(((t_env *)envs->content)->value, new_data);
+			free(envs->env->value);
+			envs->env->value = ft_strdup(new_data);
 			flag = 1;
 			break ;
 		}
@@ -55,7 +53,7 @@ int			update_env_data(t_list *envs, char *new_env, char *new_data)
 	return (flag);
 }
 
-void		check_env(char *argv, t_list *envs)
+void		check_env(char *argv, t_list_env *envs)
 {
 	char	*new_env;
 	char	*new_data;
@@ -83,7 +81,7 @@ void		check_env(char *argv, t_list *envs)
 	free(new_data);
 }
 
-int			command_export(char **argv, t_list *envs)
+int			command_export(char **argv, t_list_env *envs)
 {
 	int i;
 

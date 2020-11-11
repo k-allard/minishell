@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 19:18:06 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/09 19:18:07 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/11 13:39:12 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ static int	parent_waiting(pid_t *pid, int *res, int *file_pipes)
 {
 	int	status[2];
 
+	waitpid(pid[1], &(status[1]), 0);
 	waitpid(pid[0], &(status[0]), WNOHANG);
 	if (WIFEXITED(status[0]))
 		res[0] = WEXITSTATUS(status[0]);
+	close(file_pipes[0]);
 	close(file_pipes[1]);
-	waitpid(pid[1], &(status[1]), 0);
 	if (WIFEXITED(status[1]))
 		res[1] = WEXITSTATUS(status[1]);
 	else
@@ -74,6 +75,8 @@ int			eval_with_pipe(t_list_lexema *all, t_list_env *envs)
 		if (pid[1] == 0)
 			eval_right_pipe_end(res, file_pipes, all, envs);
 	}
+	close(file_pipes[0]);
+	close(file_pipes[1]);
 	return (lexema_chain_free(cmd) + lexema_chain_free(all) + \
 		(parent_waiting(pid, res, file_pipes)));
 }

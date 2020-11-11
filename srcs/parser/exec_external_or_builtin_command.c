@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 03:15:14 by cwindom           #+#    #+#             */
-/*   Updated: 2020/11/10 19:55:28 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/11 11:13:12 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_list_lexema *lexema_chain, t_list_env *envs)
 	else if (command_index == COMMAND_ECHO)
 		res = command_echo(args);
 	else if (command_index == COMMAND_EXPORT)
-		res = command_export(args, (t_list *)envs);
+		res = command_export(args, envs);
 	else if (command_index == COMMAND_EXIT)
 		res = command_exit(args);
 	else if (command_index == COMMAND_ENV)

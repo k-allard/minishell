@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 22:43:39 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/31 15:39:43 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/11 11:15:15 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		command_unset(char **argv, t_list *envs, int i)
 	while (argv[++i])
 	{
 		tmp = envs;
-		while (tmp && (is_this_key_env(argv[i], tmp)))
+		while (tmp && (is_this_key_env(argv[i], (t_list_env *)tmp)))
 		{
 			del = tmp;
 			tmp = tmp->next;
@@ -36,7 +36,7 @@ int		command_unset(char **argv, t_list *envs, int i)
 		}
 		while (tmp->next)
 		{
-			if (is_this_key_env(argv[i], tmp->next))
+			if (is_this_key_env(argv[i], (t_list_env *)tmp->next))
 			{
 				del = tmp->next;
 				tmp->next = tmp->next->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eval_with_redirect_or_without_3.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwindom <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 04:24:23 by cwindom           #+#    #+#             */
-/*   Updated: 2020/11/09 04:24:26 by cwindom          ###   ########.fr       */
+/*   Updated: 2020/11/11 13:34:57 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ int	redir_stdout(t_redirects *redirects_fd, char *filename, int flags)
 
 	if (redirects_fd->stdout_fd == -1)
 		redirects_fd->stdout_original = dup(STDOUT_FILENO);
-	if ((res = open_redirect_fd(&(redirects_fd->stdout_fd), STDOUT_FILENO, \
-	filename, flags)) == 0)
-		if ((res = dup2(redirects_fd->stdout_fd, STDOUT_FILENO)) != -1)
-			res = 0;
+	res = open_redirect_fd(&(redirects_fd->stdout_fd), STDOUT_FILENO, \
+	filename, flags);
 	if (res != 0)
 		ft_putendl_fd(strerror(errno), STDERR_FILENO);
 	return (res);
@@ -34,11 +32,8 @@ int	redir_stdin(t_redirects *redirects_fd, char *filename, int flags)
 
 	if (redirects_fd->stdin_fd == -1)
 		redirects_fd->stdin_original = dup(STDIN_FILENO);
-	res = -1;
-	if (0 == open_redirect_fd(&(redirects_fd->stdin_fd), STDIN_FILENO, \
-	filename, flags))
-		if (-1 != dup2(redirects_fd->stdin_fd, STDIN_FILENO))
-			res = 0;
+	res = open_redirect_fd(&(redirects_fd->stdin_fd), \
+			STDIN_FILENO, filename, flags);
 	if (res != 0)
 		ft_putendl_fd(strerror(errno), STDERR_FILENO);
 	return (res);

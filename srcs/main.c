@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/14 22:38:46 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/10 21:57:27 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/11 11:12:39 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ static void	update_shlvl(t_list_env *envs)
 	char	*shlvl_str;
 	int		shlvl;
 
-	shlvl_str = get_env_value("SHLVL", (t_list *)envs);
+	shlvl_str = get_env_value("SHLVL", envs);
 	if (shlvl_str[0] == '\0')
 	{
 		shlvl_str = "1";
-		update_env_data((t_list *)envs, "SHLVL", shlvl_str);
+		update_env_data(envs, "SHLVL", shlvl_str);
 		return ;
 	}
 	shlvl = ft_atoi(shlvl_str);
 	shlvl++;
 	shlvl_str = ft_itoa(shlvl);
-	update_env_data((t_list *)envs, "SHLVL", shlvl_str);
+	update_env_data(envs, "SHLVL", shlvl_str);
 	free(shlvl_str);
 }
 

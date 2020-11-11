@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/08 15:26:49 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/08 16:45:44 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/11 11:13:04 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	eval_var(char **str_eval, char **str_original, t_list_env *envs)
 	char	*var_name;
 
 	var_name = get_var_name(*str_original);
-	str_join_str(str_eval, get_env_value(var_name, (t_list *)envs));
+	str_join_str(str_eval, get_env_value(var_name, envs));
 	(*str_original) += (ft_strlen(var_name) + 1);
 	free(var_name);
 }
@@ -47,7 +47,7 @@ void	eval_tilda(char **str_eval, char **str_original, t_list_env *envs)
 {
 	char	*home_dir;
 
-	home_dir = get_env_value("HOME", (t_list *)envs);
+	home_dir = get_env_value("HOME", envs);
 	str_join_str(str_eval, home_dir);
 	(*str_original) += 2;
 }

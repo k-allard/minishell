@@ -6,7 +6,7 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 17:42:50 by kallard           #+#    #+#             */
-/*   Updated: 2020/11/09 17:42:52 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/11 10:52:37 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int				is_block(t_lexema *lexema);
 
 t_list_lexema	*get_lexema_list(char *commandline, int *res);
 void			parser_debug_print_lexema_list(t_list_lexema *lexema_list);
+void			parser_debug_print_envs_list(t_list_env *lexema_list);
 
 char			*get_var_name(char *str);
 void			str_join_str(char **str1, char *str2);
