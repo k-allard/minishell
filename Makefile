@@ -55,7 +55,7 @@ $(NAME):
 	@echo "\x1b[33m Preparing minishell...\x1b[0m"
 	@make -C libft
 	@gcc -o $(NAME) $(SRCS) libft/libft.a $(FLAGS)
-	@echo "\x1b[33m Minishell is ready!\x1b[0m"
+	@echo "\x1b[32m Minishell is ready!\x1b[0m"
 
 norm:
 	@echo "\x1b[33m Sources NORM CHECK...\x1b[0m"
@@ -72,6 +72,7 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 	@make -C libft fclean
+	@rm -rf test.txt
 
 re: fclean all
 

@@ -3,43 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
+/*   By: cwindom <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/10 13:57:54 by kallard           #+#    #+#             */
-/*   Updated: 2020/05/11 22:17:35 by kallard          ###   ########.fr       */
+/*   Created: 2020/05/23 15:54:28 by cwindom           #+#    #+#             */
+/*   Updated: 2020/05/23 15:54:30 by cwindom          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-** Removes chars specified in ’set’ from the beginning and the end of string s1.
-** Allocates and returns a copy of s1 modified.
-*/
-
-char	*ft_strtrim(char const *s1, char const *set)
+static char	*search(const char *set, char c)
 {
-	unsigned int	i;
-	unsigned int	end;
-	size_t			setlen;
-	unsigned char	trim_hashmap[255];
+	char	*str;
+	int		n;
 
-	if (!s1 || !set)
-		return (NULL);
-	setlen = ft_strlen(set);
-	if (!setlen || !ft_strlen(s1))
+	n = (int)ft_strlen(set);
+	str = (char *)set;
+	while (n--)
+	{
+		if (*str == c)
+			return (str);
+		str++;
+	}
+	return (NULL);
+}
+
+char		*ft_strtrim(char const *s1, char const *set)
+{
+	size_t	left;
+	size_t	right;
+
+	left = 0;
+	right = ft_strlen(s1);
+	if (!(s1 && set))
+		return (0);
+	if (*set == '\0')
 		return (ft_strdup(s1));
-	ft_bzero(trim_hashmap, 255);
-	i = 0;
-	while (i < setlen)
-		trim_hashmap[(unsigned int)set[i++]] = 1;
-	i = 0;
-	end = ft_strlen(s1) - 1;
-	while (s1[i] && ((unsigned int)s1[i] < 255) && \
-		trim_hashmap[(unsigned int)s1[i]])
-		i++;
-	while (end > i && ((unsigned int)s1[i] < 255) && \
-		trim_hashmap[(unsigned int)s1[end]])
-		end--;
-	return (ft_substr(s1, i, end - i + 1));
+	while (s1[left] && search(set, s1[left]))
+		left++;
+	while (s1[right - 1] && search(set, s1[right - 1]))
+		right--;
+	if (right - left > right)
+		return (ft_substr(s1, left, 0));
+	return (ft_substr(s1, left, right - left));
 }
