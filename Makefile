@@ -76,15 +76,17 @@ fclean: clean
 re: fclean all
 
 test: re
-	@touch test.txt
-	@chmod a+rw test.txt
-	@echo "test\nabc" >> ./test.txt
-	@echo "Remove old minishell from test folder"
-	@cd ./minishell-tester ; rm -f ./minishell ; cd ..
-	@echo "Copy minishell into test Folder"
-	@cp ./minishell ./minishell-tester/minishell
-	@echo "Go to test folder && Start tests"
-	@cd ./minishell-tester ; bash test.sh ; cd ..
+	@if ! [ -d ./minishell-tester ]; then \
+  		echo "\x1b[31m No tester directory! \x1b[0m"; \
+  		echo "\x1b[31m STOP \x1b[0m"; \
+  	else \
+		touch test.txt ; \
+		chmod a+rw test.txt ; \
+		echo "test\nabc" >> ./test.txt ; \
+		cd ./minishell-tester ; rm -f ./minishell ; cd .. ; \
+		cp ./minishell ./minishell-tester/minishell ; \
+		cd ./minishell-tester ; bash test.sh ; cd .. ; \
+	fi
 
 %.o: %.c
 	@$(CC) $(FLAGS) -c $< -o $@
