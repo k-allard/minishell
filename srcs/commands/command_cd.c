@@ -6,73 +6,71 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 23:07:16 by cwindom           #+#    #+#             */
-/*   Updated: 2020/10/31 15:31:46 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/11 11:15:52 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../minishell.h"
 
-# include "../minishell.h"
-
-int	count_argv(char **argv)
+static int	cd_path(char *path, char *pwd, t_list *envs)
 {
-	int i;
-	i = 0;
-
-	while (argv[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
-int command_cd(char **argv, t_list *envs)
-{
-	DIR		*dir;
-	char	*path;
-	char	*pwd;
-	char *is_cwd;
-    int		res;
-	int		n;
+	DIR	*dir;
+	int	res;
 
 	res = 0;
-	n = count_argv(argv);
-	path = (n > 1) ? argv[1] : get_env_value("HOME", envs);
-
-	if (path == NULL)
-		return 17;
-	pwd = get_env_value("PWD", (t_list *)envs);
-	is_cwd = getcwd(0, 1024);//TODO 1: получать PWD из переменных - getpwd(envs);
-	if(!is_cwd && path[0] == '.' && path[1] == '\0')
+	dir = opendir(path);
+	if (dir != NULL)
 	{
-		update_env_data(envs, "OLDPWD", pwd); //обновляем OLDPWD в переменных
-		pwd = ft_strjoin(pwd, "/.");
-		update_env_data(envs, "PWD", pwd); //обновляем PWD в переменных
-		free(pwd);
+		if ((chdir(path) < 0) || (closedir(dir) < 0))
+			res = 1;
+		if (res == 0)
+		{
+			update_env_data((t_list_env *)envs, "OLDPWD", pwd);
+			pwd = getcwd(0, 1024);
+			update_env_data((t_list_env *)envs, "PWD", pwd);
+			free(pwd);
+		}
 	}
-	else if(path[0] == '.' && path[1] == '\0')
+	else
+		res = 1;
+	return (res);
+}
+
+static void	cd_point(char *pwd, t_list *envs)
+{
+	char	*is_cwd;
+
+	is_cwd = getcwd(0, 1024);
+	if (!is_cwd)
 	{
-		update_env_data(envs, "OLDPWD", pwd); //обновляем OLDPWD в переменных
-		update_env_data(envs, "PWD", pwd); //обновляем PWD в переменных
-		chdir(pwd); //TODO: сделать вместо chdir функцию chpwd, чтобы она ставила PWD env + OWDPWD env и выполняла chdir
+		update_env_data((t_list_env *)envs, "OLDPWD", pwd);
+		pwd = ft_strjoin(pwd, "/.");
+		update_env_data((t_list_env *)envs, "PWD", pwd);
 		free(pwd);
 	}
 	else
 	{
-		dir = opendir(path);
-		if (dir != NULL)
-		{
-			if ((chdir(path) < 0) || (closedir(dir) < 0))
-				res = 1;
-			if (res == 0)
-			{
-				update_env_data(envs, "OLDPWD", pwd); //обновляем OLDPWD в переменных
-				pwd = getcwd(0, 1024);
-				update_env_data(envs, "PWD", pwd); //обновляем PWD в переменных
-			}
-		}
-		else
-			res = 1;
+		update_env_data((t_list_env *)envs, "OLDPWD", pwd);
+		free(is_cwd);
 	}
+}
+
+int			command_cd(char **argv, t_list *envs)
+{
+	char	*path;
+	char	*pwd;
+	int		res;
+
+	res = 0;
+	path = (count_argv(argv) > 1) ? argv[1] : \
+		get_env_value("HOME", (t_list_env *)envs);
+	if (path == NULL)
+		return (17);
+	pwd = get_env_value("PWD", (t_list_env *)envs);
+	if (path[0] == '.' && path[1] == '\0')
+		cd_point(pwd, envs);
+	else
+		res = cd_path(path, pwd, envs);
 	if (res == 1)
 	{
 		ft_putstr_fd("cd: ", STDERR_FILENO);

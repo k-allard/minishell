@@ -12,6 +12,18 @@
 
 #include "../minishell.h"
 
+int	count_argv(char **argv)
+{
+	int i;
+
+	i = 0;
+	while (argv[i])
+	{
+		i++;
+	}
+	return (i);
+}
+
 int	valid_name_first(int ch)
 {
 	if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))
@@ -19,17 +31,16 @@ int	valid_name_first(int ch)
 	if (ch == '_')
 		return (1);
 	return (0);
-
 }
 
-int valid_name(char *str)
+int	valid_name(char *str)
 {
 	int i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i] != '=' && str[i] != '\0')
 	{
-		if (ft_isalpha(str[i]) || ft_isdigit(str[i] || str[i] == '_'))
+		if (ft_isalpha(str[i]) || ft_isdigit(str[i]) || str[i] == '_')
 		{
 			i++;
 		}
@@ -37,7 +48,6 @@ int valid_name(char *str)
 		{
 			return (0);
 		}
-
 	}
 	return (1);
 }

@@ -12,20 +12,35 @@
 
 #include "../minishell.h"
 
-static int		if_str_number(char *str)
+static int		if_str_number(char *str, int i, int s, int l)
 {
-	int	i;
+	int m;
 
-	i = 0;
 	if (str[i] == '-')
+	{
 		i++;
-	while (str[i])
-		if (!ft_isdigit(str[i++]))
-			return (0);
+		s = -1;
+	}
+	else if (str[i] == '+')
+	{
+		i++;
+		s = 1;
+	}
+	while (str[i] && (l == 0))
+		l = !(ft_isdigit(str[i++]));
+	if (l != 0)
+		return (0);
+	l = ft_strlen(str);
+	m = ft_strlen("9223372036854775807");
+	if ((s == 1 && l > m) || (s == -1 && l > m + 1))
+		return (0);
+	if ((s == 1 && l == m && ft_strncmp("9223372036854775807", str, m) < 0) ||
+	(s == -1 && l == m + 1 && ft_strncmp("-9223372036854775808", str, m) < 0))
+		return (0);
 	return (1);
 }
 
-int			command_exit(char **argv)
+int				command_exit(char **argv)
 {
 	int	i;
 
@@ -34,15 +49,12 @@ int			command_exit(char **argv)
 		i++;
 	ft_putendl_fd("exit", 2);
 	if (i == 1)
-		exit(EXIT_SUCCESS);
-	else if (i == 2 && if_str_number(argv[1]))
+		exit(g_exit_value);
+	else if (i == 2 && if_str_number(argv[1], 0, 1, 0))
 	{
-		if (ft_atoi(argv[1]) >= 0)
-			exit(ft_atoi(argv[1]));
-		else
-			exit (252);
+		exit((unsigned char)ft_atoi(argv[1]));
 	}
-	else if (i > 2 && if_str_number(argv[1]))
+	else if (i > 2 && if_str_number(argv[1], 0, 1, 0))
 	{
 		ft_putendl_fd("exit: too many arguments", 2);
 		return (1);
@@ -52,6 +64,6 @@ int			command_exit(char **argv)
 		ft_putstr_fd("exit: ", 2);
 		ft_putstr_fd(argv[1], 2);
 		ft_putendl_fd(": numeric argument required", 2);
-		exit (255);
+		exit(255);
 	}
 }

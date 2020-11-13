@@ -6,7 +6,7 @@
 #    By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/30 22:32:54 by kallard           #+#    #+#              #
-#    Updated: 2020/10/19 15:10:42 by kallard          ###   ########.fr        #
+#    Updated: 2020/11/11 13:41:08 by kallard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,10 +64,10 @@ SRC = ft_memset.c \
 		ft_lstiter.c \
 		ft_lstmap.c \
 		ft_gnl.c
-		
+
 OBJS = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS =-Wall -Wextra -Werror -O3
 
 CC = gcc
 

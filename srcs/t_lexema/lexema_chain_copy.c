@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_var_name.c                                     :+:      :+:    :+:   */
+/*   lexema_chain_copy.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cwindom <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 02:50:03 by cwindom           #+#    #+#             */
-/*   Updated: 2020/11/09 02:50:06 by cwindom          ###   ########.fr       */
+/*   Created: 2020/11/10 22:02:18 by kallard           #+#    #+#             */
+/*   Updated: 2020/11/10 22:02:20 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include "parser.h"
 
-char		*get_var_name(char *str)
+t_list_lexema	*lexema_chain_copy(t_list_lexema *lexema_chain)
 {
-	int		i;
-	char	*var_name;
+	t_list_lexema *copy;
 
-	i = 1;
-	while (str[i] && is_var_name_symbol_with_num(str[i]))
-		i++;
-	var_name = ft_strndup((str + 1), i - 1);
-	return (var_name);
+	copy = NULL;
+	while (lexema_chain)
+	{
+		ft_lstadd_back((t_list **)(&copy), \
+			ft_lstnew(t_lexema_copy(lexema_chain->lexema)));
+		lexema_chain = lexema_chain->next;
+	}
+	return (copy);
 }

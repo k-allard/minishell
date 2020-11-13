@@ -6,13 +6,21 @@
 /*   By: kallard <kallard@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 19:35:15 by kallard           #+#    #+#             */
-/*   Updated: 2020/10/30 18:16:44 by kallard          ###   ########.fr       */
+/*   Updated: 2020/11/11 11:14:32 by kallard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
-# include <sys/stat.h>
-# include <stdio.h>
+#include "minishell.h"
+
+static int	is_absolute_path(char *path)
+{
+	struct stat	s;
+
+	if (stat(path, &s) == 0)
+		return (1);
+	else
+		return (0);
+}
 
 char		*find_path(char *argv, t_list *envs)
 {
@@ -22,11 +30,12 @@ char		*find_path(char *argv, t_list *envs)
 	char		**paths;
 	struct stat	s;
 
-	if (!(tmp = get_env_value("PATH", envs)))
-		return (NULL);
+	if (is_absolute_path(argv))
+		return (argv);
+	tmp = get_env_value("PATH", (t_list_env *)envs);
 	paths = ft_split(tmp, ':');
 	i = -1;
-	while (paths[++i])
+	while (paths && paths[++i])
 	{
 		tmp = ft_strjoin("/", argv);
 		new_path = ft_strjoin(paths[i], tmp);
@@ -39,34 +48,5 @@ char		*find_path(char *argv, t_list *envs)
 		free(new_path);
 	}
 	free_double_array(paths);
-	return (ft_strdup(argv));
+	return (NULL);
 }
-
-//void			execute_others(char *line, t_list *envs)
-//{
-//	int		status;
-//	char	*filename;
-//	char	**argv;
-//	pid_t	pid;
-//
-//	argv = get_argumentes(line, envs);
-//	filename = find_path(argv[0], envs);
-//	if (!filename)
-//	{
-//		error_no_cmd(argv[0]);
-//		return ;
-//	}
-//	pid = fork();
-//	if (pid == 0)
-//	{
-//		if (execve(filename, argv, g_envp) == -1) // filename - абсолютный путь до исполняемого файла команды
-//			exit(error_no_cmd(argv[0]));
-//		exit(EXIT_SUCCESS);
-//	}
-//	waitpid(pid, &status, 0);
-//	close(pid);
-//	free(filename);
-//	free_double_array(argv);
-//	if (WIFEXITED(status))  // if the process terminated normally by a call to _exit(2) or exit(3)
-//		g_exit_value = WEXITSTATUS(status); // evaluates to the low-order 8 bits of the argument passed to _exit(2) or exit(3) by the child.
-//}

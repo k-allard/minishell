@@ -1,55 +1,76 @@
-# include "../minishell.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include "../t_lexema/t_lexema.h"
-#include "../t_stream/t_stream.h"
-#include "../t_command/t_redirects_close.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cwindom <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/09 14:28:49 by cwindom           #+#    #+#             */
+/*   Updated: 2020/11/09 14:28:50 by cwindom          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../minishell.h"
 #include "parser.h"
 
-
-
-static int exit_code(int code)
+int			external_command_exist(char *command_name, \
+			t_list_lexema *lexema_chain, t_list_env *envs)
 {
-	g_exit_value = code;
-	return code;
+	int		res;
+	char	**env;
+	char	**args;
+
+	args = lexema_chain_2_argv(lexema_chain);
+	env = list_env_2_env(envs);
+	if ((res = execve(command_name, args, env)) < 0)
+	{
+		if (errno == ENOENT)
+		{
+			ft_putstr_fd(command_name, STDERR_FILENO);
+			ft_putendl_fd(": command not found", STDERR_FILENO);
+			res = 127;
+		}
+		else
+			res = errno;
+	}
+	free_double_array(args);
+	free_double_array(env);
+	return (res);
 }
 
-int parser(char *commandline, int argc, char **argv, t_list_env	*envs)
+static int	exit_code(int code, t_list_lexema *lexema_list)
 {
-    t_list_lexema *lexema_list;
-    t_list_lexema *lexema_chain;
-    int res;
+	if (lexema_list != NULL)
+		lexema_chain_free(lexema_list);
+	g_exit_value = code;
+	return (code);
+}
+
+int			parser(char *commandline, t_args_struct *args_struct)
+{
+	t_list_lexema	*lexema_list;
+	t_list_lexema	*lexema_chain;
+	int				res;
 
 	lexema_list = get_lexema_list(commandline, &res);
-	if(res)
-		return exit_code(res);
-	if(lexema_list == NULL)
-        return (0);
-
-//    ft_putstr_fd("«", STDERR_FILENO);
-//    ft_putstr_fd(commandline, STDERR_FILENO);
-//    ft_putstr_fd("»\n", STDERR_FILENO);
-//    parser_debug_print_lexema_list(lexema_list);
-
-    res = check_marker_syntaxis(lexema_list);
-    if (res)
-    	return exit_code(res);
-
-    while ((lexema_chain = get_next_lexema_chain(&lexema_list, lexema_type_semicolon)))
-    {
-//		ft_putstr_fd("«Before:»\n", STDERR_FILENO);
-//		parser_debug_print_lexema_list(lexema_chain);
-        eval_vars_and_unescape_$_in_lexema_chain(lexema_chain, argc, argv, envs);
-        join_lexemas_without_spaces(lexema_chain);
-//		ft_putstr_fd("«After eval_vars_and_unescape_$_in_lexema_chain:»\n", STDERR_FILENO);
-		// parser_debug_print_lexema_list(lexema_chain);
+	if (res)
+		return (exit_code(res, lexema_list));
+	if (lexema_list == NULL)
+		return (0);
+	res = check_marker_syntaxis(lexema_list);
+	if (res)
+		return (exit_code(res, lexema_list));
+	while ((lexema_chain = get_next_lexema_chain(&lexema_list,\
+	lexema_type_semicolon)))
+	{
+		eval_vars_unesc_dol_in_lex_chain(lexema_chain, args_struct);
+		join_lexemas_without_spaces(lexema_chain);
 		remove_empty_elements(&lexema_chain);
-//		ft_putstr_fd("«After remove_empty_elements:»\n", STDERR_FILENO);
-//		parser_debug_print_lexema_list(lexema_chain);
-        res = eval_with_pipe_or_without(lexema_chain, envs);
-    }
-    return res;
+		if (lexema_chain != NULL)
+		{
+			res = eval_with_pipe_or_without(lexema_chain, args_struct->envs);
+			lexema_chain_free(lexema_chain);
+		}
+	}
+	return (res);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 void	free_double_array(char **array)
 {
@@ -31,9 +31,19 @@ int		error_no_cmd(char *cmd)
 	return (127);
 }
 
-//int		error_no_file_dir(char *cmd)
-//{
-//	ft_putstr_fd(cmd, 2);
-//	ft_putendl_fd(": No such file or directory", 2);
-//	return (127);
-//}
+void	free_envs_list(t_list_env *envs)
+{
+	t_list_env *arch_elem;
+
+	if (!envs)
+		return ;
+	while (envs)
+	{
+		free(envs->env->key);
+		free(envs->env->value);
+		free(envs->env);
+		arch_elem = envs;
+		envs = arch_elem->next;
+		free((void *)arch_elem);
+	}
+}
